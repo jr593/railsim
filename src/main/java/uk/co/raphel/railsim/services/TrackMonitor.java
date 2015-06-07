@@ -20,10 +20,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import uk.co.raphel.railsim.dto.TrackDiagramEntry;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 @Component
 @Scope("prototype")
@@ -33,6 +30,9 @@ public class TrackMonitor implements Runnable, ResourceLoaderAware {
     private ResourceLoader resourceLoader;
 
     private Logger log = LoggerFactory.getLogger(TrackMonitor.class);
+
+    IMap<Integer, TrackDiagramEntry> trackDiagram;
+    IMap<String, String> statusMap;
 
     public TrackMonitor(){
     }
@@ -44,19 +44,26 @@ public class TrackMonitor implements Runnable, ResourceLoaderAware {
 
         // Join hazel cast
         HazelcastInstance hazelcastInstance = Hazelcast.newHazelcastInstance();
-        IMap<Integer, TrackDiagramEntry> trackDiagram = hazelcastInstance.getMap("trackDiagram");
-        IMap<String, String> statusMap = hazelcastInstance.getMap("statusMap");
+        trackDiagram = hazelcastInstance.getMap("trackDiagram");
+        statusMap = hazelcastInstance.getMap("statusMap");
 
-        statusMap.put("TRACKLOADED","FALSE");
+        statusMap.put("TRACKLOADED", "FALSE");
 
 
-        // Start by loading the track sections map
-        Resource resource =
-                getResource("classpath:resources/trackDiagram.csv");
+        // Start by loading the track sections maps
+        loadTrackMap(getResource("classpath:TrackMapDown.csv"));
+        loadTrackMap(getResource("classpath:TrackMapUp.csv"));
+
+        log.info("Track Diagrams loaded " + trackDiagram.size());
+        statusMap.put("TRACKLOADED", "TRUE");
+    }
+
+    private void loadTrackMap(Resource trackMap) {
         log.info("Loading resource");
         try{
-            InputStream is = resource.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            //InputStream is = trackMap.getInputStream();
+            File inFile = trackMap.getFile()   ;
+            BufferedReader br = new BufferedReader(new FileReader(inFile));
 
             String line;
             while ((line = br.readLine()) != null) {
@@ -66,8 +73,6 @@ public class TrackMonitor implements Runnable, ResourceLoaderAware {
             }
             br.close();
 
-            log.info("Track Diagram loaded");
-            statusMap.put("TRACKLOADED", "TRUE");
 
         }catch(IOException e){
             e.printStackTrace();

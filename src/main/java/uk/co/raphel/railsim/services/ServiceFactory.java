@@ -25,6 +25,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -37,10 +39,16 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
     private Logger log = LoggerFactory.getLogger(ServiceFactory.class);
     private ResourceLoader resourceLoader;
 
-    private Map<Integer, TrainService> services = new TreeMap<>();
+    private int simClock  = 0;       // Elapsed sim time in seconds
+
+    private int simRate;
 
 
-    public ServiceFactory(){
+
+    private List<TrainService> services =new ArrayList<>();
+
+    public ServiceFactory() {
+
     }
 
     public String getName() {
@@ -80,20 +88,31 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
         log.info("Attempting to load services");
         // Start by loading the track sections map
         Resource resource =
-                getResource("classpath:resources/services.csv");
+                getResource("classpath:ServicesDown1.csv");
         try{
             InputStream is = resource.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             String line;
+            // Read the header line and index the track sections
+            String headerLine = br.readLine();
+            List<Integer> indexList = new ArrayList<>();
+
+            if(headerLine != null && headerLine.length() >0) {
+                String indexes[] = headerLine.split(",");
+                for(int i= 5; i<indexes.length; i++) {
+                    int trackSection = Integer.parseInt(indexes[i]);
+                    indexList.add(trackSection);
+                }
+            }
             while ((line = br.readLine()) != null) {
-                TrainService service = new TrainService(line);
-                services.put(service.getStartTime(), service);
+                TrainService service = new TrainService(line, indexList);
+                services.add(service);
 
             }
             br.close();
 
-            log.info("All services loaded");
+            log.info("" + services.size() + " services loaded");
 
         }catch(IOException e){
             e.printStackTrace();
@@ -101,17 +120,31 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
         }
 
 
+        do {
 
-        try {
-            Thread.sleep(5000);
-            log.info("Running loop");
+            for(TrainService srv : services){
+                if((srv.getStartTime() == (simClock / 60 )) && !srv.isStarted() ) {
+                    ServiceRunner runner = new ServiceRunner(srv);
+                    runner.run();
+                }
+            }
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        System.out.println(name + " is running");
+
+            try {
+                Thread.sleep(5000);
+                simClock += (5 * simRate);
+
+                log.info("SimTime = " + simClock);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } while (true) ;
+
     }
+
+
 
     public void setResourceLoader(ResourceLoader resourceLoader){
         this.resourceLoader = resourceLoader;
@@ -119,5 +152,29 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
 
     public Resource getResource(String location){
         return resourceLoader.getResource(location);
+    }
+
+    public int getSimClock() {
+        return simClock;
+    }
+
+    public void setSimClock(int simClock) {
+        this.simClock = simClock;
+    }
+
+    public int getSimRate() {
+        return simRate;
+    }
+
+    public void setSimRate(int simRate) {
+        this.simRate = simRate;
+    }
+
+    public List<TrainService> getServices() {
+        return services;
+    }
+
+    public void setServices(List<TrainService> services) {
+        this.services = services;
     }
 }

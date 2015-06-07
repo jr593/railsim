@@ -28,6 +28,7 @@ public class Application {
 
         // Start the train service factory (should wait for track monitor to be ready)
         ServiceFactory serviceFactory = (ServiceFactory) context.getBean("serviceFactory");
+        serviceFactory.setSimRate(10);
         serviceFactory.setName("Service-Factory");
         serviceFactory.setTaskExecutor(taskExecutor);
         taskExecutor.execute(serviceFactory);
