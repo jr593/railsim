@@ -13,5 +13,13 @@ public class TerminatingEvent extends ServiceEvent {
         super(trackSection, timeOfDay);
     }
 
+    @Override
+    public boolean isStopping() {
+        return false;
+    }
 
+    @Override
+    public int getScheduledExitTime() {
+        return super.getTimeOfDay();
+    }
 }

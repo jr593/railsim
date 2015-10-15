@@ -32,4 +32,9 @@ public abstract class ServiceEvent {
     public void setTimeOfDay(int timeOfDay) {
         this.timeOfDay = timeOfDay;
     }
+
+    public abstract boolean isStopping();
+
+    public abstract int getScheduledExitTime();
+
 }

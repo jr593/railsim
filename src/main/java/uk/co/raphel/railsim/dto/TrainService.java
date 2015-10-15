@@ -16,13 +16,15 @@ public class TrainService {
     private String serviceClass;
     private String engine;
 
+    private Integer id;
+
     List<ServiceEvent> serviceEventList;
 
     private int currentServiceEvent;
 
     private boolean started = false;
 
-    public TrainService(String csvLine, List<Integer> indexList ) {
+    public TrainService(String csvLine, List<Integer> indexList, int id ) {
         // e.g
         // Train,From,Class,Engine,Destination,1,2,3,4,5,6,7,8,9,10,11,200,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,201,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81
        //  00:25,Victoria,Pass,EMU,,S00.25,,,,S00.31,,S00.35,,,S00.38,S00.40,,S00.44,S00.46,,,T00.48,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -41,7 +43,42 @@ public class TrainService {
             }
         }
 
+        this.id = id;
+
         currentServiceEvent = 0;
+    }
+
+    public ServiceEvent getServiceEvent() {
+        return serviceEventList.get(currentServiceEvent);
+    }
+    public void step() {
+        if(currentServiceEvent < serviceEventList.size() -1) {
+            currentServiceEvent++;
+        }
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public ServiceEvent getNextEvent() {
+           try {
+               return serviceEventList.get(currentServiceEvent+1);
+           } catch(Exception e) {
+               return null;
+           }
+    }
+    public int getOccupiedSection() {
+        return serviceEventList.get(currentServiceEvent).getEventSection();
+    }
+
+    public boolean isLastEvent() {
+        return serviceEventList == null || serviceEventList.isEmpty() ||
+                currentServiceEvent == serviceEventList.size()-1;
     }
 
     private int timeToInt(String hhmm) {
@@ -63,7 +100,11 @@ public class TrainService {
              return new TerminatingEvent(trackSection, timeToInt(eventBase.substring(1)));
         }
         if(eventBase.startsWith("P")) {
-            return new PassingEvent(trackSection, timeToInt(eventBase.substring(1)));
+            try {
+                return new PassingEvent(trackSection, timeToInt(eventBase.substring(1)));
+            } catch(Exception e) {
+                return new PassingEvent(trackSection, 0); // Blank passing event
+            }
         }
         if(eventBase.startsWith("S")) {
             if(eventBase.contains("/")) {

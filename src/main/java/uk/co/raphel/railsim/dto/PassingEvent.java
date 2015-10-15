@@ -12,4 +12,13 @@ public class PassingEvent extends ServiceEvent {
         super(eventSection, timeOfDay);
     }
 
+    @Override
+    public boolean isStopping() {
+        return false;
+    }
+
+    @Override
+    public int getScheduledExitTime() {
+        return super.getTimeOfDay();
+    }
 }

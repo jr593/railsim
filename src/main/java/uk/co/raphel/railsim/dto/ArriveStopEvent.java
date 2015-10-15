@@ -14,4 +14,14 @@ public class ArriveStopEvent extends ServiceEvent {
         super(eventSection, timeOfDay);
         this.departureTime = departureTime;
     }
+
+    @Override
+    public boolean isStopping() {
+        return true;
+    }
+
+    @Override
+    public int getScheduledExitTime() {
+        return departureTime;
+    }
 }

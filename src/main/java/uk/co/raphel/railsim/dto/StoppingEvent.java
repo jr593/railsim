@@ -11,4 +11,14 @@ public class StoppingEvent extends ServiceEvent {
     public StoppingEvent(int eventSection, int timeOfDay) {
         super(eventSection, timeOfDay);
     }
+
+    @Override
+    public boolean isStopping() {
+        return true;
+    }
+
+    @Override
+    public int getScheduledExitTime() {
+        return super.getTimeOfDay();
+    }
 }

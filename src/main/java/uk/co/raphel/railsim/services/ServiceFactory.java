@@ -2,12 +2,12 @@ package uk.co.raphel.railsim.services;/**
  * Created by johnr on 30/05/2015.
  */
 
-import com.hazelcast.core.Hazelcast;
-import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.IMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ResourceLoaderAware;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.task.TaskExecutor;
@@ -17,25 +17,27 @@ import org.springframework.core.task.TaskExecutor;
  * * Author  : johnr
  **/
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import uk.co.raphel.railsim.dto.TrackDiagramEntry;
 import uk.co.raphel.railsim.dto.TrainService;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import javax.annotation.PostConstruct;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 @Component
-@Scope("prototype")
+@EnableScheduling
+//@Scope("prototype")
 public class ServiceFactory implements Runnable, ResourceLoaderAware {
 
-    String name;
-    TaskExecutor taskExecutor;
+   // String name;
+   // TaskExecutor taskExecutor;
     private Logger log = LoggerFactory.getLogger(ServiceFactory.class);
     private ResourceLoader resourceLoader;
 
@@ -43,52 +45,27 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
 
     private int simRate;
 
+    @Autowired
+    ThreadPoolTaskExecutor executor;
 
+    @Autowired
+    DataStore ds;
 
-    private List<TrainService> services =new ArrayList<>();
+    @PostConstruct
+    public void postConstruct() {
+       // log.info(name + " is running");
 
-    public ServiceFactory() {
+        // Start by loading the track sections maps
+        loadTrackMap(getResource("classpath:TrackMapDown.csv"));
+        loadTrackMap(getResource("classpath:TrackMapUp.csv"));
 
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public TaskExecutor getTaskExecutor() {
-        return taskExecutor;
-    }
-
-    public void setTaskExecutor(TaskExecutor taskExecutor) {
-        this.taskExecutor = taskExecutor;
-    }
-
-    public void run() {
-
-        System.out.println(name + " is running");
-        // Join hazel cast
-        HazelcastInstance hazelcastInstance = Hazelcast.newHazelcastInstance();
-        IMap<String, String> statusMap = hazelcastInstance.getMap("statusMap");
-        try {
-            while(statusMap == null || statusMap.get("TRACKLOADED") == null ||
-                    !statusMap.get("TRACKLOADED").equalsIgnoreCase("TRUE") ) {
-
-                log.warn("Waiting for track diagram to load");
-                Thread.sleep(5000);
-            }
-        }    catch(InterruptedException ie) {
-            // Do nothing
-        }
-        IMap<Integer, TrackDiagramEntry> trackDiagram = hazelcastInstance.getMap("trackDiagram");
         log.info("Track diagram accessable");
         log.info("Attempting to load services");
         // Start by loading the track sections map
         Resource resource =
                 getResource("classpath:ServicesDown1.csv");
+        int trainId = 1;
+
         try{
             InputStream is = resource.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -97,7 +74,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
             // Read the header line and index the track sections
             String headerLine = br.readLine();
             List<Integer> indexList = new ArrayList<>();
-
+            System.out.println(headerLine);
             if(headerLine != null && headerLine.length() >0) {
                 String indexes[] = headerLine.split(",");
                 for(int i= 5; i<indexes.length; i++) {
@@ -106,13 +83,13 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
                 }
             }
             while ((line = br.readLine()) != null) {
-                TrainService service = new TrainService(line, indexList);
-                services.add(service);
+                TrainService service = new TrainService(line, indexList, trainId++);
+                ds.addService(service);
 
             }
             br.close();
 
-            log.info("" + services.size() + " services loaded");
+            log.info("" + ds.getServices().size() + " services loaded");
 
         }catch(IOException e){
             e.printStackTrace();
@@ -120,30 +97,73 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
         }
 
 
-        do {
-
-            for(TrainService srv : services){
-                if((srv.getStartTime() == (simClock / 60 )) && !srv.isStarted() ) {
-                    ServiceRunner runner = new ServiceRunner(srv);
-                    runner.run();
-                }
-            }
-
-
-
-            try {
-                Thread.sleep(5000);
-                simClock += (5 * simRate);
-
-                log.info("SimTime = " + simClock);
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } while (true) ;
-
+        executor.setCorePoolSize(50);
+        executor.setMaxPoolSize(100);
+        executor.setQueueCapacity(100);
+        executor.initialize();
     }
 
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+
+//    public TaskExecutor getTaskExecutor() {
+//        return taskExecutor;
+//    }
+
+//    public void setTaskExecutor(TaskExecutor taskExecutor) {
+//        this.taskExecutor = taskExecutor;
+//    }
+
+    @Scheduled(fixedDelay = 1000)
+    public void run() {
+
+
+        simClock += 1;          // Advance one minute per loop iteration
+        ds.setSimClock(simClock);
+
+
+
+            for(TrainService srv : ds.getServices()){
+                //System.out.println(srv.getServiceName() + " " + simClock + ":" + srv.getStartTime());
+
+                if((srv.getServiceEventList().get(0).getTimeOfDay() == (simClock /* / 60*/ )) && !srv.isStarted() ) {
+                    System.out.println("Kick off : " + srv.getServiceName());
+                    ServiceRunner runner = new ServiceRunner(srv, ds);
+                    executor.execute(runner);
+                }
+            }
+    }
+    private void loadTrackMap(Resource trackMap) {
+        log.info("Loading resource");
+        try{
+            //InputStream is = trackMap.getInputStream();
+            File inFile = trackMap.getFile()   ;
+            BufferedReader br = new BufferedReader(new FileReader(inFile));
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                TrackDiagramEntry diagramEntry = new TrackDiagramEntry(line);
+                System.out.println(diagramEntry.getId() + ":" + diagramEntry.getName());
+                ds.addTrackDiagramEntry(diagramEntry);
+
+            }
+            br.close();
+
+
+        }catch(IOException e){
+            e.printStackTrace();
+            log.error("Error loading track diagram", e);
+        }
+
+    }
+    private String simTimeToClock(int simTime) {
+        return " " + simTime/60 + ":" + simTime % 60;
+    }
 
 
     public void setResourceLoader(ResourceLoader resourceLoader){
@@ -170,11 +190,4 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
         this.simRate = simRate;
     }
 
-    public List<TrainService> getServices() {
-        return services;
-    }
-
-    public void setServices(List<TrainService> services) {
-        this.services = services;
-    }
 }
