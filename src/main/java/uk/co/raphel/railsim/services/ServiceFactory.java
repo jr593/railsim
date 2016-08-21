@@ -126,17 +126,12 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
         simClock += 1;          // Advance one minute per loop iteration
         ds.setSimClock(simClock);
 
-
-
-            for(TrainService srv : ds.getServices()){
-                //System.out.println(srv.getServiceName() + " " + simClock + ":" + srv.getStartTime());
-
-                if((srv.getServiceEventList().get(0).getTimeOfDay() == (simClock /* / 60*/ )) && !srv.isStarted() ) {
-                    System.out.println("Kick off : " + srv.getServiceName());
-                    ServiceRunner runner = new ServiceRunner(srv, ds);
-                    executor.execute(runner);
-                }
-            }
+        ds.getServices().stream().filter(srv -> (srv.getServiceEventList().get(0).getTimeOfDay() == (simClock ))
+                                                                                  && !srv.isStarted()).forEach(srv -> {
+            System.out.println("Kick off : " + srv.getServiceName());
+            ServiceRunner runner = new ServiceRunner(srv, ds);
+            executor.execute(runner);
+        });
     }
     private void loadTrackMap(Resource trackMap) {
         log.info("Loading resource");

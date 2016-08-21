@@ -88,7 +88,7 @@ public class ServiceRunner extends Thread {
                     int nextSection = trainService.getNextEvent().getEventSection();
                     if(nextSection != 0) {
                         boolean lock = false;
-                        while(lock == false) {
+                        while(!lock) {
                             lock = ds.getTrackLock();
                             Thread.sleep(50);
                         }
