@@ -1,4 +1,4 @@
-package uk.co.raphel.railsim.messaging;
+package uk.co.raphel.railsim.common;
 /**
  * Created by johnr on 19/02/2017.
  */
@@ -6,7 +6,6 @@ package uk.co.raphel.railsim.messaging;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.co.raphel.railsim.services.ServiceRunner;
 
 import java.io.Serializable;
 
@@ -30,6 +29,9 @@ public class RailSimMessage implements Serializable {
     private String miscInfo;
     private Logger log = LoggerFactory.getLogger(RailSimMessage.class);
 
+    public RailSimMessage() {
+        // For Jackson
+    }
 
     public RailSimMessage(MessageType messageType, String clockTime,Integer serviceId, String serviceName,
                           String serviceEngine, String serviceClass,
@@ -56,6 +58,16 @@ public class RailSimMessage implements Serializable {
         }
         return "";
     }
+
+    public static RailSimMessage fromjson(String json) {
+        try {
+            return  new ObjectMapper().readValue(json, RailSimMessage.class);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public MessageType getMessageType() {
         return messageType;
     }

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/RailSimClient/RailSimClient.iml" filepath="$PROJECT_DIR$/RailSimClient/RailSimClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RailSimCommon/RailSimCommon.iml" filepath="$PROJECT_DIR$/RailSimCommon/RailSimCommon.iml" />
       <module fileurl="file://$PROJECT_DIR$/RailwaySim.iml" filepath="$PROJECT_DIR$/RailwaySim.iml" />
     </modules>
   </component>

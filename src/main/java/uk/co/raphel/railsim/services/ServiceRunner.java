@@ -11,12 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import uk.co.raphel.railsim.common.MessageType;
+import uk.co.raphel.railsim.common.RailSimMessage;
+import uk.co.raphel.railsim.common.SectionStatus;
 import uk.co.raphel.railsim.dto.TerminatingEvent;
 
 import uk.co.raphel.railsim.dto.TrainService;
-import uk.co.raphel.railsim.messaging.MessageType;
-import uk.co.raphel.railsim.messaging.RailSimMessage;
-import uk.co.raphel.railsim.messaging.SectionStatus;
+
 
 /**
  * * Created : 07/06/2015

@@ -62,6 +62,8 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
         loadTrackMap(getResource("classpath:TrackMapDown.csv"));
         loadTrackMap(getResource("classpath:TrackMapUp.csv"));
 
+        // TODO Send track diagram to clients
+
         log.info("Track diagram accessable");
         log.info("Attempting to load services");
         // Start by loading the track sections map

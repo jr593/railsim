@@ -7,7 +7,11 @@
     <groupId>uk.co.raphel</groupId>
     <artifactId>railwaysim</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>RailSimClient</module>
+        <module>RailSimCommon</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <properties>
         <spring.amqp.version>1.6.6.RELEASE</spring.amqp.version>
@@ -87,6 +91,11 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
+        </dependency>
+        <dependency>
+            <groupId>uk.co.raphel</groupId>
+            <artifactId>railsimcommon</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
