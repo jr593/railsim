@@ -5,6 +5,7 @@ package uk.co.raphel.railsim.services;/**
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +34,6 @@ import java.util.TreeMap;
 
 @Component
 @EnableScheduling
-//@Scope("prototype")
 public class ServiceFactory implements Runnable, ResourceLoaderAware {
 
    // String name;
@@ -47,6 +47,9 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
 
     @Autowired
     ThreadPoolTaskExecutor executor;
+
+    @Autowired
+    RabbitTemplate rabbitTemplate;
 
     @Autowired
     DataStore ds;
@@ -129,7 +132,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
         ds.getServices().stream().filter(srv -> (srv.getServiceEventList().get(0).getTimeOfDay() == (simClock ))
                                                                                   && !srv.isStarted()).forEach(srv -> {
             System.out.println("Kick off : " + srv.getServiceName());
-            ServiceRunner runner = new ServiceRunner(srv, ds);
+            ServiceRunner runner = new ServiceRunner(srv, ds, rabbitTemplate);
             executor.execute(runner);
         });
     }

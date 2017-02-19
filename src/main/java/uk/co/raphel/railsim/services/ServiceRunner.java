@@ -5,6 +5,8 @@ package uk.co.raphel.railsim.services;/**
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -12,33 +14,45 @@ import org.springframework.stereotype.Component;
 import uk.co.raphel.railsim.dto.TerminatingEvent;
 
 import uk.co.raphel.railsim.dto.TrainService;
+import uk.co.raphel.railsim.messaging.MessageType;
+import uk.co.raphel.railsim.messaging.RailSimMessage;
+import uk.co.raphel.railsim.messaging.SectionStatus;
 
 /**
  * * Created : 07/06/2015
  * * Author  : johnr
  **/
-@Component
-@Scope("prototype")
+
 public class ServiceRunner extends Thread {
 
-    //@Autowired
+
     private DataStore ds;
 
     private TrainService trainService;
 
+    RabbitTemplate rabbitTemplate;
 
     private Logger log = LoggerFactory.getLogger(ServiceRunner.class);
 
 
-    public ServiceRunner(TrainService trainService,DataStore ds) {
+    public ServiceRunner() { }
+
+    public ServiceRunner(TrainService trainService,DataStore ds, RabbitTemplate rabbitTemplate) {
         this.trainService = trainService;
         this.ds = ds;
+        this.rabbitTemplate = rabbitTemplate ;
 
     }
 
     @Override
     public void run() {
         int simTime = ds.getSimClock();
+
+        rabbitTemplate.convertAndSend(new RailSimMessage(MessageType.SERVICESTART,simTimeAsClock(simTime), trainService.getId(),
+                trainService.getServiceName(), trainService.getEngine(), trainService.getServiceClass(),
+                trainService.getOccupiedSection(), ds.getSectionName(trainService.getOccupiedSection()),
+                SectionStatus.OCCUPIED,"Service Started").toJson());
+
         log.info("T=" + simTimeAsClock(simTime) + " Service " + trainService.getServiceName() + " started at " + ds.getSectionName(trainService.getOccupiedSection()));
         trainService.setStarted(true);
         try{
@@ -95,10 +109,25 @@ public class ServiceRunner extends Thread {
                         try {
                             if(ds.isSectionFree(nextSection)) {
                                 ds.clearTrackSection(trainService.getOccupiedSection(),trainService.getId());
+                                // Send clear section message
+                                rabbitTemplate.convertAndSend(new RailSimMessage(MessageType.MOVEMENT,simTimeAsClock(simTime), trainService.getId(),
+                                        trainService.getServiceName(), trainService.getEngine(), trainService.getServiceClass(),
+                                        trainService.getOccupiedSection(), ds.getSectionName(trainService.getOccupiedSection()),
+                                        SectionStatus.CLEARED,"Section Cleared").toJson());
                                 ds.occupySection(trainService.getNextEvent().getEventSection(), trainService.getId());
+                                // Send occupy section message
+                                rabbitTemplate.convertAndSend(new RailSimMessage(MessageType.MOVEMENT,simTimeAsClock(simTime), trainService.getId(),
+                                        trainService.getServiceName(), trainService.getEngine(), trainService.getServiceClass(),
+                                        trainService.getNextEvent().getEventSection(), ds.getSectionName(trainService.getNextEvent().getEventSection()),
+                                        SectionStatus.OCCUPIED,"Section Occupied").toJson());
                                 trainService.step();
                                 log.info("T=" + simTimeAsClock(simTime) + " Service " + trainService.getServiceName() + " occupied " + ds.getSectionName(trainService.getOccupiedSection()));
                             } else {
+                                // Send blocking section message
+                                rabbitTemplate.convertAndSend(new RailSimMessage(MessageType.BLOCKING,simTimeAsClock(simTime), trainService.getId(),
+                                        trainService.getServiceName(), trainService.getEngine(), trainService.getServiceClass(),
+                                        trainService.getOccupiedSection(), ds.getSectionName(trainService.getOccupiedSection()),
+                                        SectionStatus.OCCUPIED,"Section Held on red for section " + ds.getSectionName(trainService.getNextEvent().getEventSection())).toJson());
                                 log.info("T=" + simTimeAsClock(simTime) + " Service " + trainService.getServiceName() + " waiting on RED at "
                                         + ds.getSectionName(trainService.getOccupiedSection()) + " for "
                                         + ds.getSectionName(trainService.getNextEvent().getEventSection()));
@@ -118,6 +147,15 @@ public class ServiceRunner extends Thread {
             ie.printStackTrace();
         }
         ds.clearTrackSection(trainService.getOccupiedSection(), trainService.getId());
+        // Send clear section message
+        rabbitTemplate.convertAndSend(new RailSimMessage(MessageType.MOVEMENT,simTimeAsClock(simTime), trainService.getId(),
+                trainService.getServiceName(), trainService.getEngine(), trainService.getServiceClass(),
+                trainService.getOccupiedSection(), ds.getSectionName(trainService.getOccupiedSection()),
+                SectionStatus.CLEARED,"Section Cleared").toJson());
+        // Send service terminated message
+        rabbitTemplate.convertAndSend(new RailSimMessage(MessageType.COMPLETION,simTimeAsClock(simTime), trainService.getId(),
+                trainService.getServiceName(), trainService.getEngine(), trainService.getServiceClass(),
+                0, "",  SectionStatus.CLEARED,"Service terminated").toJson());
         log.info("T=" + simTimeAsClock(simTime) + " Service " + trainService.getServiceName() + " terminated at " + ds.getSectionName(trainService.getOccupiedSection()));
     }
 
