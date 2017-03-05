@@ -11,12 +11,4 @@
 
     <artifactId>RailSimClient</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>uk.co.raphel</groupId>
-            <artifactId>railsimcommon</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-
 </project>

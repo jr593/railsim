@@ -19,6 +19,5 @@ public class MainFrame extends JFrame {
 
         setVisible(true);
         setState(Frame.NORMAL);
-        show();
     }
 }

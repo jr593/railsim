@@ -3,7 +3,6 @@ package uk.co.raphel.railsim.services;/**
  */
 
 import org.springframework.stereotype.Component;
-import uk.co.raphel.railsim.dto.ServiceEvent;
 import uk.co.raphel.railsim.dto.TrackDiagramEntry;
 import uk.co.raphel.railsim.dto.TrainService;
 
@@ -71,7 +70,7 @@ public class DataStore {
             return false;
         } else {
             tracklock = true;
-            return tracklock;
+            return true;
         }
     }
 

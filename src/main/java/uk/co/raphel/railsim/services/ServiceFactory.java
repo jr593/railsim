@@ -8,16 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ResourceLoaderAware;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.core.task.TaskExecutor;
 
 /**
  * * Created : 30/05/2015
  * * Author  : johnr
  **/
-import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -29,8 +26,6 @@ import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 @Component
 @EnableScheduling
@@ -66,9 +61,8 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
 
         log.info("Track diagram accessable");
         log.info("Attempting to load services");
-        // Start by loading the track sections map
-        Resource resource =
-                getResource("classpath:ServicesDown1.csv");
+
+        Resource resource = getResource("classpath:ServicesDown1.csv");
         int trainId = 1;
 
         try{
@@ -88,8 +82,11 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
                 }
             }
             while ((line = br.readLine()) != null) {
-                TrainService service = new TrainService(line, indexList, trainId++);
-                ds.addService(service);
+                // Only read lines with service defined (may be being built still!)
+                if(line.split(",").length >=5) {
+                    TrainService service = new TrainService(line, indexList, trainId++);
+                    ds.addService(service);
+                }
 
             }
             br.close();
