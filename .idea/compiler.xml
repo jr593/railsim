@@ -32,10 +32,18 @@
         <processorPath useClasspath="true" />
         <module name="RailSimCommon" />
       </profile>
+      <profile default="false" name="Annotation profile for RailsimConfigGUI" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="RailsimConfigGUI" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="RailSimClient" target="1.8" />
       <module name="RailSimCommon" target="1.8" />
+      <module name="RailsimConfigGUI" target="1.8" />
       <module name="RailwaySim" target="1.8" />
     </bytecodeTargetLevel>
   </component>

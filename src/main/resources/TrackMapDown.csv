@@ -1,3 +1,4 @@
+ID,Description,Total,Step,Mult
 1,Victoria Down Main,0,0,N
 2,Stewarts Lane Down,1.95,1.95,N
 3,Factory Junction Down,2.94,0.99,N
@@ -29,6 +30,7 @@
 28,Swanley Down Maidstone (Out),17.39,2.68,N
 29,Farningham Road Down,20.51,3.13,N
 30,Fawkham Junction Down,23.38,2.86,N
+205,Longfield,24,0,N
 31,Meopham Down,25.95,2.58,N
 204,Sole Street Goods Down,26.89,2.58,Y
 32,Sole Street Down,26.89,0.94,N

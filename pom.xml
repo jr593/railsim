@@ -10,6 +10,7 @@
     <modules>
         <module>RailSimClient</module>
         <module>RailSimCommon</module>
+        <module>RailsimConfigGUI</module>
     </modules>
     <packaging>pom</packaging>
 
