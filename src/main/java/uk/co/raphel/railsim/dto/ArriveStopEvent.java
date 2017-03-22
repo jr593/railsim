@@ -8,7 +8,7 @@ package uk.co.raphel.railsim.dto;/**
  **/
 public class ArriveStopEvent extends ServiceEvent {
 
-    private int departureTime;
+    private final int departureTime;
 
     public ArriveStopEvent(int eventSection, int timeOfDay, int departureTime) {
         super(eventSection, timeOfDay);

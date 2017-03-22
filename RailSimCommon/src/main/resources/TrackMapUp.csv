@@ -1,3 +1,4 @@
+ID,Description,Total,Step,Mult
 101,Ramsgate Up Fast,0,0,N
 102,Ramsgate Up Slow,0,0,N
 103,Dumpton Park Up,0.94,0.94,N
@@ -18,7 +19,7 @@
 118,Teynham Up,31.34,4.04,N
 119,Murston Sidings,32,0.66,Y
 120,Sittingbourne Up,33.53,1.53,N
-203,Sittingbourne Goods Up,33.53,1.53,Y
+300,Sittingbourne Goods Up,33.53,1.53,Y
 121,Eastern Junction Up,34.03,0.5,N
 122,Middle Junction Up,34.13,0.11,N
 168,Middle Junction to Kemsley,34.91,0.78,N
@@ -42,7 +43,8 @@
 135,Cobham Park Up,50.16,1.8,N
 136,Sole Street Up,52.38,2.22,N
 137,Meopham Up,53.31,0.94,N
-138,Fawkham Junction Up,55.89,2.58,N
+301,Longfield,55.26,1.95,N
+138,Fawkham Junction Up,55.89,0.63,N
 139,Farningham Road Up,58.75,2.86,N
 140,Swanley Up Maidstone (Join),61.88,0,N
 141,Swanley Up Chatham,61.88,3.13,N

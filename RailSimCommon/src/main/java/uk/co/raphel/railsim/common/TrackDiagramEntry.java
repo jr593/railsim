@@ -1,4 +1,4 @@
-package uk.co.raphel.railsim.dto;/**
+package uk.co.raphel.railsim.common;/**
  * Created by johnr on 30/05/2015.
  */
 

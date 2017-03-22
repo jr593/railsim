@@ -3,7 +3,7 @@ package uk.co.raphel.railsim.services;/**
  */
 
 import org.springframework.stereotype.Component;
-import uk.co.raphel.railsim.dto.TrackDiagramEntry;
+import uk.co.raphel.railsim.common.TrackDiagramEntry;
 import uk.co.raphel.railsim.dto.TrainService;
 
 import java.util.ArrayList;
@@ -22,10 +22,10 @@ public class DataStore {
 
 
     private List<TrainService> services;
-    Map<Integer, TrackDiagramEntry> trackDiagram;
+    private Map<Integer, TrackDiagramEntry> trackDiagram;
     private int simClock;
 
-    boolean tracklock = false;
+    private boolean tracklock = false;
 
     public String getSectionName(int sectionNumber) {
         return trackDiagram.get(sectionNumber).getName() + " (" + sectionNumber + ")";

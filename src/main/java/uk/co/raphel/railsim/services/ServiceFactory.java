@@ -19,7 +19,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
-import uk.co.raphel.railsim.dto.TrackDiagramEntry;
+import uk.co.raphel.railsim.common.TrackDiagramEntry;
 import uk.co.raphel.railsim.dto.TrainService;
 
 import javax.annotation.PostConstruct;
@@ -33,7 +33,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
 
    // String name;
    // TaskExecutor taskExecutor;
-    private Logger log = LoggerFactory.getLogger(ServiceFactory.class);
+    private final Logger log = LoggerFactory.getLogger(ServiceFactory.class);
     private ResourceLoader resourceLoader;
 
     private int simClock  = 0;       // Elapsed sim time in seconds

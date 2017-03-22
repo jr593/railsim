@@ -27,9 +27,9 @@ public class ServiceRunner extends Thread {
 
     private TrainService trainService;
 
-    RabbitTemplate rabbitTemplate;
+    private RabbitTemplate rabbitTemplate;
 
-    private Logger log = LoggerFactory.getLogger(ServiceRunner.class);
+    private final Logger log = LoggerFactory.getLogger(ServiceRunner.class);
 
 
     public ServiceRunner() { }

@@ -27,7 +27,7 @@ public class RailSimMessage implements Serializable {
     private SectionStatus sectionStatus;
 
     private String miscInfo;
-    private Logger log = LoggerFactory.getLogger(RailSimMessage.class);
+    private final Logger log = LoggerFactory.getLogger(RailSimMessage.class);
 
     public RailSimMessage() {
         // For Jackson

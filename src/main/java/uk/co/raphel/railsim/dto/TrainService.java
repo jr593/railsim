@@ -18,7 +18,7 @@ public class TrainService {
 
     private Integer id;
 
-    List<ServiceEvent> serviceEventList;
+    private List<ServiceEvent> serviceEventList;
 
     private int currentServiceEvent;
 
