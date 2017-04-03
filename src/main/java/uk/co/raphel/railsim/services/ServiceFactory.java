@@ -128,11 +128,15 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
         simClock += 1;          // Advance one minute per loop iteration
         ds.setSimClock(simClock);
 
-        ds.getServices().stream().filter(srv -> (srv.getServiceEventList().get(0).getTimeOfDay() == (simClock ))
-                                                                                  && !srv.isStarted()).forEach(srv -> {
-            System.out.println("Kick off : " + srv.getServiceName());
-            ServiceRunner runner = new ServiceRunner(srv, ds, rabbitTemplate);
-            executor.execute(runner);
+        ds.getServices().stream().forEach(srv -> {
+            if(!srv.getServiceEventList().isEmpty()) {
+                if(srv.getServiceEventList().get(0).getTimeOfDay() == (simClock )  && !srv.isStarted())   {
+                    System.out.println("Kick off : " + srv.getServiceName());
+                    ServiceRunner runner = new ServiceRunner(srv, ds, rabbitTemplate);
+                    executor.execute(runner);
+
+                }
+            }
         });
     }
     private void loadTrackMap(Resource trackMap) {
@@ -142,7 +146,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
             File inFile = trackMap.getFile()   ;
             BufferedReader br = new BufferedReader(new FileReader(inFile));
 
-            String line;
+            String line = br.readLine(); // Skip header row
             while ((line = br.readLine()) != null) {
                 TrackDiagramEntry diagramEntry = new TrackDiagramEntry(line);
                 System.out.println(diagramEntry.getId() + ":" + diagramEntry.getName());

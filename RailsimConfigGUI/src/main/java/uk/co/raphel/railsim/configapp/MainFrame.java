@@ -14,9 +14,11 @@ import uk.co.raphel.railsim.common.TrackDiagramEntry;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListDataListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import javax.swing.text.NumberFormatter;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,8 +26,9 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.*;
 import java.util.List;
 
 
@@ -45,6 +48,7 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
     private final JTextField txtEquipment = new JTextField("");
     private final JTextField txtDest = new JTextField("");
     private final JPanel buttonPanel = new JPanel();
+    private JComboBox<EditableTrainService> copyCombo;
 
     public void init() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -71,13 +75,15 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         JButton prevButton = new JButton("<<"); prevButton.setActionCommand("PREV"); prevButton.addActionListener(this);
         JButton saveButton = new JButton("Save")  ; saveButton.setActionCommand("SAVE"); saveButton.addActionListener(this);
         JButton exitButton = new JButton("Exit"); exitButton.setActionCommand("EXIT"); exitButton.addActionListener(this);
+        JButton searchButton = new JButton("Find MT"); searchButton.setActionCommand("FIND"); searchButton.addActionListener(this);
         buttonPanel.setBorder(new TitledBorder("Buttons"));
         buttonPanel.setLayout(new GridBagLayout());
         gridbag.setConstraints(buttonPanel,c);
         c.gridx = 0; c.gridy = 0; buttonPanel.add(nextButton,c);
-        c.gridx = 1; c.gridy = 0; buttonPanel.add(prevButton);
-        c.gridx = 2; c.gridy = 0; buttonPanel.add(saveButton);
-        c.gridx = 3; c.gridy = 0; buttonPanel.add(exitButton);
+        c.gridx = 1; c.gridy = 0; buttonPanel.add(prevButton,c);
+        c.gridx = 2; c.gridy = 0; buttonPanel.add(searchButton,c)  ;
+        c.gridx = 3; c.gridy = 0; buttonPanel.add(saveButton,c);
+        c.gridx = 4; c.gridy = 0; buttonPanel.add(exitButton,c);
         JLabel lblService = new JLabel("Service");
         JLabel lblStart = new JLabel("Start");
         JLabel lblClass = new JLabel("Class");
@@ -89,6 +95,12 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         c.gridx = 0; c.gridy = 4; c.gridwidth=1;  buttonPanel.add(lblEquipment,c); c.gridx = 1; c.gridy = 4;c.gridwidth = 3;  buttonPanel.add(txtEquipment,c);
         c.gridx = 0; c.gridy = 5; c.gridwidth=1;  buttonPanel.add(lblDest,c); c.gridx = 1; c.gridy = 5; c.gridwidth = 3;  buttonPanel.add(txtDest,c);
 
+        copyCombo = new JComboBox<>();
+        dataBase.stream().forEach(copyCombo::addItem);
+
+        c.gridx  =0; c.gridy = 6; c.gridwidth = 3; buttonPanel.add(copyCombo,c);
+        JButton copyButton = new JButton("Copy"); copyButton.setActionCommand("COPY"); copyButton.addActionListener(this);
+        c.gridx = 3; c.gridy = 6; c.gridwidth = 1; buttonPanel.add(copyButton,c);
         add(buttonPanel);
 
 
@@ -122,9 +134,53 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
             this.dispose();
             System.exit(0);
         }
+        if(e.getActionCommand().equals("FIND")) {
+            currentDataPointer = findfirstEmpty();
+            setCurrentDataToTableModel();
+        }
+        if(e.getActionCommand().equals("COPY")) {
+            EditableTrainService srvToCopy =  (EditableTrainService) copyCombo.getSelectedItem();
+            EditableTrainService srvCopyInto = dataBase.get(currentDataPointer);
+            copyEditableService(srvToCopy, srvCopyInto);
+            setCurrentDataToTableModel();
+        }
 
     }
 
+    private void copyEditableService(EditableTrainService from, EditableTrainService to) {
+        String origStartTime = from.getStartTime();
+        int origHour = Integer.parseInt(origStartTime.substring(0,2));
+        String newStartTime = to.getStartTime();
+        int newHour = Integer.parseInt(newStartTime.substring(0,2));
+        to.setCallingPoints(new HashMap<>());
+        for(Map.Entry<Integer, String> entry : from.getCallingPoints().entrySet()) {
+                 to.getCallingPoints().put(entry.getKey(), entry.getValue().equals("") ? "" : adjHour(entry.getValue(), newHour-origHour));
+        }
+    }
+
+    private String adjHour(String origValue, int adj) {
+        NumberFormat nf = new DecimalFormat("00");
+        boolean hasDual = origValue.contains("/");
+
+        String retval = origValue.substring(0,1); // Code
+        retval += nf.format(Integer.parseInt(origValue.substring(1,3)) + adj); // Start hour
+        retval += origValue.substring(3,6);
+        if(hasDual) {
+            retval += "/";
+            retval += nf.format(Integer.parseInt(origValue.substring(7,9))+adj);
+            retval += origValue.substring(9,12);
+        }
+        return retval;
+    }
+
+    private int findfirstEmpty() {
+        for(int i=0; i< dataBase.size(); i++) {
+            if(dataBase.get(i).hasNoEntries()) {
+                return i;
+            }
+        }
+        return 0;
+    }
     private void updateServiceHeader() {
         EditableTrainService srv = dataBase.get(currentDataPointer);
         srv.setStartTime(this.txtService.getText());
