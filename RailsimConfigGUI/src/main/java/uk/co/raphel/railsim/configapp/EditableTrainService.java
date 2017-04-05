@@ -2,8 +2,6 @@ package uk.co.raphel.railsim.configapp;/**
  * Created by johnr on 30/05/2015.
  */
 
-import uk.co.raphel.railsim.common.TrackDiagramEntry;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

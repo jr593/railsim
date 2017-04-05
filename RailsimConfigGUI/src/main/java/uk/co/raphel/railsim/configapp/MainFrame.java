@@ -14,11 +14,9 @@ import uk.co.raphel.railsim.common.TrackDiagramEntry;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListDataListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import javax.swing.text.NumberFormatter;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -295,8 +293,6 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
     }
 
     private void loadServices(Resource resource ){
-
-        int trainId = 1;
 
         try{
             //InputStream is = resource.getInputStream();
