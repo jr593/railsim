@@ -83,6 +83,10 @@ public class ServiceRunner extends Thread {
                     while(simTime <= rdyExitTime) {
                        // log.info("T=" + simTimeAsClock(simTime) + " Service " + trainService.getServiceName() +
                        //         " waiting until (stopped) " + simTimeAsClock(rdyExitTime));
+                        rabbitTemplate.convertAndSend(new RailSimMessage(MessageType.MOVEMENT,simTimeAsClock(simTime), trainService.getId(),
+                                trainService.getServiceName(), trainService.getEngine(), trainService.getServiceClass(),
+                                trainService.getOccupiedSection(), ds.getSectionName(trainService.getOccupiedSection()),
+                                SectionStatus.HOLDING,"" + rdyExitTime).toJson());
                         Thread.sleep(1000);
                         simTime =  ds.getSimClock();
                     }
@@ -93,6 +97,10 @@ public class ServiceRunner extends Thread {
                 if(trainService.getServiceEvent() instanceof TerminatingEvent) {
                     trainService.setStarted(false);
                     ds.clearTrackSection(trainService.getOccupiedSection(), trainService.getId());
+                    rabbitTemplate.convertAndSend(new RailSimMessage(MessageType.MOVEMENT,simTimeAsClock(simTime), trainService.getId(),
+                            trainService.getServiceName(), trainService.getEngine(), trainService.getServiceClass(),
+                            trainService.getOccupiedSection(), ds.getSectionName(trainService.getOccupiedSection()),
+                            SectionStatus.CLEARED,"Section Cleared").toJson());
                 } else {
 
                     // Move to next section (if open)

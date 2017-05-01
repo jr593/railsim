@@ -1,0 +1,88 @@
+ID,Description,Total,Step,Mult
+1,Victoria Down Main,0,0,N
+2,Stewarts Lane Down,1.95,1.95,N
+3,Factory Junction Down,2.94,0.99,N
+4,Catford Loop Down,3.15,0.21,N
+5,Brixton Down,3.18,0.24,N
+6,Holbourn Down (Join),3.9,0,N
+7,Herne Hill Down Slow,3.95,0.05,N
+8,Herne Hill Down Fast,3.95,0.05,N
+9,Tulse Hill Down,4,0.05,N
+10,West Dulwich Down,5.03,1.08,N
+11,Sydenham Hill Down,5.71,0.69,N
+12,Penge East Down,7.19,1.48,N
+200,UNKNOWN SIDING,7.5,1,Y
+13,Kent House Down Slow,7.83,0.64,N
+14,Kent House Down Fast,7.83,0.64,N
+15,Crystal Palace Single (Join),8.5,0,N
+16,Beckenham Junction Down,8.66,0.84,N
+17,Catford Loop Down (Shortlands),10.13,0,N
+18,Shortlands Down Slow,10.04,1.38,N
+19,Shortlands Down Fast,10.04,1.38,N
+20,Bromley South Down Slow,10.89,0.85,N
+21,Bromley South Down Fast,10.89,0.85,N
+22,Bickley Down Slow,11.95,1.06,N
+23,Bickley Down Fast,11.95,1.06,N
+24,Tonbridge Down loop (Out),12.3,1,N
+25,Chatham Down Loop (In),13.21,0,N
+26,St Mary Cray Down,14.71,2.76,N
+27,Swanley Down Chatham,17.39,2.68,N
+28,Swanley Down Maidstone (Out),17.39,2.68,N
+29,Farningham Road Down,20.51,3.13,N
+30,Fawkham Junction Down,23.38,2.86,N
+205,Longfield,24,0,N
+31,Meopham Down,25.95,2.58,N
+204,Sole Street Goods Down,26.89,2.58,Y
+32,Sole Street Down,26.89,0.94,N
+33,Cobham Park,28,1.11,N
+34,Cuxton Road,30.9,2.9,N
+35,Rochester Bridge Junction Down,33.01,2.11,N
+36,Chatham Goods Down,33.51,0.5,Y
+37,Rochester Down Slow,33.76,0.75,N
+38,Rochester Down Fast,33.76,0.75,N
+39,Chatham Down Slow,34.31,0.55,N
+40,Chatham Down Fast,34.31,0.55,N
+41,Gillingham Down,35.94,1.63,N
+201,Gillingham Reversable,35.94,1.63,N
+42,Rainham Down,38.93,2.99,N
+203,Rainham Goods,38.93,2.99,Y
+43,Newington Down,41.55,2.63,N
+44,Western Junction Down,43.85,2.3,N
+45,Middle Junction Down,44,0.2,N
+46,Eastern Junction Down,44.24,0.39,N
+47,Sittingbourne Bay,44.74,0.5,N
+202,Sittingbourne Goods,44.74,0.5,Y
+48,Sittingbourne Down,44.74,0.5,N
+49,Murston Sidings,45.5,0.76,Y
+50,Teynham Down,47.93,3.19,N
+51,Faversham Down Slow,51.96,4.04,N
+52,Faversham Down Fast,51.96,4.04,N
+53,Graveney Down,54.96,3,N
+54,Whitstable Down,59.08,4.11,N
+55,Chestfield Down,60.56,1.49,N
+56,Herne Bay Down,62.73,2.16,N
+57,Reculver,65,2.28,N
+58,Minnis Bay,68,3,N
+59,Birchington Down,70.7,2.7,N
+60,Westgate Down,72.44,1.74,N
+61,Margate Down Main,73.86,1.43,N
+62,Margate Down Bay,73.86,1.43,N
+63,Broadstairs Down,77.11,3.25,N
+64,Dumpton Park Down,78.33,1.21,N
+65,Ramsgate Down Slow,79.26,0.94,N
+66,Ramsgate Down Fast,79.26,0.94,N
+67,Selling Down,55.23,3.26,N
+68,Canterbury East Down,61.81,6.59,N
+69,Bekesbourne Down,64.73,2.91,N
+70,Adisham Down,67.75,3.03,N
+71,Aylesham Down,68.83,1.08,N
+72,Snowdown Down,69.75,0.92,Y
+73,Sheperdswell Down,71.75,2,N
+74,Kearsney Down,75.11,3.36,N
+75,Dover Priory Down,77.29,2.18,N
+76,Sheerness Down,0,0,N
+77,Queenborough Down,1.99,1.99,N
+78,Swale Down,3.95,1.96,N
+79,Ridham Dock Down,4.41,0.46,Y
+80,Kemsley Down,5.94,1.53,N
+81,Kemsley to Middle Junction,7.1,1.16,N

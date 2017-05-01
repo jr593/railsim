@@ -49,6 +49,9 @@ public class RailSimMessage implements Serializable {
         this.miscInfo = miscInfo;
     }
 
+    public String toString() {
+        return messageType + " " + serviceName + " " +  sectionName + " " + sectionStatus + " " + miscInfo;
+    }
     public String toJson() {
         try {
             return new ObjectMapper().writeValueAsString(this);

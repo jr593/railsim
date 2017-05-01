@@ -94,7 +94,7 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         c.gridx = 0; c.gridy = 5; c.gridwidth=1;  buttonPanel.add(lblDest,c); c.gridx = 1; c.gridy = 5; c.gridwidth = 3;  buttonPanel.add(txtDest,c);
 
         copyCombo = new JComboBox<>();
-        dataBase.stream().forEach(copyCombo::addItem);
+       // dataBase.stream().forEach(copyCombo::addItem);
 
         c.gridx  =0; c.gridy = 6; c.gridwidth = 3; buttonPanel.add(copyCombo,c);
         JButton copyButton = new JButton("Copy"); copyButton.setActionCommand("COPY"); copyButton.addActionListener(this);
@@ -189,11 +189,11 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
     }
     private void loadData() {
         theTableModel.clear();
-        loadTrackMap(getResource("classpath:TrackMapDown.csv"));
+        loadTrackMap(getResource("classpath:TrackMapUp.csv"));
 
 
         theTableModel.setTrackNames(trackDiagram);
-        loadServices(getResource("classpath:ServicesDown1.csv"));
+        loadServices(getResource("classpath:ServicesUp1.csv"));
         currentDataPointer =0;
         setCurrentDataToTableModel();
     }
@@ -254,8 +254,18 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         txtClass.setText(srv.getServiceClass());
         txtEquipment.setText(srv.getEngine());
         txtDest.setText(srv.getDestination());
+        filterCopyCombo(srv);
         buttonPanel.invalidate();
 
+    }
+
+    private void filterCopyCombo(EditableTrainService srv) {
+
+        if(copyCombo != null) {
+            copyCombo.removeAllItems();
+            dataBase.stream().filter(serv -> serv.getStart().equals(srv.getStart()) && serv.getDestination().equals(srv.getDestination()))
+                    .forEach(copyCombo::addItem);
+        }
     }
     @Override
     public void tableChanged(TableModelEvent e) {

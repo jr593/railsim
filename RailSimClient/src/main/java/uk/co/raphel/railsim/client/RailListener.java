@@ -14,21 +14,10 @@ import java.util.Date;
  * * Created : 19/02/2017
  * * Author  : johnr
  **/
-@Component
-public class RailListener {
 
-    @Autowired
-    MainFrame mainFrame;
+public interface RailListener {
 
-    public void listen(String message) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        mainFrame.setTitle(df.format(new Date()));
 
-        RailSimMessage railSimMessage = RailSimMessage.fromjson(message);
-
-        if(railSimMessage != null) {
-            System.out.println(railSimMessage.getMiscInfo());
-        }
-    }
+    public void listen(String message);
 
 }

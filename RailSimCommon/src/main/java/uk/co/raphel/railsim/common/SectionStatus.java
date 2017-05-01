@@ -9,5 +9,6 @@ package uk.co.raphel.railsim.common;/**
 public enum SectionStatus {
 
     OCCUPIED,
-    CLEARED
+    CLEARED,
+    HOLDING
 }
