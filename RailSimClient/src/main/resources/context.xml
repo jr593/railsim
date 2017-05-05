@@ -26,7 +26,7 @@
 
     </rabbit:listener-container>
 
-    <bean id="railListener" class="uk.co.raphel.railsim.client.RailListener"/>
+    <bean id="railListener" class="uk.co.raphel.railsim.client.MessageProcessor"/>
 
     <bean id="mainframe" class="uk.co.raphel.railsim.client.MainFrame" init-method="init"/>
 

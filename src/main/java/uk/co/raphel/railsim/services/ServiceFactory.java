@@ -64,40 +64,11 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
 
         Resource resource = getResource("classpath:ServicesDown1.csv");
         int trainId = 1;
+        trainId = loadServiceSet(resource, trainId);
+        resource = getResource("classpath:ServicesUp1.csv");
+        trainId = loadServiceSet(resource,trainId);
 
-        try{
-            InputStream is = resource.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
-            String line;
-            // Read the header line and index the track sections
-            String headerLine = br.readLine();
-            List<Integer> indexList = new ArrayList<>();
-            System.out.println(headerLine);
-            if(headerLine != null && headerLine.length() >0) {
-                String indexes[] = headerLine.split(",");
-                for(int i= 5; i<indexes.length; i++) {
-                    int trackSection = Integer.parseInt(indexes[i]);
-                    indexList.add(trackSection);
-                }
-            }
-            while ((line = br.readLine()) != null) {
-                // Only read lines with service defined (may be being built still!)
-                if(line.split(",").length >=5) {
-                    TrainService service = new TrainService(line, indexList, trainId++);
-                    ds.addService(service);
-                }
-
-            }
-            br.close();
-
-            log.info("" + ds.getServices().size() + " services loaded");
-
-        }catch(IOException e){
-            e.printStackTrace();
-            log.error("Error loading services", e);
-        }
-
+        log.info("Services total = " + trainId);
 
         executor.setCorePoolSize(50);
         executor.setMaxPoolSize(100);
@@ -138,6 +109,43 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
                 }
             }
         });
+    }
+
+    private int loadServiceSet(Resource resource,int firstId) {
+        int retVal = firstId;
+        try{
+            InputStream is = resource.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+            String line;
+            // Read the header line and index the track sections
+            String headerLine = br.readLine();
+            List<Integer> indexList = new ArrayList<>();
+            System.out.println(headerLine);
+            if(headerLine != null && headerLine.length() >0) {
+                String indexes[] = headerLine.split(",");
+                for(int i= 5; i<indexes.length; i++) {
+                    int trackSection = Integer.parseInt(indexes[i]);
+                    indexList.add(trackSection);
+                }
+            }
+            while ((line = br.readLine()) != null) {
+                // Only read lines with service defined (may be being built still!)
+                if(line.split(",").length >=5) {
+                    TrainService service = new TrainService(line, indexList, retVal++);
+                    ds.addService(service);
+                }
+
+            }
+            br.close();
+
+            log.info("" + ds.getServices().size() + " services loaded");
+
+        }catch(IOException e){
+            e.printStackTrace();
+            log.error("Error loading services", e);
+        }
+        return retVal;
     }
     private void loadTrackMap(Resource trackMap) {
         log.info("Loading resource");
