@@ -13,13 +13,21 @@ import java.util.List;
  * * Created : 01/05/2017
  * * Author  : johnr
  **/
-public class DestinationBoard extends JPanel implements TrackEventListener {
+public class DestinationBoard extends JPanel  {
 
     String stationName;
     Integer stopNumber; // TODO Expand
 
-    @Override
-    public void onTrackEvent() {
+    JTextField txtLocation = new JTextField();
+
+    public DestinationBoard() {
+        this.add(txtLocation);
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        GroupLayout jPanel2Layout = new javax.swing.GroupLayout(this);
+        setLayout(jPanel2Layout);
+
+    }
+    public void onTrackEvent(RailSimMessage railSimMessage) {
 
     }
 
@@ -29,6 +37,8 @@ public class DestinationBoard extends JPanel implements TrackEventListener {
 
     public void setStationName(String stationName) {
         this.stationName = stationName;
+        txtLocation.setText(stationName + "(" + stopNumber + ")");
+        System.out.println(stationName);
     }
 
     public Integer getStopNumber() {
@@ -37,5 +47,6 @@ public class DestinationBoard extends JPanel implements TrackEventListener {
 
     public void setStopNumber(Integer stopNumber) {
         this.stopNumber = stopNumber;
+        txtLocation.setText(stationName + "(" + stopNumber + ")");
     }
 }

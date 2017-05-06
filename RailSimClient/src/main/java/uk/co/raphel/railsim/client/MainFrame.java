@@ -12,6 +12,8 @@ import org.springframework.context.ResourceLoaderAware;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import sun.security.krb5.internal.crypto.Des;
+import uk.co.raphel.railsim.common.RailSimMessage;
 
 
 import java.awt.*;
@@ -19,19 +21,17 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import javax.swing.*;
 
 
 @org.springframework.stereotype.Component
-public class MainFrame extends JFrame implements ResourceLoaderAware {
+public class MainFrame extends JFrame implements ResourceLoaderAware, RailListener {
 
-    @Autowired
-    MessageProcessor messageProcessor;
 
-    JPanel destinationPanel = new JPanel();
-    JScrollPane scrollPane = new JScrollPane(destinationPanel);
+    //JScrollPane scrollPane = new JScrollPane();
     Map<String,List<DestinationBoard>> destinations = new HashMap<>();
     private ResourceLoader resourceLoader;
 
@@ -42,29 +42,53 @@ public class MainFrame extends JFrame implements ResourceLoaderAware {
 
         destinations = loadDestinations();
 
-        GridBagLayout gridbag = new GridBagLayout();
+       // scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        //JPanel boardPanel = new JPanel();
+        GridBagLayout gridBag = new GridBagLayout();
+        //boardPanel.setLayout(gridBag);
         GridBagConstraints c = new GridBagConstraints();
-        //setLayout(gridbag);
         c.weightx = 1.0;
         c.weighty = 1.0;
-        gridbag.setConstraints(scrollPane, c);
-        add(scrollPane);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        scrollPane.setLayout(gridbag);
+        gridBag.setConstraints(this,c);
+        //scrollPane.add(boardPanel);
+
+        //add(scrollPane);
 
         int gridRow = 0;
         for(Map.Entry<String,List<DestinationBoard>> entry  : destinations.entrySet()) {
             int gridCol =0;
             for(DestinationBoard destinationBoard : entry.getValue()) {
-                c.gridx = gridRow;
-                c.gridy = gridCol++;
-                scrollPane.add(destinationBoard,c);
+                GridBagConstraints gridBagConstraints = new GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 0;
+                GridBagConstraints g = new GridBagConstraints();
+                g.gridx = gridRow;
+                g.gridy = gridCol++;
+                add(destinationBoard);
             }
             gridRow++;
         }
 
         setVisible(true);
         setState(Frame.NORMAL);
+    }
+
+    @Override
+    public void listen(String message) {
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        RailSimMessage railSimMessage = RailSimMessage.fromjson(message);
+
+        if(railSimMessage != null ) {
+            for(Map.Entry<String,List<DestinationBoard>> dest : destinations.entrySet()) {
+                for(DestinationBoard brd :  dest.getValue()) {
+                    brd.onTrackEvent(railSimMessage);
+                }
+            }
+        }
+
     }
 
     @Override
@@ -95,7 +119,6 @@ public class MainFrame extends JFrame implements ResourceLoaderAware {
                         brd.setStationName(destLine[1]);
                         brd.setStopNumber(Integer.parseInt(destLine[i]));
                         boards.add(brd);
-                        messageProcessor.addListener(brd);
                     }
                     result.put(destLine[1], boards);
                 }
