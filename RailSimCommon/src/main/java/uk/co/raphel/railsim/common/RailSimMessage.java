@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * * Created : 19/02/2017
@@ -17,41 +18,43 @@ public class RailSimMessage implements Serializable {
 
     private MessageType messageType;
     private String clockTime;
-    private String serviceName;
-    private String serviceClass;
-    private String serviceEngine;
-    private Integer serviceId;
+    TrainService trainService;
 
     private Integer sectionId;
     private String sectionName;
     private SectionStatus sectionStatus;
 
     private String miscInfo;
+
+    private Map<Integer, Map<String, String>> occSched;
     private final Logger log = LoggerFactory.getLogger(RailSimMessage.class);
 
     public RailSimMessage() {
         // For Jackson
     }
 
-    public RailSimMessage(MessageType messageType, String clockTime,Integer serviceId, String serviceName,
-                          String serviceEngine, String serviceClass,
-                           Integer sectionId, String sectionName,
+    public RailSimMessage(MessageType messageType,String clockTime, Map<Integer, Map<String, String>> occSched) {
+        this.messageType = messageType;
+        this.clockTime = clockTime;
+        this.occSched = occSched;
+    }
+
+    public RailSimMessage(MessageType messageType, String clockTime, TrainService trainService,
+                          String sectionName,
                           SectionStatus sectionStatus, String miscInfo) {
         this.messageType = messageType;
         this.clockTime = clockTime;
-        this.serviceName = serviceName;
-        this.serviceClass = serviceClass;
-        this.serviceEngine = serviceEngine;
-        this.serviceId = serviceId;
-        this.sectionId = sectionId;
+        this.trainService = trainService;
+        this.sectionId = trainService.getOccupiedSection();
         this.sectionName = sectionName;
         this.sectionStatus = sectionStatus;
         this.miscInfo = miscInfo;
     }
 
     public String toString() {
-        return messageType + " " + serviceName + " " +  sectionName + " " + sectionStatus + " " + miscInfo;
+        return messageType + " " + trainService.getServiceName() + " " + sectionName + " " + sectionStatus + " " + miscInfo;
     }
+
     public String toJson() {
         try {
             return new ObjectMapper().writeValueAsString(this);
@@ -64,7 +67,7 @@ public class RailSimMessage implements Serializable {
 
     public static RailSimMessage fromjson(String json) {
         try {
-            return  new ObjectMapper().readValue(json, RailSimMessage.class);
+            return new ObjectMapper().readValue(json, RailSimMessage.class);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -87,36 +90,12 @@ public class RailSimMessage implements Serializable {
         this.clockTime = clockTime;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public TrainService getTrainService() {
+        return trainService;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-    }
-
-    public String getServiceClass() {
-        return serviceClass;
-    }
-
-    public void setServiceClass(String serviceClass) {
-        this.serviceClass = serviceClass;
-    }
-
-    public String getServiceEngine() {
-        return serviceEngine;
-    }
-
-    public void setServiceEngine(String serviceEngine) {
-        this.serviceEngine = serviceEngine;
-    }
-
-    public Integer getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(Integer serviceId) {
-        this.serviceId = serviceId;
+    public void setTrainService(TrainService trainService) {
+        this.trainService = trainService;
     }
 
     public Integer getSectionId() {
@@ -150,4 +129,13 @@ public class RailSimMessage implements Serializable {
     public void setMiscInfo(String miscInfo) {
         this.miscInfo = miscInfo;
     }
+
+    public Map<Integer, Map<String, String>> getOccSched() {
+        return occSched;
+    }
+
+    public void setOccSched(Map<Integer, Map<String, String>> occSched) {
+        this.occSched = occSched;
+    }
 }
+

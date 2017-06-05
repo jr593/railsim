@@ -1,0 +1,55 @@
+{
+  "messageType": "COMPLETION",
+  "clockTime": "00:12",
+  "trainService": {
+    "startTime": 1366,
+    "serviceName": "22:46 Charing Cross to Gillingham",
+    "origin": "Charing Cross",
+    "destination": "Gillingham",
+    "serviceClass": "Pass",
+    "engine": "EMU",
+    "id": 337,
+    "serviceEventList": [
+      {
+        "eventSection": 35,
+        "timeOfDay": 5,
+        "scheduledExitTime": 5,
+        "stopping": false
+      },
+      {
+        "eventSection": 38,
+        "timeOfDay": 7,
+        "scheduledExitTime": 7,
+        "stopping": true
+      },
+      {
+        "eventSection": 40,
+        "timeOfDay": 10,
+        "scheduledExitTime": 10,
+        "stopping": true
+      },
+      {
+        "eventSection": 201,
+        "timeOfDay": 13,
+        "scheduledExitTime": 13,
+        "stopping": false
+      }
+    ],
+    "currentServiceEvent": 3,
+    "started": false,
+    "serviceEvent": {
+      "eventSection": 201,
+      "timeOfDay": 13,
+      "scheduledExitTime": 13,
+      "stopping": false
+    },
+    "lastEvent": true,
+    "nextEvent": null,
+    "occupiedSection": 201
+  },
+  "sectionId": 201,
+  "sectionName": "",
+  "sectionStatus": "CLEARED",
+  "miscInfo": "Service terminated",
+  "occSched": null
+}

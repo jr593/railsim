@@ -12,6 +12,7 @@ public enum MessageType {
     MOVEMENT,
     BLOCKING,
     COMPLETION,
+    SCHEDULE,
 
     ERROR
 }

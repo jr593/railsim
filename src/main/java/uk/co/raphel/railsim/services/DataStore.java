@@ -4,7 +4,7 @@ package uk.co.raphel.railsim.services;/**
 
 import org.springframework.stereotype.Component;
 import uk.co.raphel.railsim.common.TrackDiagramEntry;
-import uk.co.raphel.railsim.dto.TrainService;
+import uk.co.raphel.railsim.common.TrainService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +20,11 @@ public class DataStore {
 
     private Map<String,String> statusMap;
 
+    //
+    // This map has the occupation schedule loaded into it.
+    // Each Entry is : (int)Section No -> ((String)scheduled time, (String)Destination)
+    // Destination boards can then use it to determine displayed services.
+    private Map<Integer,Map<String,String>> trackOccupationSchedule = new HashMap<>();
 
     private List<TrainService> services;
     private Map<Integer, TrackDiagramEntry> trackDiagram;
@@ -27,6 +32,17 @@ public class DataStore {
 
     private boolean tracklock = false;
 
+    public Map<Integer,Map<String,String>> getTrackOccupationSchedule() {
+        return trackOccupationSchedule;
+    }
+    public void addOccupations(String destination, Map<Integer,String> occMap) {
+        occMap.entrySet().stream().forEach(e -> {
+            if(!trackOccupationSchedule.containsKey(e.getKey())) {
+                trackOccupationSchedule.put(e.getKey(), new HashMap<>());
+            }
+            trackOccupationSchedule.get(e.getKey()).put(e.getValue(), destination);
+        });
+    }
     public String getSectionName(int sectionNumber) {
         return trackDiagram.get(sectionNumber).getName() + " (" + sectionNumber + ")";
     }

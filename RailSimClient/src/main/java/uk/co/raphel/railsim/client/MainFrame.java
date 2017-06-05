@@ -8,11 +8,13 @@ package uk.co.raphel.railsim.client;/**
  **/
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ResourceLoaderAware;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import sun.security.krb5.internal.crypto.Des;
+import uk.co.raphel.railsim.common.MessageType;
 import uk.co.raphel.railsim.common.RailSimMessage;
 
 
@@ -28,81 +30,91 @@ import javax.swing.*;
 
 
 @org.springframework.stereotype.Component
-public class MainFrame extends JFrame implements ResourceLoaderAware, RailListener {
+public class MainFrame extends JFrame implements ResourceLoaderAware {
 
+    @Autowired
+    private ApplicationContext appContext;
 
-    //JScrollPane scrollPane = new JScrollPane();
-    Map<String,List<DestinationBoard>> destinations = new HashMap<>();
+    MessageProcessor messageProcessor;
+
+    List<Destination> destinations;
+
     private ResourceLoader resourceLoader;
 
 
     public void init() {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setSize(new Dimension(600, 400));
+        setSize(new Dimension(800, 800));
+
+        messageProcessor = (MessageProcessor) appContext.getBean("railListener");
 
         destinations = loadDestinations();
 
-       // scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        GridBagConstraints gridBagConstraints;
 
-        //JPanel boardPanel = new JPanel();
-        GridBagLayout gridBag = new GridBagLayout();
-        //boardPanel.setLayout(gridBag);
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 1.0;
-        c.weighty = 1.0;
-        gridBag.setConstraints(this,c);
-        //scrollPane.add(boardPanel);
+        JScrollPane scrolPane = new JScrollPane();
+        JPanel backPane = new JPanel();
 
-        //add(scrollPane);
+        scrolPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        int gridRow = 0;
-        for(Map.Entry<String,List<DestinationBoard>> entry  : destinations.entrySet()) {
-            int gridCol =0;
-            for(DestinationBoard destinationBoard : entry.getValue()) {
-                GridBagConstraints gridBagConstraints = new GridBagConstraints();
-                gridBagConstraints.gridx = 0;
-                gridBagConstraints.gridy = 0;
-                GridBagConstraints g = new GridBagConstraints();
-                g.gridx = gridRow;
-                g.gridy = gridCol++;
-                add(destinationBoard);
+        backPane.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        backPane.setLayout(new java.awt.GridBagLayout());
+        int currRow = 0;
+        for(Destination entry : destinations) {
+            int curCol = 0;
+            gridBagConstraints = new GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = currRow++;
+            backPane.add(new JLabel(entry.getName()),gridBagConstraints);
+            for(DestinationBoard brd : entry.getDestinationBoards()) {
+                brd.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+                gridBagConstraints = new GridBagConstraints();
+                gridBagConstraints.gridx = curCol;
+                gridBagConstraints.gridy = currRow;
+                backPane.add(brd, gridBagConstraints);
+                brd.setPreferredSize(new Dimension(200,40));
+                brd.setVisible(true);
+                messageProcessor.addListener(brd);
+                curCol++;
             }
-            gridRow++;
+            currRow++;
         }
+
+        scrolPane.setViewportView(backPane);
+        /*GroupLayout layout = new GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(scrolPane, GroupLayout.PREFERRED_SIZE, 778, GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 10, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(scrolPane, GroupLayout.PREFERRED_SIZE, 612, GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+        );*/
+
+        add(scrolPane);
 
         setVisible(true);
         setState(Frame.NORMAL);
     }
 
-    @Override
-    public void listen(String message) {
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        RailSimMessage railSimMessage = RailSimMessage.fromjson(message);
-
-        if(railSimMessage != null ) {
-            for(Map.Entry<String,List<DestinationBoard>> dest : destinations.entrySet()) {
-                for(DestinationBoard brd :  dest.getValue()) {
-                    brd.onTrackEvent(railSimMessage);
-                }
-            }
-        }
-
-    }
 
     @Override
     public void setResourceLoader(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
 
-    private Map<String,List<DestinationBoard>> loadDestinations() {
+    private List<Destination> loadDestinations() {
         Resource resource = getResource("classpath:destinations.csv");
-        Map<String,List<DestinationBoard>> result = new LinkedHashMap<>();
+        List<Destination> result = new LinkedList<>();
 
-        try{
-            //InputStream is = resource.getInputStream();
-            File inFile = resource.getFile()   ;
+        try {
+            File inFile = resource.getFile();
 
             BufferedReader br = new BufferedReader(new FileReader(inFile));
 
@@ -110,17 +122,21 @@ public class MainFrame extends JFrame implements ResourceLoaderAware, RailListen
             // Read the header line
             String headerLine = br.readLine();
 
-            while ((line = br.readLine()) != null) {
-                 String[] destLine = line.split(",");
+            while((line = br.readLine()) != null) {
+                String[] destLine = line.split(",");
                 if(destLine.length > 3) {
                     List<DestinationBoard> boards = new ArrayList<>();
-                    for(int i=2; i<destLine.length; i++) {
+                    Destination destination = new Destination();
+                    destination.setName(destLine[1]);
+                    destination.setId(Integer.parseInt(destLine[0]));
+                    for(int i = 2; i < destLine.length; i++) {
                         DestinationBoard brd = new DestinationBoard();
                         brd.setStationName(destLine[1]);
                         brd.setStopNumber(Integer.parseInt(destLine[i]));
                         boards.add(brd);
                     }
-                    result.put(destLine[1], boards);
+                    destination.setDestinationBoards(boards);
+                    result.add(destination);
                 }
 
 
@@ -128,12 +144,15 @@ public class MainFrame extends JFrame implements ResourceLoaderAware, RailListen
             br.close();
 
 
-        }catch(IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
         }
         return result;
     }
-    private Resource getResource(String location){
+
+    private Resource getResource(String location) {
         return resourceLoader.getResource(location);
     }
+
 }
+

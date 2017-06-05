@@ -1,6 +1,8 @@
-package uk.co.raphel.railsim.dto;/**
+package uk.co.raphel.railsim.common;/**
  * Created by johnr on 30/05/2015.
  */
+
+import uk.co.raphel.railsim.common.dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,8 @@ public class TrainService {
 
     private Integer startTime;
     private String serviceName;
+    private String origin;
+    private String destination;
     private String serviceClass;
     private String engine;
 
@@ -24,14 +28,32 @@ public class TrainService {
 
     private boolean started = false;
 
+    public TrainService() { // for Json
+    }
+
+    public TrainService(int startTime, String serviceName, String origin, String destination, String serviceClass,
+                        String engine, int id, List<ServiceEvent> serviceEventList) {
+        this.startTime = startTime;
+        this.serviceName = serviceName;
+        this.origin = origin;
+        this.destination = destination;
+        this.serviceClass = serviceClass;
+        this.engine = engine;
+        this.id = id;
+        this.serviceEventList = serviceEventList;
+
+        this.currentServiceEvent = 0;
+    }
     public TrainService(String csvLine, List<Integer> indexList, int id ) {
         // e.g
         // Train,From,Class,Engine,Destination,1,2,3,4,5,6,7,8,9,10,11,200,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,201,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81
        //  00:25,Victoria,Pass,EMU,,S00.25,,,,S00.31,,S00.35,,,S00.38,S00.40,,S00.44,S00.46,,,T00.48,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         String csv[] = csvLine.split(",");
-
+        System.out.println(csvLine);
         startTime = timeToInt(csv[0]);
         serviceName = csv[0] + " " + csv[1] + " to " + csv[4];
+        origin = csv[1];
+        destination = csv[4];
         serviceClass = csv[2];
         engine = csv[3];
 
@@ -42,7 +64,13 @@ public class TrainService {
                 serviceEventList.add(generateServiceEvent(indexList.get(i - 5), csv[i]));
             }
         }
-
+        // Make sure last event is a terminator
+        ServiceEvent lastEvent = serviceEventList.get(serviceEventList.size()-1);
+        if(!(lastEvent.getServiceEventType() == ServiceEventType.TERMINATING)) {
+            lastEvent = new ServiceEvent(lastEvent.getServiceEventType(),
+                                         lastEvent.getEventSection(), lastEvent.getTimeOfDay());
+            serviceEventList.set(serviceEventList.size()-1, lastEvent);
+        }
         this.id = id;
 
         currentServiceEvent = 0;
@@ -97,24 +125,33 @@ public class TrainService {
         // Txx.xx - Termination time
 
         if(eventBase.startsWith("T")) {
-             return new TerminatingEvent(trackSection, timeToInt(eventBase.substring(1)));
+             return new ServiceEvent(ServiceEventType.TERMINATING, trackSection, timeToInt(eventBase.substring(1)));
         }
         if(eventBase.startsWith("P")) {
             try {
-                return new PassingEvent(trackSection, timeToInt(eventBase.substring(1)));
+                return new ServiceEvent(ServiceEventType.PASSING,trackSection, timeToInt(eventBase.substring(1)));
             } catch(Exception e) {
-                return new PassingEvent(trackSection, 0); // Blank passing event
+                return new ServiceEvent(ServiceEventType.PASSING,trackSection, 0); // Blank passing event
             }
         }
         if(eventBase.startsWith("S")) {
             if(eventBase.contains("/")) {
-                return new ArriveStopEvent(trackSection, timeToInt(eventBase.substring(1,6)), timeToInt(eventBase.substring(7)));
+                return new ServiceEvent(ServiceEventType.ARRIVESTOP, trackSection,
+                                         timeToInt(eventBase.substring(1,6)),
+                                         timeToInt(eventBase.substring(7)));
             } else {
-                return new StoppingEvent(trackSection, timeToInt(eventBase.substring(1)));
+                return new ServiceEvent(ServiceEventType.STOPPING, trackSection,
+                        timeToInt(eventBase.substring(1)),
+                        timeToInt(eventBase.substring(1)));
             }
         }
 
         return null;
+    }
+
+    public String toString() {
+        return serviceName + " current evt=" + currentServiceEvent + " (" +
+                serviceEventList.get(currentServiceEvent) + ")";
     }
 
     public Integer getStartTime() {
@@ -171,5 +208,21 @@ public class TrainService {
 
     public void setStarted(boolean started) {
         this.started = started;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 }

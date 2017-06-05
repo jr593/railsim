@@ -20,4 +20,6 @@ public interface RailListener {
 
     public void listen(String message);
 
+    public void listen(RailSimMessage message);
+
 }
