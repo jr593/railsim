@@ -2,6 +2,7 @@ package uk.co.raphel.railsim.common;/**
  * Created by johnr on 30/05/2015.
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import uk.co.raphel.railsim.common.dto.*;
 
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class TrainService {
 
         currentServiceEvent = 0;
     }
-
+    @JsonIgnore
     public ServiceEvent getServiceEvent() {
         return serviceEventList.get(currentServiceEvent);
     }
@@ -92,7 +93,7 @@ public class TrainService {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    @JsonIgnore
     public ServiceEvent getNextEvent() {
            try {
                return serviceEventList.get(currentServiceEvent+1);
@@ -100,10 +101,11 @@ public class TrainService {
                return null;
            }
     }
+    @JsonIgnore
     public int getOccupiedSection() {
         return serviceEventList.get(currentServiceEvent).getEventSection();
     }
-
+    @JsonIgnore
     public boolean isLastEvent() {
         return serviceEventList == null || serviceEventList.isEmpty() ||
                 currentServiceEvent == serviceEventList.size()-1;
@@ -201,7 +203,7 @@ public class TrainService {
     public void setCurrentServiceEvent(int currentServiceEvent) {
         this.currentServiceEvent = currentServiceEvent;
     }
-
+    @JsonIgnore
     public boolean isStarted() {
         return started;
     }

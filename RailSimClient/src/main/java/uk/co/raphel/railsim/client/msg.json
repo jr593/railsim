@@ -11,45 +11,50 @@
     "id": 337,
     "serviceEventList": [
       {
+        "serviceEventType": "PASSING",
         "eventSection": 35,
         "timeOfDay": 5,
-        "scheduledExitTime": 5,
-        "stopping": false
+        "departureTime": 0,
+        "scheduledExitTime": 5
       },
       {
+        "serviceEventType": "STOPPING",
         "eventSection": 38,
         "timeOfDay": 7,
-        "scheduledExitTime": 7,
-        "stopping": true
+        "departureTime": 7,
+        "scheduledExitTime": 7
       },
       {
+        "serviceEventType": "STOPPING",
         "eventSection": 40,
         "timeOfDay": 10,
-        "scheduledExitTime": 10,
-        "stopping": true
+        "departureTime": 10,
+        "scheduledExitTime": 10
       },
       {
+        "serviceEventType": "TERMINATING",
         "eventSection": 201,
         "timeOfDay": 13,
-        "scheduledExitTime": 13,
-        "stopping": false
+        "departureTime": 0,
+        "scheduledExitTime": 13
       }
     ],
     "currentServiceEvent": 3,
     "started": false,
+    "occupiedSection": 201,
     "serviceEvent": {
+      "serviceEventType": "TERMINATING",
       "eventSection": 201,
       "timeOfDay": 13,
-      "scheduledExitTime": 13,
-      "stopping": false
+      "departureTime": 0,
+      "scheduledExitTime": 13
     },
     "lastEvent": true,
-    "nextEvent": null,
-    "occupiedSection": 201
+    "nextEvent": null
   },
   "sectionId": 201,
   "sectionName": "",
   "sectionStatus": "CLEARED",
   "miscInfo": "Service terminated",
   "occSched": null
-}
+};
