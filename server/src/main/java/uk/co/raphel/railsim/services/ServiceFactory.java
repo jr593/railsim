@@ -1,20 +1,14 @@
-package uk.co.raphel.railsim.services;/**
- * Created by johnr on 30/05/2015.
- */
-
+package uk.co.raphel.railsim.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
-/**
- * * Created : 30/05/2015
- * * Author  : johnr
- **/
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -24,7 +18,6 @@ import uk.co.raphel.railsim.common.RailSimMessage;
 import uk.co.raphel.railsim.common.TrackDiagramEntry;
 import uk.co.raphel.railsim.common.TrainService;
 
-import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +26,7 @@ import java.util.Map;
 
 @Component
 @EnableScheduling
-public class ServiceFactory implements Runnable, ResourceLoaderAware {
+public class ServiceFactory implements Runnable, ResourceLoaderAware, InitializingBean {
 
    // String name;
    // TaskExecutor taskExecutor;
@@ -53,8 +46,10 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
     @Autowired
     DataStore ds;
 
-    @PostConstruct
-    public void postConstruct() {
+
+    @Override
+    public void afterPropertiesSet()  {
+
        // log.info(name + " is running");
 
         // Start by loading the track sections maps
@@ -79,7 +74,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
                 ds.getTrackOccupationSchedule()));
 
 
-        executor.setCorePoolSize(50);
+        executor.setCorePoolSize(4);
         executor.setMaxPoolSize(100);
         executor.setQueueCapacity(100);
         executor.initialize();
@@ -108,7 +103,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
         simClock += 1;          // Advance one minute per loop iteration
         ds.setSimClock(simClock);
 
-        ds.getServices().stream().forEach(srv -> {
+        ds.getServices().forEach(srv -> {
             if(!srv.getServiceEventList().isEmpty()) {
                 if(srv.getServiceEventList().get(0).getTimeOfDay() == (simClock )  && !srv.isStarted())   {
                     System.out.println("Kick off : " + srv.getServiceName());
@@ -132,7 +127,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
             List<Integer> indexList = new ArrayList<>();
             System.out.println(headerLine);
             if(headerLine != null && headerLine.length() >0) {
-                String indexes[] = headerLine.split(",");
+                String[] indexes = headerLine.split(",");
                 for(int i= 5; i<indexes.length; i++) {
                     int trackSection = Integer.parseInt(indexes[i]);
                     indexList.add(trackSection);
@@ -185,7 +180,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
         // e.g
         // Train,From,Class,Engine,Destination,1,2,3,4,5,6,7,8,9,10,11,200,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,201,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81
         //  00:25,Victoria,Pass,EMU,,S00.25,,,,S00.31,,S00.35,,,S00.38,S00.40,,S00.44,S00.46,,,T00.48,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-        String csv[] = csvLine.split(",");
+        String[] csv = csvLine.split(",");
         String destination = csv[4];
 
         Map<Integer,String> occSched = new HashMap<>();   // Schedule for this line   = section ->> time
@@ -214,7 +209,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware {
         this.resourceLoader = resourceLoader;
     }
 
-    public Resource getResource(String location){
+    private Resource getResource(String location){
         return resourceLoader.getResource(location);
     }
 

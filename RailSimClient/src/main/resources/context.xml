@@ -15,14 +15,14 @@
     <context:component-scan base-package="uk.co.raphel.railsim" />
 
 
-    <rabbit:connection-factory id="connectionFactory"  host="localhost" username="localspringamqp" password="localspringamqp"/>
+    <rabbit:connection-factory id="connectionFactory"  host="127.0.0.1" username="guest" password="guest"/>
 
-    <rabbit:template id="rabbitTemplate" exchange="amq.direct" connection-factory="connectionFactory" queue="railsim.queue"/>
+    <rabbit:template id="rabbitTemplate" exchange="amq.direct" connection-factory="connectionFactory" queue="uk.co.raphel.railsim.queue"/>
 
     <rabbit:admin connection-factory="connectionFactory"/>
 
     <rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto">
-        <rabbit:listener ref="railListener" method="listen" queue-names="railsim.queue"/>
+        <rabbit:listener ref="railListener" method="listen" queue-names="uk.co.raphel.railsim.queue"/>
 
     </rabbit:listener-container>
 

@@ -1,14 +1,9 @@
-package uk.co.raphel.railsim.services;/**
- * Created by johnr on 07/06/2015.
- */
-
-
+package uk.co.raphel.railsim.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 import uk.co.raphel.railsim.common.*;
-
 
 /**
  * * Created : 07/06/2015

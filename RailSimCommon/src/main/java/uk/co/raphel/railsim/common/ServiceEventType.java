@@ -1,6 +1,4 @@
-package uk.co.raphel.railsim.common;/**
- * Created by johnr on 28/05/2017.
- */
+package uk.co.raphel.railsim.common;
 
 /**
  * * Created : 28/05/2017

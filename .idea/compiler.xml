@@ -1,50 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <option name="DEFAULT_COMPILER" value="Javac" />
-    <resourceExtensions />
-    <wildcardResourcePatterns>
-      <entry name="!?*.java" />
-      <entry name="!?*.form" />
-      <entry name="!?*.class" />
-      <entry name="!?*.groovy" />
-      <entry name="!?*.scala" />
-      <entry name="!?*.flex" />
-      <entry name="!?*.kt" />
-      <entry name="!?*.clj" />
-      <entry name="!?*.aj" />
-    </wildcardResourcePatterns>
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="false">
-        <processorPath useClasspath="true" />
-      </profile>
-      <profile default="false" name="Annotation profile for RailSimClient" enabled="true">
+      <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="true" />
-        <module name="RailSimClient" />
-      </profile>
-      <profile default="false" name="Annotation profile for RailSimCommon" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="true" />
         <module name="RailSimCommon" />
-      </profile>
-      <profile default="false" name="Annotation profile for RailsimConfigGUI" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="true" />
+        <module name="server" />
         <module name="RailsimConfigGUI" />
+        <module name="RailSimClient" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="RailSimClient" target="1.8" />
-      <module name="RailSimCommon" target="1.8" />
-      <module name="RailsimConfigGUI" target="1.8" />
-      <module name="RailwaySim" target="1.8" />
+      <module name="RailSimClient" target="12" />
+      <module name="RailSimCommon" target="12" />
+      <module name="RailsimConfigGUI" target="12" />
+      <module name="RailwaySim" target="12" />
+      <module name="server" target="12" />
     </bytecodeTargetLevel>
   </component>
 </project>

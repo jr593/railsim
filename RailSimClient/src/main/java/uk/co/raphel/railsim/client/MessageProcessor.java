@@ -1,6 +1,4 @@
-package uk.co.raphel.railsim.client;/**
- * Created by johnr on 07/05/2017.
- */
+package uk.co.raphel.railsim.client;
 
 import org.springframework.stereotype.Component;
 import uk.co.raphel.railsim.common.MessageType;
@@ -9,7 +7,6 @@ import uk.co.raphel.railsim.common.RailSimMessage;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * * Created : 07/05/2017
@@ -19,7 +16,7 @@ import java.util.Map;
 public class MessageProcessor implements RailListener {
 
 
-    List<RailSimMessageListener> listeners = new ArrayList<>();
+    private List<RailSimMessageListener> listeners = new ArrayList<>();
 
     @Override
     public void listen(String message) {
@@ -29,27 +26,27 @@ public class MessageProcessor implements RailListener {
         RailSimMessage railSimMessage = RailSimMessage.fromjson(message);
 
         System.out.println(railSimMessage);
-        if(railSimMessage != null) {
-            if(railSimMessage.getMessageType() == MessageType.SCHEDULE) {
-                listeners.stream().forEach(m -> m.recvSchedule(railSimMessage));
-            }   else {
-                listeners.stream().forEach(m -> m.consume(railSimMessage));
+        if (railSimMessage != null) {
+            if (railSimMessage.getMessageType() == MessageType.SCHEDULE) {
+                listeners.forEach(m -> m.recvSchedule(railSimMessage));
+            } else {
+                listeners.forEach(m -> m.consume(railSimMessage));
             }
         }
     }
 
     @Override
     public void listen(RailSimMessage railSimMessage) {
-        if(railSimMessage != null) {
-            if(railSimMessage.getMessageType() == MessageType.SCHEDULE) {
-                listeners.stream().forEach(m -> m.recvSchedule(railSimMessage));
-            }   else {
-                listeners.stream().forEach(m -> m.consume(railSimMessage));
+        if (railSimMessage != null) {
+            if (railSimMessage.getMessageType() == MessageType.SCHEDULE) {
+                listeners.forEach(m -> m.recvSchedule(railSimMessage));
+            } else {
+                listeners.forEach(m -> m.consume(railSimMessage));
             }
         }
     }
 
-    public void addListener(RailSimMessageListener listener) {
+    void addListener(RailSimMessageListener listener) {
         listeners.add(listener);
     }
 }

@@ -23,9 +23,9 @@
     <bean id="serviceFactory" class="uk.co.raphel.railsim.services.ServiceFactory"/>
     <bean id="dataStore" class="uk.co.raphel.railsim.services.DataStore"/>
 
-    <rabbit:connection-factory id="connectionFactory"  host="localhost" username="localspringamqp" password="localspringamqp"/>
+    <rabbit:connection-factory id="connectionFactory"  host="127.0.0.1" username="guest" password="guest"/>
 
-    <rabbit:template id="rabbitTemplate" exchange="amq.direct" connection-factory="connectionFactory" queue="railsim.queue"/>
+    <rabbit:template id="rabbitTemplate" exchange="amq.direct" connection-factory="connectionFactory" queue="uk.co.raphel.railsim.queue"/>
 
     <rabbit:admin connection-factory="connectionFactory"/>
 </beans>

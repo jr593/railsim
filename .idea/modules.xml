@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/RailSimCommon/RailSimCommon.iml" filepath="$PROJECT_DIR$/RailSimCommon/RailSimCommon.iml" />
       <module fileurl="file://$PROJECT_DIR$/RailsimConfigGUI/RailsimConfigGUI.iml" filepath="$PROJECT_DIR$/RailsimConfigGUI/RailsimConfigGUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/RailwaySim.iml" filepath="$PROJECT_DIR$/RailwaySim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
     </modules>
   </component>
 </project>

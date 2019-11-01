@@ -1,8 +1,8 @@
-package uk.co.raphel.railsim.common.dto;/**
- * Created by johnr on 07/06/2015.
- */
+package uk.co.raphel.railsim.common.dto;
 
 import uk.co.raphel.railsim.common.ServiceEventType;
+
+import static uk.co.raphel.railsim.common.ServiceEventType.ARRIVESTOP;
 
 /**
  * * Created : 07/06/2015
@@ -16,7 +16,8 @@ public class ServiceEvent {
     private int departureTime;
 
 
-    public ServiceEvent() {}
+    public ServiceEvent() {
+    }
 
     public ServiceEvent(ServiceEventType serviceEventType, int eventSection, int timeOfDay) {
         this.serviceEventType = serviceEventType;
@@ -76,35 +77,21 @@ public class ServiceEvent {
         }
     }*/
 
-    public  int getScheduledExitTime(){
-        switch (serviceEventType) {
-            case ARRIVESTOP:
-                return departureTime;
-            case PASSING:
-            case STOPPING:
-            case TERMINATING:
-            default:
-                return getTimeOfDay();
-        }
-
-    }
+    public int getScheduledExitTime() {
+        return serviceEventType == ARRIVESTOP ? departureTime : getTimeOfDay();
+     }
 
     public void setScheduledExitTime(int scheduledExitTime) {
-        switch (serviceEventType) {
-            case ARRIVESTOP:
-                 departureTime = scheduledExitTime;
-                break;
-            case PASSING:
-            case STOPPING:
-            case TERMINATING:
-            default:
-                timeOfDay = scheduledExitTime;
-                break;
+        if(serviceEventType == ARRIVESTOP ) {
+            departureTime = scheduledExitTime;
+        } else {
+            timeOfDay = scheduledExitTime;
         }
 
     }
-    public  String toString() {
-        if(serviceEventType == ServiceEventType.ARRIVESTOP) {
+
+    public String toString() {
+        if (serviceEventType == ARRIVESTOP) {
             return "ArriveStopEvent Section " + getEventSection() + " at " + getTimeOfDay() + "/" + departureTime;
         } else {
             return serviceEventType + " Section " + getEventSection() + " at " + getTimeOfDay();

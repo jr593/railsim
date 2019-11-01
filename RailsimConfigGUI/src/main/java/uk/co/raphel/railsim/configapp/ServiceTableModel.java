@@ -1,6 +1,4 @@
-package uk.co.raphel.railsim.configapp;/**
- * Created by johnr on 19/03/2017.
- */
+package uk.co.raphel.railsim.configapp;
 
 import uk.co.raphel.railsim.common.TrackDiagramEntry;
 
@@ -18,7 +16,7 @@ public class ServiceTableModel extends AbstractTableModel {
     private EditableTrainService service;
 
 
-    public void clear() {
+    void clear() {
         service = null;
     }
     public int getColumnCount() {
@@ -45,11 +43,11 @@ public class ServiceTableModel extends AbstractTableModel {
         return getValueAt(0, c).getClass();
     }
 
-    public void setData(EditableTrainService service) {
+    void setData(EditableTrainService service) {
         this.service = service;
         fireTableDataChanged();
     }
-    public void setTrackNames(List<TrackDiagramEntry> trackNames) {
+    void setTrackNames(List<TrackDiagramEntry> trackNames) {
         this.trackNames = trackNames;
     }
     /*
