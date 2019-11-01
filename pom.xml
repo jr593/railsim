@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <spring.amqp.version>1.6.6.RELEASE</spring.amqp.version>
+        <spring.amqp.version>2.2.0.RELEASE</spring.amqp.version>
     </properties>
      <build>
          <plugins>
