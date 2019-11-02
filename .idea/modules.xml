@@ -3,9 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RailSimClient/RailSimClient.iml" filepath="$PROJECT_DIR$/RailSimClient/RailSimClient.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RailSimCommon/RailSimCommon.iml" filepath="$PROJECT_DIR$/RailSimCommon/RailSimCommon.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RailsimConfigGUI/RailsimConfigGUI.iml" filepath="$PROJECT_DIR$/RailsimConfigGUI/RailsimConfigGUI.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RailwaySim.iml" filepath="$PROJECT_DIR$/RailwaySim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RailsimConfigGUI/RailSimConfigGui.iml" filepath="$PROJECT_DIR$/RailsimConfigGUI/RailSimConfigGui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RailSimCommon/railsimcommon.iml" filepath="$PROJECT_DIR$/RailSimCommon/railsimcommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/railwaysim.iml" filepath="$PROJECT_DIR$/railwaysim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
     </modules>
   </component>
 </project>

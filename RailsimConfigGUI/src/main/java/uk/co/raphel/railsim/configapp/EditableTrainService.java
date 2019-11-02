@@ -1,6 +1,4 @@
-package uk.co.raphel.railsim.configapp;/**
- * Created by johnr on 30/05/2015.
- */
+package uk.co.raphel.railsim.configapp;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,11 +23,11 @@ public class EditableTrainService {
     public String toString() {
         return startTime + "-" + start + " to " + destination;
     }
-    public EditableTrainService(String csvLine, List<Integer> indexList) {
+    EditableTrainService(String csvLine, List<Integer> indexList) {
         // e.g
         // Train,From,Class,Engine,Destination,1,2,3,4,5,6,7,8,9,10,11,200,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,201,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81
        //  00:25,Victoria,Pass,EMU,,S00.25,,,,S00.31,,S00.35,,,S00.38,S00.40,,S00.44,S00.46,,,T00.48,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-        String csv[] = csvLine.split(",");
+        String[] csv = csvLine.split(",");
 
         startTime = csv[0];
         this.start = csv[1];
@@ -49,61 +47,59 @@ public class EditableTrainService {
     }
 
 
-    public boolean hasNoEntries() {
+    boolean hasNoEntries() {
         return getCallingPoints() == null ||
                 getCallingPoints().isEmpty() ||
-                !callingPoints.values()
+                callingPoints.values()
                         .stream()
-                        .filter(m -> m != null && m.length() > 0)
-                        .findFirst()
-                        .isPresent();
+                        .noneMatch(m -> m != null && m.length() > 0);
     }
 
-    public String getStartTime() {
+    String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public String getStart() {
+    String getStart() {
         return start;
     }
 
-    public void setStart(String start) {
+    void setStart(String start) {
         this.start = start;
     }
 
-    public String getDestination() {
+    String getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
+    void setDestination(String destination) {
         this.destination = destination;
     }
 
-    public String getServiceClass() {
+    String getServiceClass() {
         return serviceClass;
     }
 
-    public void setServiceClass(String serviceClass) {
+    void setServiceClass(String serviceClass) {
         this.serviceClass = serviceClass;
     }
 
-    public String getEngine() {
+    String getEngine() {
         return engine;
     }
 
-    public void setEngine(String engine) {
+    void setEngine(String engine) {
         this.engine = engine;
     }
 
-    public Map<Integer, String> getCallingPoints() {
+    Map<Integer, String> getCallingPoints() {
         return callingPoints;
     }
 
-    public void setCallingPoints(Map<Integer, String> callingPoints) {
+    void setCallingPoints(Map<Integer, String> callingPoints) {
         this.callingPoints = callingPoints;
     }
 }

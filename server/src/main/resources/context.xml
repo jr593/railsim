@@ -13,23 +13,19 @@
 
     <tx:annotation-driven/>
     <context:component-scan base-package="uk.co.raphel.railsim" />
+    <bean id="taskExecutor"
+          class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="5" />
+        <property name="maxPoolSize" value="10" />
+        <property name="WaitForTasksToCompleteOnShutdown" value="true" />
+    </bean>
 
+    <bean id="serviceFactory" class="uk.co.raphel.railsim.services.ServiceFactory"/>
+    <bean id="dataStore" class="uk.co.raphel.railsim.services.DataStore"/>
 
-<!--
-    <rabbit:connection-factory id="connectionFactory"  host="localhost" username="localspringamqp" password="localspringamqp"/>
+    <rabbit:connection-factory id="connectionFactory"  host="127.0.0.1" username="guest" password="guest"/>
 
-    <rabbit:template id="rabbitTemplate" exchange="amq.direct" connection-factory="connectionFactory" queue="railsim.queue"/>
+    <rabbit:template id="rabbitTemplate" exchange="amq.direct" connection-factory="connectionFactory" queue="uk.co.raphel.railsim.queue"/>
 
     <rabbit:admin connection-factory="connectionFactory"/>
-
-    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto">
-        <rabbit:listener ref="railListener" method="listen" queue-names="railsim.queue"/>
-
-    </rabbit:listener-container>
-
-    <bean id="railListener" class="uk.co.raphel.railsim.client.RailListener"/>
--->
-
-    <bean id="mainframe" class="uk.co.raphel.railsim.configapp.MainFrame" init-method="init"/>
-
 </beans>

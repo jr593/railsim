@@ -1,7 +1,4 @@
 package uk.co.raphel.railsim.common;
-/**
- * Created by johnr on 19/02/2017.
- */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -18,7 +15,7 @@ public class RailSimMessage implements Serializable {
 
     private MessageType messageType;
     private String clockTime;
-    TrainService trainService;
+    private TrainService trainService;
 
     private Integer sectionId;
     private String sectionName;
@@ -78,7 +75,7 @@ public class RailSimMessage implements Serializable {
         return messageType;
     }
 
-    public void setMessageType(MessageType messageType) {
+    private void setMessageType(MessageType messageType) {
         this.messageType = messageType;
     }
 

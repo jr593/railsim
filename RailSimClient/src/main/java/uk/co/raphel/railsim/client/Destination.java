@@ -1,6 +1,4 @@
-package uk.co.raphel.railsim.client;/**
- * Created by johnr on 27/05/2017.
- */
+package uk.co.raphel.railsim.client;
 
 import java.util.List;
 
@@ -9,31 +7,31 @@ import java.util.List;
  * * Author  : johnr
  **/
 public class Destination {
-    int id;
-    String name;
-    List<DestinationBoard> destinationBoards;
+    private int id;
+    private String name;
+    private List<DestinationBoard> destinationBoards;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 
-    public List<DestinationBoard> getDestinationBoards() {
+    List<DestinationBoard> getDestinationBoards() {
         return destinationBoards;
     }
 
-    public void setDestinationBoards(List<DestinationBoard> destinationBoards) {
+    void setDestinationBoards(List<DestinationBoard> destinationBoards) {
         this.destinationBoards = destinationBoards;
     }
 }

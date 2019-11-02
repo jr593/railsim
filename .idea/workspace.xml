@@ -1,21 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72c98a20-7f9d-4c90-9b90-5f5a618f2629" name="Default" comment="">
+    <list default="true" id="9ae121b0-e85b-4536-be23-2a6e3570d3f0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimClient/target/RailSimClient-1.0-SNAPSHOT.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimClient/target/classes/uk/co/raphel/railsim/client/Application.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimClient/target/classes/uk/co/raphel/railsim/client/Destination.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimClient/target/classes/uk/co/raphel/railsim/client/DestinationBoard$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimClient/target/classes/uk/co/raphel/railsim/client/DestinationBoard.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimClient/target/classes/uk/co/raphel/railsim/client/MainFrame.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimClient/target/classes/uk/co/raphel/railsim/client/MessageProcessor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimClient/target/classes/uk/co/raphel/railsim/client/RailListener.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimClient/target/classes/uk/co/raphel/railsim/client/RailSimMessageListener.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimCommon/target/classes/uk/co/raphel/railsim/common/MessageType.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimCommon/target/classes/uk/co/raphel/railsim/common/RailSimMessage.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimCommon/target/classes/uk/co/raphel/railsim/common/SectionStatus.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimCommon/target/classes/uk/co/raphel/railsim/common/ServiceEventType.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimCommon/target/classes/uk/co/raphel/railsim/common/TrackDiagramEntry.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimCommon/target/classes/uk/co/raphel/railsim/common/TrainService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimCommon/target/classes/uk/co/raphel/railsim/common/dto/ServiceEvent.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimCommon/target/railsimcommon-1.0-SNAPSHOT.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailsimConfigGUI/target/RailSimConfigGui-1.0-SNAPSHOT.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailsimConfigGUI/target/classes/uk/co/raphel/railsim/configapp/Application.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailsimConfigGUI/target/classes/uk/co/raphel/railsim/configapp/EditableTrainService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailsimConfigGUI/target/classes/uk/co/raphel/railsim/configapp/MainFrame.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailsimConfigGUI/target/classes/uk/co/raphel/railsim/configapp/ServiceTableModel.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/target/classes/uk/co/raphel/railsim/services/DataStore.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/target/classes/uk/co/raphel/railsim/services/ServiceFactory.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/target/classes/uk/co/raphel/railsim/services/ServiceRunner.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/target/server-1.0-SNAPSHOT.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimClient/target/maven-archiver/pom.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailSimCommon/target/maven-archiver/pom.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RailsimConfigGUI/target/maven-archiver/pom.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/server.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/target/maven-archiver/pom.properties" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/uk/co/raphel/railsim/dto/TrainService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/uk/co/raphel/railsim/services/ServiceFactory.class" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/Application.java" afterPath="$PROJECT_DIR$/server/src/main/java/uk/co/raphel/railsim/Application.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/DataStore.java" afterPath="$PROJECT_DIR$/server/src/main/java/uk/co/raphel/railsim/services/DataStore.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/ServiceFactory.java" afterPath="$PROJECT_DIR$/server/src/main/java/uk/co/raphel/railsim/services/ServiceFactory.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/ServiceRunner.java" afterPath="$PROJECT_DIR$/server/src/main/java/uk/co/raphel/railsim/services/ServiceRunner.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/context.xml" afterPath="$PROJECT_DIR$/server/src/main/resources/context.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterPath="$PROJECT_DIR$/server/src/main/resources/log4j.properties" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/target/classes/context.xml" afterPath="$PROJECT_DIR$/server/target/classes/context.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/target/classes/log4j.properties" afterPath="$PROJECT_DIR$/server/target/classes/log4j.properties" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/target/classes/uk/co/raphel/railsim/Application.class" afterPath="$PROJECT_DIR$/server/target/classes/uk/co/raphel/railsim/Application.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimCommon/target/classes/DownPlan.vsdx" afterPath="$PROJECT_DIR$/RailSimCommon/target/classes/DownPlan.vsdx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimClient/RailSimClient.iml" afterPath="$PROJECT_DIR$/RailSimClient/RailSimClient.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimClient/pom.xml" afterPath="$PROJECT_DIR$/RailSimClient/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/Application.java" afterPath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/Application.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/Destination.java" afterPath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/Destination.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/DestinationBoard.java" afterPath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/DestinationBoard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MainFrame.java" afterPath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MainFrame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MessageProcessor.java" afterPath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MessageProcessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/RailListener.java" afterPath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/RailListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/RailSimMessageListener.java" afterPath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/RailSimMessageListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimClient/src/main/resources/context.xml" afterPath="$PROJECT_DIR$/RailSimClient/src/main/resources/context.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimClient/target/classes/context.xml" afterPath="$PROJECT_DIR$/RailSimClient/target/classes/context.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimCommon/RailSimCommon.iml" afterPath="$PROJECT_DIR$/RailSimCommon/RailSimCommon.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/MessageType.java" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/MessageType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/RailSimMessage.java" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/RailSimMessage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/SectionStatus.java" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/SectionStatus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/ServiceEventType.java" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/ServiceEventType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrackDiagramEntry.java" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrackDiagramEntry.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrainService.java" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrainService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/ServiceEvent.java" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/ServiceEvent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailsimConfigGUI/RailsimConfigGUI.iml" afterPath="$PROJECT_DIR$/RailsimConfigGUI/RailsimConfigGUI.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailsimConfigGUI/pom.xml" afterPath="$PROJECT_DIR$/RailsimConfigGUI/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/Application.java" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/Application.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/EditableTrainService.java" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/EditableTrainService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/ServiceTableModel.java" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/ServiceTableModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RailwaySim.iml" afterPath="$PROJECT_DIR$/RailwaySim.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
-    <ignored path="RailwaySim.iws" />
+    <ignored path="railwaysim.iws" />
     <ignored path=".idea/workspace.xml" />
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
-    <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/RailSimClient/target/" />
     <ignored path="$PROJECT_DIR$/RailSimCommon/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/RailsimConfigGUI/target/" />
+    <ignored path="$PROJECT_DIR$/server/target/" />
+    <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,145 +102,25 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
-    <favorites_list name="RailwaySim" />
+    <favorites_list name="railwaysim" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RailListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/RailListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MessageProcessor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MessageProcessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RailSimMessage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/RailSimMessage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainFrame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MainFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataStore.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/DataStore.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServiceFactory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/ServiceFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="234" column="34" selection-start-line="33" selection-start-column="0" selection-end-line="234" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TrackDiagramEntry.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrackDiagramEntry.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26091954">
-              <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServiceRunner.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/ServiceRunner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="context.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/context.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/Application.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DestinationBoard.java" pinned="false" current-in-tab="false">
+    <leaf>
+      <file leaf-file-name="DestinationBoard.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/DestinationBoard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.38568935">
+              <caret line="169" column="81" selection-start-line="169" selection-start-column="81" selection-end-line="169" selection-end-column="81" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainFrame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java">
+      <file leaf-file-name="MessageType.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/MessageType.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="338" column="9" selection-start-line="306" selection-start-column="4" selection-end-line="338" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/Application.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="context.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/resources/context.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="72" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="72" />
+              <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -175,72 +128,13 @@
       </file>
     </leaf>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Enum" />
-        <option value="Class" />
-        <option value="Interface" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/ServiceFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/TrackMonitor.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/dto/ServiceEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/dto/PassingEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/dto/StoppingEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/dto/TerminatingEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/TrackMapDown.csv" />
-        <option value="$PROJECT_DIR$/src/main/resources/TrackMapUp.csv" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/ICacheService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/CacheManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/TrackMonitor.java" />
-        <option value="$PROJECT_DIR$/src/test/java/HCTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/messaging/RailSimConfiguration.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/context.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/RailSimMessage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/messaging/SectionStatus.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/dto/test.json" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/messaging/MessageType.java" />
-        <option value="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/Application.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/messaging/RailSimMessage.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="C:/Program Files/Java/jdk1.8.0_25/src.zip!/java/awt/Window.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/Application.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/dto/TrackDiagramEntry.java" />
-        <option value="$PROJECT_DIR$/RailSimClient/pom.xml" />
-        <option value="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/context.xml" />
-        <option value="C:/Program Files/Java/jdk1.8.0_25/src.zip!/java/util/List.java" />
-        <option value="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/ServiceEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/DataStore.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/dto/TrainService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/dto/ArriveStopEvent.java" />
-        <option value="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/ServiceTableModel.java" />
-        <option value="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/EditableTrainService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/ServiceRunner.java" />
-        <option value="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/SectionStatus.java" />
-        <option value="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/RailSimMessage.java" />
-        <option value="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java" />
-        <option value="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/RailListener.java" />
-        <option value="$PROJECT_DIR$/RailSimClient/src/main/java/DestinationBoard.java" />
-        <option value="$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/ServiceFactory.java" />
-        <option value="$PROJECT_DIR$/RailSimClient/src/main/resources/context.xml" />
-        <option value="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MainFrame.java" />
-        <option value="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MessageProcessor.java" />
         <option value="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/DestinationBoard.java" />
-        <option value="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/TrackEventListener.java" />
       </list>
     </option>
   </component>
@@ -255,6 +149,11 @@
         <option name="mavenHome" value="Bundled (Maven 3)" />
       </MavenGeneralSettings>
     </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="lookForNested" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
@@ -264,35 +163,37 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
       </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="railwaysim" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="railwaysim" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1928" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
-  </component>
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-          <State>
-            <id>Class structureJava</id>
-          </State>
-          <State>
-            <id>Java</id>
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>ListenerMayUseAdapter</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -301,7 +202,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
@@ -319,69 +220,19 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RailwaySim" />
+              <option name="myItemId" value="railwaysim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RailwaySim" />
+              <option name="myItemId" value="railwaysim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="railsim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RailwaySim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="railsim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RailwaySim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="railsim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="railsim" />
@@ -390,37 +241,7 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RailwaySim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="railsim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="railsim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RailwaySim" />
+              <option name="myItemId" value="railwaysim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -434,7 +255,7 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RailwaySim" />
+              <option name="myItemId" value="railwaysim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -456,7 +277,7 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RailwaySim" />
+              <option name="myItemId" value="railwaysim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -484,8 +305,76 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="railwaysim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="railsim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RailSimClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="railwaysim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="railsim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RailSimClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="railwaysim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="railsim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RailSimClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -495,125 +384,24 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="uk.co.raphel.railsim.client" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\projects\RailwaySim\RailsimConfigGUI\src\main\resources" />
-      <recent name="C:\projects\RailwaySim\RailSimCommon\src\main\java" />
-      <recent name="C:\projects\RailwaySim\RailSimClient\src\main\resources" />
-      <recent name="C:\projects\RailwaySim\RailSimClient\src\main\java" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="uk.co.raphel.railsim.configapp" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\projects\RailwaySim\RailSimCommon\src\main\resources" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.client">
-    <configuration default="false" name="Server" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="uk.co.raphel.railsim.client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="uk.co.raphel.railsim.Application" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="RailwaySim" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="client" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="uk.co.raphel.railsim.client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="uk.co.raphel.railsim.client.Application" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="RailSimClient" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="Config App" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="uk.co.raphel.railsim.configapp.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="uk.co.raphel.railsim.configapp.Application" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="RailsimConfigGUI" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="HCTest.testThreadNotOwnerOfLock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="RailwaySim" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="HCTest" />
-      <option name="METHOD_NAME" value="testThreadNotOwnerOfLock" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="Applet" factoryName="Applet">
-      <module />
+      <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
@@ -628,7 +416,6 @@
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -646,51 +433,6 @@
       </option>
       <envs />
       <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="JarApplication" factoryName="JAR Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="SCRATCH_FILE_ID" value="0" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
@@ -723,14 +465,7 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -742,7 +477,7 @@
       <option name="TEST_OBJECT" value="CLASS" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <option name="OUTPUT_DIRECTORY" />
       <option name="ANNOTATION_TYPE" />
       <option name="ENV_VARIABLES" />
@@ -757,275 +492,55 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <pass-parent-envs>true</pass-parent-envs>
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run-script" />
-      <scripts />
-      <envs />
-      <method />
-    </configuration>
-    <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Application.Server" />
-      <item index="1" class="java.lang.String" itemvalue="Application.client" />
-      <item index="2" class="java.lang.String" itemvalue="Application.Config App" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.HCTest.testThreadNotOwnerOfLock" />
-    </list>
-    <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Application.client" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Config App" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Server" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.HCTest.testThreadNotOwnerOfLock" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SbtLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="72c98a20-7f9d-4c90-9b90-5f5a618f2629" name="Default" comment="" />
-      <created>1432996113602</created>
+      <changelist id="9ae121b0-e85b-4536-be23-2a6e3570d3f0" name="Default" comment="" />
+      <created>1572707908337</created>
       <option name="number" value="Default" />
-      <updated>1432996113602</updated>
-      <workItem from="1432996121918" duration="446000" />
-      <workItem from="1432996677556" duration="5538000" />
-      <workItem from="1433674404476" duration="7085000" />
-      <workItem from="1433794132242" duration="3209000" />
-      <workItem from="1434020416260" duration="3447000" />
-      <workItem from="1434132336211" duration="462000" />
-      <workItem from="1434290323458" duration="3652000" />
-      <workItem from="1434395382949" duration="2807000" />
-      <workItem from="1434652604508" duration="2176000" />
-      <workItem from="1437908030311" duration="4399000" />
-      <workItem from="1439230915057" duration="635000" />
-      <workItem from="1442582127344" duration="757000" />
-      <workItem from="1442842490365" duration="1037000" />
-      <workItem from="1442845277063" duration="408000" />
-      <workItem from="1442847452004" duration="2910000" />
-      <workItem from="1444056728962" duration="1072000" />
-      <workItem from="1444763118340" duration="1366000" />
-      <workItem from="1444822326421" duration="8781000" />
-      <workItem from="1444901198491" duration="8445000" />
-      <workItem from="1445435514073" duration="49000" />
-      <workItem from="1447599507380" duration="41000" />
-      <workItem from="1453898555068" duration="131000" />
-      <workItem from="1453898817584" duration="307000" />
-      <workItem from="1455303545064" duration="12000" />
-      <workItem from="1456075651299" duration="10000" />
-      <workItem from="1457723630091" duration="501000" />
-      <workItem from="1487273748727" duration="506000" />
-      <workItem from="1487504337781" duration="10990000" />
-      <workItem from="1488108557670" duration="295000" />
-      <workItem from="1488394768999" duration="639000" />
-      <workItem from="1489695342503" duration="2209000" />
-      <workItem from="1489928880511" duration="4178000" />
-      <workItem from="1490036783546" duration="2893000" />
-      <workItem from="1490122194682" duration="3564000" />
-      <workItem from="1490209602697" duration="4706000" />
-      <workItem from="1490297397921" duration="1421000" />
-      <workItem from="1490381027565" duration="733000" />
-      <workItem from="1490455940571" duration="1008000" />
-      <workItem from="1490556512996" duration="1253000" />
-      <workItem from="1490639511354" duration="934000" />
-      <workItem from="1490809270769" duration="41000" />
-      <workItem from="1490902204395" duration="601000" />
-      <workItem from="1491057761614" duration="606000" />
-      <workItem from="1491150024326" duration="4346000" />
-      <workItem from="1491241115514" duration="2341000" />
-      <workItem from="1491332552365" duration="1189000" />
-      <workItem from="1491410121025" duration="1807000" />
-      <workItem from="1491671423244" duration="838000" />
-      <workItem from="1492961060778" duration="723000" />
-      <workItem from="1493055691837" duration="608000" />
-      <workItem from="1493390835560" duration="651000" />
-      <workItem from="1493566825530" duration="1765000" />
-      <workItem from="1493638417263" duration="2559000" />
-      <workItem from="1493748678747" duration="627000" />
-      <workItem from="1493837036813" duration="613000" />
-      <workItem from="1493921636789" duration="622000" />
-      <workItem from="1494007522012" duration="4542000" />
+      <updated>1572707908337</updated>
     </task>
-    <task id="LOCAL-00001" summary="First nearly working example">
-      <created>1444912662016</created>
-      <option name="number" value="00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1444912662016</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Added spring support for messaging to rabbit&#10;">
-      <created>1487514161972</created>
-      <option name="number" value="00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1487514161972</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Client built">
-      <created>1487525684828</created>
-      <option name="number" value="00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1487525684828</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Added config framework">
-      <created>1489696603528</created>
-      <option name="number" value="00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1489696603528</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Config program created">
-      <created>1490214325981</created>
-      <option name="number" value="00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1490214325981</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Adjusted service trigger">
-      <created>1491245536275</created>
-      <option name="number" value="00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1491245536275</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119491000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19722815" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20895523" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32739422" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31959912" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43541202" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2895323" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
-  </component>
-  <component name="Vcs.Log.UiProperties">
-    <option name="RECENTLY_FILTERED_USER_GROUPS">
-      <collection />
-    </option>
-    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-      <collection />
-    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="First nearly working example" />
-    <MESSAGE value="Added spring support for messaging to rabbit&#10;" />
-    <MESSAGE value="Client built" />
-    <MESSAGE value="Added config framework" />
-    <MESSAGE value="Config program created" />
-    <MESSAGE value="Adjusted service trigger" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjusted service trigger" />
-  </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrackDiagramEntry.java</url>
-          <line>32</line>
-          <properties />
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java</url>
-          <line>148</line>
-          <properties />
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/ServiceFactory.java</url>
-          <line>104</line>
-          <properties />
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MainFrame.java</url>
-          <line>42</line>
-          <properties />
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-      </breakpoints>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-      <option name="time" value="55" />
-    </breakpoint-manager>
+    <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -1033,416 +548,26 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/DestinationBoard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="338" column="9" selection-start-line="306" selection-start-column="4" selection-end-line="338" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/resources/context.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="72" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/RailListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MessageProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="39" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/RailSimMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="107" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MainFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/DestinationBoard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="338" column="30" selection-start-line="306" selection-start-column="4" selection-end-line="338" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/resources/context.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="72" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="91" selection-start-line="7" selection-start-column="91" selection-end-line="7" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/context.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="59" selection-start-line="16" selection-start-column="59" selection-end-line="16" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/ServiceFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="45" selection-start-line="99" selection-start-column="45" selection-end-line="99" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrackDiagramEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="91" selection-start-line="7" selection-start-column="91" selection-end-line="7" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/MessageType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-61.46154">
-          <caret line="95" column="9" selection-start-line="95" selection-start-column="9" selection-end-line="95" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://SpringLocalModels/module=RailSimClient">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>SpringLocalModels</ID>
-          <OriginalElement>module=RailSimClient</OriginalElement>
-          <nodes>
-            <node x="" y="">module=RailSimClient</node>
-            <node x="" y="">fileset=RailSimClient/Spring Application Context</node>
-            <node x="" y="">filePath=C:/projects/RailwaySim/RailSimClient/src/main/resources/context.xml</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="253.0" y="10.0" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Show filesets as groups</Category>
-          </Categories>
-          <SCOPE>All</SCOPE>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailsimConfigGUI/pom.xml">
+    <entry file="file://$PROJECT_DIR$/RailSimClient/RailSimClient.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/resources/ServicesUp1.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/resources/TrackMapDown.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="81" column="39" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/resources/TrackMapUp.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.01954023">
-          <caret line="38" column="43" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/resources/ServicesDown1.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/context.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3222749">
-          <caret line="16" column="55" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://SpringLocalModels/module=RailwaySim">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>SpringLocalModels</ID>
-          <OriginalElement>module=RailwaySim</OriginalElement>
-          <nodes>
-            <node x="" y="">module=RailwaySim</node>
-            <node x="" y="">fileset=RailwaySim/Spring Application Context</node>
-            <node x="" y="">filePath=C:/projects/RailwaySim/src/main/resources/context.xml</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="248.0" y="10.0" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Show filesets as groups</Category>
-          </Categories>
-          <SCOPE>All</SCOPE>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimCommon/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24142012">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/SectionStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23421355">
-          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/EditableTrainService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/ServiceTableModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47471264">
-          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="338" column="9" selection-start-line="306" selection-start-column="4" selection-end-line="338" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/RailListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/resources/context.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="72" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="72" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/DestinationBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MessageProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/RailSimMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MainFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/context.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/ServiceRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/DataStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/uk/co/raphel/railsim/services/ServiceFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="234" column="34" selection-start-line="33" selection-start-column="0" selection-end-line="234" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrackDiagramEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26091954">
-          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.38568935">
+          <caret line="169" column="81" selection-start-line="169" selection-start-column="81" selection-end-line="169" selection-end-column="81" />
           <folding />
         </state>
       </provider>
@@ -1464,7 +589,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Spring</last-edited>
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1476,7 +601,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>scala-sdk-2.11.4</last-edited>
+          <last-edited>pretty-tools</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1500,7 +625,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Spring|RailsimConfigGUI</last-edited>
+          <last-edited>RailSimClient</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

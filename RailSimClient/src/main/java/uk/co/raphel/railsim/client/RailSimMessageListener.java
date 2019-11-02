@@ -1,6 +1,4 @@
-package uk.co.raphel.railsim.client;/**
- * Created by johnr on 07/05/2017.
- */
+package uk.co.raphel.railsim.client;
 
 import uk.co.raphel.railsim.common.RailSimMessage;
 
@@ -10,7 +8,7 @@ import uk.co.raphel.railsim.common.RailSimMessage;
  **/
 public interface RailSimMessageListener {
 
-    public void consume(RailSimMessage railSimMessage);
+    void consume(RailSimMessage railSimMessage);
 
-    public void recvSchedule(RailSimMessage railSimMessage);
+    void recvSchedule(RailSimMessage railSimMessage);
 }

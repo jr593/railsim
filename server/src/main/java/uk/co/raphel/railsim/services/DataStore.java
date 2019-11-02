@@ -1,6 +1,4 @@
-package uk.co.raphel.railsim.services;/**
- * Created by johnr on 26/07/2015.
- */
+package uk.co.raphel.railsim.services;
 
 import org.springframework.stereotype.Component;
 import uk.co.raphel.railsim.common.TrackDiagramEntry;
@@ -32,21 +30,21 @@ public class DataStore {
 
     private boolean tracklock = false;
 
-    public Map<Integer,Map<String,String>> getTrackOccupationSchedule() {
+    Map<Integer,Map<String,String>> getTrackOccupationSchedule() {
         return trackOccupationSchedule;
     }
-    public void addOccupations(String destination, Map<Integer,String> occMap) {
-        occMap.entrySet().stream().forEach(e -> {
+    void addOccupations(String destination, Map<Integer, String> occMap) {
+        occMap.entrySet().forEach(e -> {
             if(!trackOccupationSchedule.containsKey(e.getKey())) {
                 trackOccupationSchedule.put(e.getKey(), new HashMap<>());
             }
             trackOccupationSchedule.get(e.getKey()).put(e.getValue(), destination);
         });
     }
-    public String getSectionName(int sectionNumber) {
+    String getSectionName(int sectionNumber) {
         return trackDiagram.get(sectionNumber).getName() + " (" + sectionNumber + ")";
     }
-    public void addService(TrainService service) {
+    void addService(TrainService service) {
         if(services == null) {
             services = new ArrayList<>();
         }
@@ -54,22 +52,22 @@ public class DataStore {
 
     }
 
-    public List<TrainService> getServices() {
+    List<TrainService> getServices() {
         if(services == null) {
             services = new ArrayList<>();
         }
         return services;
     }
 
-    public void setSimClock(int simClock) {
+    void setSimClock(int simClock) {
         this.simClock = simClock;
     }
 
-    public int getSimClock() {
+    int getSimClock() {
         return simClock;
     }
 
-    public void addTrackDiagramEntry(TrackDiagramEntry diagramEntry) {
+    void addTrackDiagramEntry(TrackDiagramEntry diagramEntry) {
         if(trackDiagram == null) {
             trackDiagram = new HashMap<>();
         }
@@ -77,11 +75,11 @@ public class DataStore {
         trackDiagram.put(diagramEntry.getId(), diagramEntry);
     }
 
-    public void releaseTrackLock() {
+    void releaseTrackLock() {
         tracklock = false;
     }
 
-    public boolean getTrackLock() {
+    boolean getTrackLock() {
         if(tracklock) {
             return false;
         } else {
@@ -90,7 +88,7 @@ public class DataStore {
         }
     }
 
-    public int calcTimeInSection(int sectionId, int speed) {
+    int calcTimeInSection(int sectionId, int speed) {
 
         TrackDiagramEntry trackSection = trackDiagram.get(sectionId);
 
@@ -102,17 +100,17 @@ public class DataStore {
 
     }
 
-    public boolean isSectionFree(int nextSection) throws NullPointerException {
+    boolean isSectionFree(int nextSection) throws NullPointerException {
 
         return (trackDiagram.get(nextSection).getOccupiedBy().isEmpty())
                 || trackDiagram.get(nextSection).isAllowMultipleOccupancy();
     }
 
-    public void clearTrackSection(int occupiedSection,Integer serviceId) {
+    void clearTrackSection(int occupiedSection, Integer serviceId) {
         trackDiagram.get(occupiedSection).clearOccupiedBy(serviceId);
     }
 
-    public void occupySection(int eventSection, Integer id) {
+    void occupySection(int eventSection, Integer id) {
         trackDiagram.get(eventSection).setOccupiedBy(id);
     }
 }
