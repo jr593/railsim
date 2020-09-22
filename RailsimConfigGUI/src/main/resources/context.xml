@@ -3,11 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/task"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
 
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 	                       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
-	                       http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
@@ -15,20 +13,6 @@
     <context:component-scan base-package="uk.co.raphel.railsim" />
 
 
-<!--
-    <rabbit:connection-factory id="connectionFactory"  host="localhost" username="localspringamqp" password="localspringamqp"/>
-
-    <rabbit:template id="rabbitTemplate" exchange="amq.direct" connection-factory="connectionFactory" queue="railsim.queue"/>
-
-    <rabbit:admin connection-factory="connectionFactory"/>
-
-    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto">
-        <rabbit:listener ref="railListener" method="listen" queue-names="railsim.queue"/>
-
-    </rabbit:listener-container>
-
-    <bean id="railListener" class="uk.co.raphel.railsim.client.RailListener"/>
--->
 
     <bean id="mainframe" class="uk.co.raphel.railsim.configapp.MainFrame" init-method="init"/>
 

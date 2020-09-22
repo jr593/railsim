@@ -17,6 +17,10 @@
             <artifactId>railsimcommon</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-    </dependencies>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <version>2.3.7.RELEASE</version>
+        </dependency>    </dependencies>
 
 </project>

@@ -1,18 +1,22 @@
 package uk.co.raphel.railsim.services;
 
+import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 import uk.co.raphel.railsim.common.MessageType;
 import uk.co.raphel.railsim.common.RailSimMessage;
 import uk.co.raphel.railsim.common.TrackDiagramEntry;
@@ -41,10 +45,13 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
     ThreadPoolTaskExecutor executor;
 
     @Autowired
-    RabbitTemplate rabbitTemplate;
+    DataStore ds;
 
     @Autowired
-    DataStore ds;
+    KafkaTemplate<String, RailSimMessage> kafkaTemplate;
+
+    @Autowired
+    NewTopic topic;
 
 
     @Override
@@ -70,7 +77,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
         log.info("Services total = " + trainId);
 
         // Send initial track occupation schedule
-        rabbitTemplate.convertAndSend(new RailSimMessage(MessageType.SCHEDULE, simTimeToClock(simClock),
+        sendMessage(topic.name(), new RailSimMessage(MessageType.SCHEDULE, simTimeToClock(simClock),
                 ds.getTrackOccupationSchedule()));
 
 
@@ -80,21 +87,25 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
         executor.initialize();
     }
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
+    private void sendMessage(String topic, RailSimMessage message) {
+        ListenableFuture<SendResult<String, RailSimMessage>> future =
+                kafkaTemplate.send(topic, message);
 
-//    public TaskExecutor getTaskExecutor() {
-//        return taskExecutor;
-//    }
+        future.addCallback(new ListenableFutureCallback<SendResult<String, RailSimMessage>>() {
 
-//    public void setTaskExecutor(TaskExecutor taskExecutor) {
-//        this.taskExecutor = taskExecutor;
-//    }
+            @Override
+            public void onSuccess(SendResult<String, RailSimMessage> result) {
+                System.out.println("Sent message=[" + message +
+                        "] with offset=[" + result.getRecordMetadata().offset() + "]");
+            }
+            @Override
+            public void onFailure(Throwable ex) {
+                System.out.println("Unable to send message=["
+                        + message + "] due to : " + ex.getMessage());
+            }
+        });
+    }
+
 
     @Scheduled(fixedDelay = 1000)
     public void run() {
@@ -107,7 +118,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
             if(!srv.getServiceEventList().isEmpty()) {
                 if(srv.getServiceEventList().get(0).getTimeOfDay() == (simClock )  && !srv.isStarted())   {
                     System.out.println("Kick off : " + srv.getServiceName());
-                    ServiceRunner runner = new ServiceRunner(srv, ds, rabbitTemplate);
+                    ServiceRunner runner = new ServiceRunner(srv, ds, kafkaTemplate);
                     executor.execute(runner);
 
                 }

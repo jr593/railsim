@@ -1,5 +1,7 @@
 package uk.co.raphel.railsim.client;
 
+import org.apache.kafka.clients.admin.NewTopic;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.co.raphel.railsim.common.MessageType;
 import uk.co.raphel.railsim.common.RailSimMessage;
@@ -12,13 +14,12 @@ import java.util.List;
  * * Created : 07/05/2017
  * * Author  : johnr
  **/
-@Component
-public class MessageProcessor implements RailListener {
+public class MessageProcessor  {
+
 
 
     private List<RailSimMessageListener> listeners = new ArrayList<>();
 
-    @Override
     public void listen(String message) {
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -35,7 +36,6 @@ public class MessageProcessor implements RailListener {
         }
     }
 
-    @Override
     public void listen(RailSimMessage railSimMessage) {
         if (railSimMessage != null) {
             if (railSimMessage.getMessageType() == MessageType.SCHEDULE) {

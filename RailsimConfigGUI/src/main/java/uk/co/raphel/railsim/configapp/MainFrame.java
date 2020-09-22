@@ -22,7 +22,6 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.*;
 
-
 public class MainFrame extends JFrame implements ActionListener, TableModelListener, ResourceLoaderAware {
 
     private final ServiceTableModel theTableModel = new ServiceTableModel();

@@ -4,7 +4,16 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.stereotype.Component;
+import uk.co.raphel.railsim.common.MessageType;
+import uk.co.raphel.railsim.common.RailSimMessage;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
@@ -16,20 +25,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-@org.springframework.stereotype.Component
 public class MainFrame extends JFrame implements ResourceLoaderAware {
 
+
     @Autowired
-    private ApplicationContext appContext;
+    KafkaConsumer kafkaConsumer;
 
     private ResourceLoader resourceLoader;
 
 
+    @PostConstruct
     public void init() {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new Dimension(800, 800));
-
-        MessageProcessor messageProcessor = (MessageProcessor) appContext.getBean("railListener");
 
         List<Destination> destinations = loadDestinations();
 
@@ -58,7 +66,7 @@ public class MainFrame extends JFrame implements ResourceLoaderAware {
                 backPane.add(brd, gridBagConstraints);
                 brd.setPreferredSize(new Dimension(200, 70));
                 brd.setVisible(true);
-                messageProcessor.addListener(brd);
+                kafkaConsumer.addListener(brd);
                 curCol++;
             }
             currRow++;
@@ -71,6 +79,9 @@ public class MainFrame extends JFrame implements ResourceLoaderAware {
         setVisible(true);
         setState(Frame.NORMAL);
     }
+
+
+
 
 
     @Override
