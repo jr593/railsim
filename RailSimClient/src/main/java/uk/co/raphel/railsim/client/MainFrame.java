@@ -1,19 +1,14 @@
 package uk.co.raphel.railsim.client;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.handler.annotation.Header;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.stereotype.Component;
 import uk.co.raphel.railsim.common.MessageType;
 import uk.co.raphel.railsim.common.RailSimMessage;
 
-import javax.annotation.PostConstruct;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
@@ -28,11 +23,9 @@ import java.util.List;
 public class MainFrame extends JFrame implements ResourceLoaderAware {
 
 
-    @Autowired
-    KafkaConsumer kafkaConsumer;
-
     private ResourceLoader resourceLoader;
 
+    private List<DestinationBoard> listeners = new ArrayList<>();
 
     @PostConstruct
     public void init() {
@@ -66,7 +59,7 @@ public class MainFrame extends JFrame implements ResourceLoaderAware {
                 backPane.add(brd, gridBagConstraints);
                 brd.setPreferredSize(new Dimension(200, 70));
                 brd.setVisible(true);
-                kafkaConsumer.addListener(brd);
+                addListener(brd);
                 curCol++;
             }
             currRow++;
@@ -80,7 +73,22 @@ public class MainFrame extends JFrame implements ResourceLoaderAware {
         setState(Frame.NORMAL);
     }
 
+    private void addListener(DestinationBoard destinationBoard) {
+        listeners.add(destinationBoard);
+    }
 
+    @KafkaListener(topics = "railsim.queue", groupId = "railsim")
+    public void listenGroupFoo(RailSimMessage message) {
+
+        System.out.println(message);
+        if (message != null) {
+            if (message.getMessageType() == MessageType.SCHEDULE) {
+                listeners.forEach(m -> m.recvSchedule(message));
+            } else {
+                listeners.forEach(m -> m.consume(message));
+            }
+        }
+    }
 
 
 

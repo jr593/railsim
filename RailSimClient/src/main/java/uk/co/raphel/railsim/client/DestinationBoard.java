@@ -1,5 +1,10 @@
 package uk.co.raphel.railsim.client;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaListener;
+import uk.co.raphel.railsim.common.MessageType;
 import uk.co.raphel.railsim.common.RailSimMessage;
 
 import javax.swing.*;
@@ -13,7 +18,9 @@ import java.util.stream.Collectors;
  * * Created : 01/05/2017
  * * Author  : johnr
  **/
-public class DestinationBoard extends JPanel implements RailSimMessageListener {
+@Slf4j(topic = "DestinationBoard")
+@Getter @Setter
+public class DestinationBoard extends JPanel  {
 
     private String stationName;
     private Integer stopNumber; // TODO Expand
@@ -22,6 +29,7 @@ public class DestinationBoard extends JPanel implements RailSimMessageListener {
     private JLabel lbl2Nd;
     private JLabel lblArr;
     private List<String> schedList = new ArrayList<>();
+
 
     DestinationBoard() {
         GridBagConstraints gridBagConstraints;
@@ -157,7 +165,7 @@ public class DestinationBoard extends JPanel implements RailSimMessageListener {
         add(lbl_2ndTxt, gridBagConstraints);
     }
 
-    @Override
+
     public void consume(RailSimMessage railSimMessage) {
         if (railSimMessage.getSectionId().intValue() == stopNumber) {
             String[] nextSrv = getNextServices(railSimMessage.getClockTime());
@@ -202,7 +210,6 @@ public class DestinationBoard extends JPanel implements RailSimMessageListener {
         return false;
     }
 
-    @Override
     public void recvSchedule(RailSimMessage railSimMessage) {
         if (railSimMessage.getOccSched() != null) {
             if (railSimMessage.getOccSched().containsKey(stopNumber)) {
@@ -216,17 +223,10 @@ public class DestinationBoard extends JPanel implements RailSimMessageListener {
         }
     }
 
-    public String getStationName() {
-        return stationName;
-    }
 
     void setStationName(String stationName) {
         this.stationName = stationName;
         lblArr.setText(stationName + "(" + stopNumber + ")");
-    }
-
-    public Integer getStopNumber() {
-        return stopNumber;
     }
 
     void setStopNumber(Integer stopNumber) {

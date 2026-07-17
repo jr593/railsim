@@ -6,9 +6,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 import uk.co.raphel.railsim.common.*;
+import uk.co.raphel.railsim.kafka.KafkaProducer;
+
+import java.util.UUID;
 
 /**
  * * Created : 07/06/2015
@@ -25,24 +26,27 @@ public class ServiceRunner extends Thread {
     KafkaTemplate<String, RailSimMessage> kafkaTemplate;
 
     @Autowired
-    NewTopic topic;
+    private KafkaProducer kafkaProducer;
 
     private final Logger log = LoggerFactory.getLogger(ServiceRunner.class);
 
+    public ServiceRunner() {
 
-    public ServiceRunner() { }
+    }
 
-    public ServiceRunner(TrainService trainService,DataStore ds, KafkaTemplate kafkaTemplate) {
+    public ServiceRunner(TrainService trainService, DataStore ds) {
         this.trainService = trainService;
         this.ds = ds;
-        this.kafkaTemplate = kafkaTemplate ;
-    }
+     }
 
     @Override
     public void run() {
+        
+        
         int simTime = ds.getSimClock();
 
-        sendMessage(topic.name(),new RailSimMessage(MessageType.SERVICESTART,simTimeAsClock(simTime),trainService,
+        kafkaProducer.publish("railsim.queue",new RailSimMessage(UUID.randomUUID(),
+                MessageType.SERVICESTART,simTimeAsClock(simTime),trainService,
                 ds.getSectionName(trainService.getOccupiedSection()),
                 SectionStatus.OCCUPIED,"Service Started"));
 
@@ -76,7 +80,8 @@ public class ServiceRunner extends Thread {
                     while(simTime <= rdyExitTime) {
                        // log.info("T=" + simTimeAsClock(simTime) + " Service " + trainService.getServiceName() +
                        //         " waiting until (stopped) " + simTimeAsClock(rdyExitTime));
-                        sendMessage(topic.name(),new RailSimMessage(MessageType.MOVEMENT,simTimeAsClock(simTime), trainService,
+                        kafkaProducer.publish("railsim.queue",
+                                new RailSimMessage(UUID.randomUUID(),MessageType.MOVEMENT,simTimeAsClock(simTime), trainService,
                                 ds.getSectionName(trainService.getOccupiedSection()),
                                 SectionStatus.HOLDING,"" + rdyExitTime));
                         Thread.sleep(1000);
@@ -89,7 +94,7 @@ public class ServiceRunner extends Thread {
                 if(trainService.getServiceEvent().getServiceEventType() == ServiceEventType.TERMINATING) {
                     trainService.setStarted(false);
                     ds.clearTrackSection(trainService.getOccupiedSection(), trainService.getId());
-                    sendMessage(topic.name(),new RailSimMessage(MessageType.MOVEMENT,simTimeAsClock(simTime), trainService,
+                    kafkaProducer.publish("railsim.queue",new RailSimMessage(UUID.randomUUID(),MessageType.MOVEMENT,simTimeAsClock(simTime), trainService,
                             ds.getSectionName(trainService.getOccupiedSection()),
                             SectionStatus.CLEARED,"Section Cleared"));
                 } else {
@@ -106,27 +111,30 @@ public class ServiceRunner extends Thread {
                             if(ds.isSectionFree(nextSection)) {
                                 ds.clearTrackSection(trainService.getOccupiedSection(),trainService.getId());
                                 // Send clear section message
-                                sendMessage(topic.name(), new RailSimMessage(MessageType.MOVEMENT,simTimeAsClock(simTime), trainService,
+                                kafkaProducer.publish("railsim.queue", new RailSimMessage(UUID.randomUUID(),MessageType.MOVEMENT,simTimeAsClock(simTime), trainService,
                                         ds.getSectionName(trainService.getOccupiedSection()),
                                         SectionStatus.CLEARED,"Section Cleared"));
                                 ds.occupySection(trainService.getNextEvent().getEventSection(), trainService.getId());
                                 // Send occupy section message
-                                sendMessage(topic.name(),new RailSimMessage(MessageType.MOVEMENT,simTimeAsClock(simTime), trainService,
+                                kafkaProducer.publish("railsim.queue",new RailSimMessage(UUID.randomUUID(),MessageType.MOVEMENT,simTimeAsClock(simTime), trainService,
                                         ds.getSectionName(trainService.getNextEvent().getEventSection()),
                                         SectionStatus.OCCUPIED,"Section Occupied"));
                                 trainService.step();
-                                log.info("T=" + simTimeAsClock(simTime) + " Service " + trainService.getServiceName() + " occupied " + ds.getSectionName(trainService.getOccupiedSection()));
+                                log.info("T=" + simTimeAsClock(simTime) + " Service " +
+                                        trainService.getServiceName() + " occupied " + ds.getSectionName(trainService.getOccupiedSection()));
                             } else {
                                 // Send blocking section message
-                                sendMessage(topic.name(),new RailSimMessage(MessageType.BLOCKING,simTimeAsClock(simTime), trainService,
+                                kafkaProducer.publish("railsim.queue",new RailSimMessage(UUID.randomUUID(),MessageType.BLOCKING,simTimeAsClock(simTime), trainService,
                                         ds.getSectionName(trainService.getOccupiedSection()),
-                                        SectionStatus.OCCUPIED,"Section Held on red for section " + ds.getSectionName(trainService.getNextEvent().getEventSection())));
+                                        SectionStatus.OCCUPIED,
+                                        "Section Held on red for section " + ds.getSectionName(trainService.getNextEvent().getEventSection())));
                                 log.info("T=" + simTimeAsClock(simTime) + " Service " + trainService.getServiceName() + " waiting on RED at "
                                         + ds.getSectionName(trainService.getOccupiedSection()) + " for "
                                         + ds.getSectionName(trainService.getNextEvent().getEventSection()));
                                 Thread.sleep(1000);
                             }
                         } catch(NullPointerException npe) {
+
                             log.error("Could not get next track section " + nextSection + " for service " + trainService.getServiceName());
                             trainService.setStarted(false);
                         }
@@ -141,32 +149,13 @@ public class ServiceRunner extends Thread {
         }
         ds.clearTrackSection(trainService.getOccupiedSection(), trainService.getId());
         // Send clear section message
-        sendMessage(topic.name(),new RailSimMessage(MessageType.MOVEMENT,simTimeAsClock(simTime), trainService,
+        kafkaProducer.publish("railsim.queue",new RailSimMessage(UUID.randomUUID(),MessageType.MOVEMENT,simTimeAsClock(simTime), trainService,
                 ds.getSectionName(trainService.getOccupiedSection()),
                 SectionStatus.CLEARED,"Section Cleared"));
         // Send service terminated message
-        sendMessage(topic.name(),new RailSimMessage(MessageType.COMPLETION,simTimeAsClock(simTime), trainService
+        kafkaProducer.publish("railsim.queue",new RailSimMessage(UUID.randomUUID(),MessageType.COMPLETION,simTimeAsClock(simTime), trainService
                 , "",  SectionStatus.CLEARED,"Service terminated"));
         log.info("T=" + simTimeAsClock(simTime) + " Service " + trainService.getServiceName() + " terminated at " + ds.getSectionName(trainService.getOccupiedSection()));
-    }
-
-    private void sendMessage(String topic, RailSimMessage message) {
-        ListenableFuture<SendResult<String, RailSimMessage>> future =
-                kafkaTemplate.send(topic, message);
-
-        future.addCallback(new ListenableFutureCallback<SendResult<String, RailSimMessage>>() {
-
-            @Override
-            public void onSuccess(SendResult<String, RailSimMessage> result) {
-                System.out.println("Sent message=[" + message +
-                        "] with offset=[" + result.getRecordMetadata().offset() + "]");
-            }
-            @Override
-            public void onFailure(Throwable ex) {
-                System.out.println("Unable to send message=["
-                        + message + "] due to : " + ex.getMessage());
-            }
-        });
     }
 
     private String simTimeAsClock(int simtime) {

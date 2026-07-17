@@ -1,8 +1,7 @@
 package uk.co.raphel.railsim.services;
 
-import org.apache.kafka.clients.admin.NewTopic;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ResourceLoaderAware;
@@ -10,36 +9,30 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 import uk.co.raphel.railsim.common.MessageType;
 import uk.co.raphel.railsim.common.RailSimMessage;
 import uk.co.raphel.railsim.common.TrackDiagramEntry;
 import uk.co.raphel.railsim.common.TrainService;
+import uk.co.raphel.railsim.kafka.KafkaProducer;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @EnableScheduling
+@Slf4j(topic="ServiceFactory")
 public class ServiceFactory implements Runnable, ResourceLoaderAware, InitializingBean {
 
-   // String name;
-   // TaskExecutor taskExecutor;
-    private final Logger log = LoggerFactory.getLogger(ServiceFactory.class);
+    @Setter
     private ResourceLoader resourceLoader;
 
     private int simClock  = 0;       // Elapsed sim time in seconds
 
-    private int simRate;
+   // private int simRate;
 
     @Autowired
     ThreadPoolTaskExecutor executor;
@@ -50,9 +43,12 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
     @Autowired
     KafkaTemplate<String, RailSimMessage> kafkaTemplate;
 
-    @Autowired
-    NewTopic topic;
 
+    private final KafkaProducer kafkaProducer;
+
+    public ServiceFactory(KafkaProducer kafkaProducer) {
+        this.kafkaProducer = kafkaProducer;
+    }
 
     @Override
     public void afterPropertiesSet()  {
@@ -62,8 +58,6 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
         // Start by loading the track sections maps
         loadTrackMap(getResource("classpath:TrackMapDown.csv"));
         loadTrackMap(getResource("classpath:TrackMapUp.csv"));
-
-        // TODO Send track diagram to clients
 
         log.info("Track diagram accessable");
         log.info("Attempting to load services");
@@ -77,7 +71,8 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
         log.info("Services total = " + trainId);
 
         // Send initial track occupation schedule
-        sendMessage(topic.name(), new RailSimMessage(MessageType.SCHEDULE, simTimeToClock(simClock),
+        kafkaProducer.publish("railsim.queue",
+                new RailSimMessage(UUID.randomUUID(),MessageType.SCHEDULE, simTimeToClock(simClock),
                 ds.getTrackOccupationSchedule()));
 
 
@@ -87,29 +82,10 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
         executor.initialize();
     }
 
-    private void sendMessage(String topic, RailSimMessage message) {
-        ListenableFuture<SendResult<String, RailSimMessage>> future =
-                kafkaTemplate.send(topic, message);
-
-        future.addCallback(new ListenableFutureCallback<SendResult<String, RailSimMessage>>() {
-
-            @Override
-            public void onSuccess(SendResult<String, RailSimMessage> result) {
-                System.out.println("Sent message=[" + message +
-                        "] with offset=[" + result.getRecordMetadata().offset() + "]");
-            }
-            @Override
-            public void onFailure(Throwable ex) {
-                System.out.println("Unable to send message=["
-                        + message + "] due to : " + ex.getMessage());
-            }
-        });
-    }
 
 
     @Scheduled(fixedDelay = 1000)
     public void run() {
-
 
         simClock += 1;          // Advance one minute per loop iteration
         ds.setSimClock(simClock);
@@ -118,7 +94,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
             if(!srv.getServiceEventList().isEmpty()) {
                 if(srv.getServiceEventList().get(0).getTimeOfDay() == (simClock )  && !srv.isStarted())   {
                     System.out.println("Kick off : " + srv.getServiceName());
-                    ServiceRunner runner = new ServiceRunner(srv, ds, kafkaTemplate);
+                    ServiceRunner runner = new ServiceRunner(srv, ds);
                     executor.execute(runner);
 
                 }
@@ -137,7 +113,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
             String headerLine = br.readLine();
             List<Integer> indexList = new ArrayList<>();
             System.out.println(headerLine);
-            if(headerLine != null && headerLine.length() >0) {
+            if(headerLine != null && !headerLine.isEmpty()) {
                 String[] indexes = headerLine.split(",");
                 for(int i= 5; i<indexes.length; i++) {
                     int trackSection = Integer.parseInt(indexes[i]);
@@ -155,10 +131,9 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
             }
             br.close();
 
-            log.info("" + ds.getServices().size() + " services loaded");
+            log.info(ds.getServices().size() + " services loaded");
 
         }catch(IOException e){
-            e.printStackTrace();
             log.error("Error loading services", e);
         }
         return retVal;
@@ -170,7 +145,8 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
             File inFile = trackMap.getFile()   ;
             BufferedReader br = new BufferedReader(new FileReader(inFile));
 
-            String line = br.readLine(); // Skip header row
+            br.readLine();
+            String line; // Skip header row
             while ((line = br.readLine()) != null) {
                 TrackDiagramEntry diagramEntry = new TrackDiagramEntry(line);
                 System.out.println(diagramEntry.getId() + ":" + diagramEntry.getName());
@@ -181,7 +157,6 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
 
 
         }catch(IOException e){
-            e.printStackTrace();
             log.error("Error loading track diagram", e);
         }
 
@@ -197,7 +172,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
         Map<Integer,String> occSched = new HashMap<>();   // Schedule for this line   = section ->> time
 
         for(int i = 5; i< csv.length; i++) {
-            if(csv[i].length() >0) {
+            if(!csv[i].isEmpty()) {
                 int sectionNumber = indexList.get(i-5);
                 String event = csv[i];
                 if(event.startsWith("S")) {
@@ -216,28 +191,9 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
     }
 
 
-    public void setResourceLoader(ResourceLoader resourceLoader){
-        this.resourceLoader = resourceLoader;
-    }
-
     private Resource getResource(String location){
         return resourceLoader.getResource(location);
     }
 
-    public int getSimClock() {
-        return simClock;
-    }
-
-    public void setSimClock(int simClock) {
-        this.simClock = simClock;
-    }
-
-    public int getSimRate() {
-        return simRate;
-    }
-
-    public void setSimRate(int simRate) {
-        this.simRate = simRate;
-    }
 
 }
