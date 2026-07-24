@@ -1,4 +1,4 @@
-package uk.co.raphel.railsim.common;
+package uk.co.raphel.railsim.common.enums;
 
 /**
  * * Created : 28/05/2017

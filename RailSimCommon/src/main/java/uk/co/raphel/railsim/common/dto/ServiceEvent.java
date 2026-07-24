@@ -1,8 +1,8 @@
 package uk.co.raphel.railsim.common.dto;
 
-import uk.co.raphel.railsim.common.ServiceEventType;
+import uk.co.raphel.railsim.common.enums.ServiceEventType;
 
-import static uk.co.raphel.railsim.common.ServiceEventType.ARRIVESTOP;
+import static uk.co.raphel.railsim.common.enums.ServiceEventType.ARRIVESTOP;
 
 /**
  * * Created : 07/06/2015

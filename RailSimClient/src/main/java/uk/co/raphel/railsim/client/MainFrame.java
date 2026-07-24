@@ -1,11 +1,10 @@
 package uk.co.raphel.railsim.client;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.kafka.annotation.KafkaListener;
-import uk.co.raphel.railsim.common.MessageType;
+import uk.co.raphel.railsim.common.enums.MessageType;
 import uk.co.raphel.railsim.common.RailSimMessage;
 
 
@@ -111,7 +110,7 @@ public class MainFrame extends JFrame implements ResourceLoaderAware {
             String headerLine = br.readLine();
 
             while ((line = br.readLine()) != null) {
-                String[] destLine = line.split(",");
+                String[] destLine = line.split(",",-1));
                 if (destLine.length > 3) {
                     List<DestinationBoard> boards = new ArrayList<>();
                     Destination destination = new Destination();

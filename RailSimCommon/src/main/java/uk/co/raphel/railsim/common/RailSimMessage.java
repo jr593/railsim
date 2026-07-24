@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import uk.co.raphel.railsim.common.enums.MessageType;
+import uk.co.raphel.railsim.common.enums.SectionStatus;
 
 import java.io.Serializable;
 import java.util.Map;

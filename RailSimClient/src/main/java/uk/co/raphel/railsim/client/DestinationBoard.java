@@ -3,8 +3,6 @@ package uk.co.raphel.railsim.client;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.annotation.KafkaListener;
-import uk.co.raphel.railsim.common.MessageType;
 import uk.co.raphel.railsim.common.RailSimMessage;
 
 import javax.swing.*;

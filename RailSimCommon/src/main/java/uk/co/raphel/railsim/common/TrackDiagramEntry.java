@@ -26,7 +26,7 @@ public class TrackDiagramEntry implements Serializable {
 
         //Take line form imnput resource to construct me.
         // e.g. 1,Victoria Down Main,0.00,0.00
-        String[] csv = csvLine.split(",");
+        String[] csv = csvLine.split(",",-1);
         if (csv.length == 5) {
             this.id = Integer.parseInt(csv[0]);
             this.name = csv[1];

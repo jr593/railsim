@@ -12,3 +12,15 @@ spring:
       acks: -1 # Either 0,1 or -1. -1 waits for all replicas to acknowledge
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  datasource:
+    url: jdbc:postgresql://192.168.1.119:5432/railsim
+    username: railsim
+    password: railsim
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 8083

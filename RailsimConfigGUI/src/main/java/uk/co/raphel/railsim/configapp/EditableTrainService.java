@@ -1,5 +1,9 @@
 package uk.co.raphel.railsim.configapp;
 
+import lombok.Getter;
+import lombok.Setter;
+import uk.co.raphel.railsim.common.entity.Berth;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,11 +12,14 @@ import java.util.Map;
  * * Created : 30/05/2015
  * * Author  : johnr
  **/
+@Setter @Getter
 public class EditableTrainService {
 
     private String startTime;
-    private String start;
-    private String destination;
+    private Berth startBerth;
+    private String startName;
+    private Berth destBerth;
+    private String destinationName;
     private String serviceClass;
     private String engine;
 
@@ -21,29 +28,9 @@ public class EditableTrainService {
 
 
     public String toString() {
-        return startTime + "-" + start + " to " + destination;
+        return startTime + "-" + startName  + "(" +  startBerth.getBerthName() + ") " + destinationName + " (" + destBerth.getBerthName() + ")";
     }
-    EditableTrainService(String csvLine, List<Integer> indexList) {
-        // e.g
-        // Train,From,Class,Engine,Destination,1,2,3,4,5,6,7,8,9,10,11,200,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,201,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81
-       //  00:25,Victoria,Pass,EMU,,S00.25,,,,S00.31,,S00.35,,,S00.38,S00.40,,S00.44,S00.46,,,T00.48,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-        String[] csv = csvLine.split(",");
-
-        startTime = csv[0];
-        this.start = csv[1];
-        this.destination =  csv[4];
-        serviceClass = csv[2];
-        engine = csv[3];
-
-        for(int i = 5; i< csv.length; i++) {
-               callingPoints.put(indexList.get(i-5), csv[i]);
-        }
-        if(csv.length-5 < indexList.size()) {
-            for(int i=csv.length-5; i<indexList.size(); i++) {
-                callingPoints.put(indexList.get(i),"");
-            }
-        }
-
+    EditableTrainService() {
     }
 
 
@@ -55,45 +42,6 @@ public class EditableTrainService {
                         .noneMatch(m -> m != null && m.length() > 0);
     }
 
-    String getStartTime() {
-        return startTime;
-    }
-
-    void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    String getStart() {
-        return start;
-    }
-
-    void setStart(String start) {
-        this.start = start;
-    }
-
-    String getDestination() {
-        return destination;
-    }
-
-    void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    String getServiceClass() {
-        return serviceClass;
-    }
-
-    void setServiceClass(String serviceClass) {
-        this.serviceClass = serviceClass;
-    }
-
-    String getEngine() {
-        return engine;
-    }
-
-    void setEngine(String engine) {
-        this.engine = engine;
-    }
 
     Map<Integer, String> getCallingPoints() {
         return callingPoints;

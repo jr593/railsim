@@ -1,10 +1,22 @@
 package uk.co.raphel.railsim.configapp;
 
 
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Component;
 import uk.co.raphel.railsim.common.TrackDiagramEntry;
+import uk.co.raphel.railsim.common.entity.Berth;
+import uk.co.raphel.railsim.common.entity.Destination;
+import uk.co.raphel.railsim.common.entity.RouteStop;
+import uk.co.raphel.railsim.common.entity.TrainService;
+import uk.co.raphel.railsim.common.enums.StopType;
+import uk.co.raphel.railsim.common.enums.TrackDirection;
+import uk.co.raphel.railsim.configapp.repository.DestinationRepository;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -19,17 +31,31 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.*;
+import java.util.stream.Collectors;
 
+@Slf4j(topic = "MainFrame")
+@Component
 public class MainFrame extends JFrame implements ActionListener, TableModelListener, ResourceLoaderAware {
 
     private final ServiceTableModel theTableModel = new ServiceTableModel();
+    @Setter
     private ResourceLoader resourceLoader;
+
+   private final DestinationRepository destinationRepository;
 
     private final List<TrackDiagramEntry> trackDiagram = new LinkedList<>();
 
-    private final List<EditableTrainService> dataBase = new ArrayList<>();
+     private List<Destination> destinations;
+    private List<Berth> berths;
+    private List<TrainService> trainServices;
+
+    private final List<EditableTrainService> editableTrainServices = new ArrayList<>();
+
+    private boolean dataLoaded = false;
 
     private int currentDataPointer;
     private final JTextField txtService = new JTextField("");
@@ -39,13 +65,19 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
     private final JTextField txtDest = new JTextField("");
     private final JPanel buttonPanel = new JPanel();
     private JComboBox<EditableTrainService> copyCombo;
+    private List<Integer> berthLookup = new LinkedList<>();
+    private List<RouteStop> routeStopLookup = new LinkedList<>();
+
+    public MainFrame(DestinationRepository destinationRepository) {
+        this.destinationRepository = destinationRepository;
+    }
+
 
     public void init() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(new Dimension(1200, 800));
 
-
-        loadData();
+        //getDataFromDatabase();
 
         theTableModel.addTableModelListener(this);
         JTable theTable = new JTable(theTableModel);
@@ -64,19 +96,23 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         JButton nextButton = new JButton(">>");
         nextButton.setActionCommand("NEXT");
         nextButton.addActionListener(this);
+        nextButton.setEnabled(false);
         JButton prevButton = new JButton("<<");
         prevButton.setActionCommand("PREV");
         prevButton.addActionListener(this);
+        prevButton.setEnabled(false);
         JButton saveButton = new JButton("Save");
         saveButton.setActionCommand("SAVE");
         saveButton.addActionListener(this);
+        saveButton.setEnabled(false);
         JButton exitButton = new JButton("Exit");
         exitButton.setActionCommand("EXIT");
         exitButton.addActionListener(this);
         JButton searchButton = new JButton("Find MT");
         searchButton.setActionCommand("FIND");
         searchButton.addActionListener(this);
-        buttonPanel.setBorder(new TitledBorder("Buttons"));
+        searchButton.setEnabled(false);
+        buttonPanel.setBorder(new TitledBorder("Actions"));
         buttonPanel.setLayout(new GridBagLayout());
         gridbag.setConstraints(buttonPanel, c);
         c.gridx = 0;
@@ -149,11 +185,24 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         buttonPanel.add(copyCombo, c);
         JButton copyButton = new JButton("Copy");
         copyButton.setActionCommand("COPY");
+        if (!dataLoaded) {
+            copyButton.setEnabled(false);
+        }
         copyButton.addActionListener(this);
         c.gridx = 3;
         c.gridy = 6;
         c.gridwidth = 1;
         buttonPanel.add(copyButton, c);
+
+        JButton loadButton = new JButton("Load");
+        loadButton.setActionCommand("LOAD");
+        loadButton.addActionListener(this);
+        c.gridx = 0;
+        c.gridy = 7;
+        c.gridwidth = 1;
+        buttonPanel.add(loadButton, c);
+
+
         add(buttonPanel);
 
 
@@ -165,9 +214,9 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("NEXT")) {
+     /*   if (e.getActionCommand().equals("NEXT")) {
             updateServiceHeader();
-            if (currentDataPointer < dataBase.size() - 1) {
+            if (currentDataPointer < editableTrainServices.size() - 1) {
                 currentDataPointer++;
                 setCurrentDataToTableModel();
             }
@@ -182,7 +231,7 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         if (e.getActionCommand().equals("SAVE")) {
             updateServiceHeader();
             saveOutput();
-        }
+        }*/
         if (e.getActionCommand().equals("EXIT")) {
             this.dispose();
             System.exit(0);
@@ -193,14 +242,18 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         }
         if (e.getActionCommand().equals("COPY")) {
             EditableTrainService srvToCopy = (EditableTrainService) copyCombo.getSelectedItem();
-            if(srvToCopy != null) {
-                EditableTrainService srvCopyInto = dataBase.get(currentDataPointer);
+            if (srvToCopy != null) {
+                EditableTrainService srvCopyInto = editableTrainServices.get(currentDataPointer);
                 copyEditableService(srvToCopy, srvCopyInto);
                 setCurrentDataToTableModel();
             }
         }
+        if (e.getActionCommand().equals("LOAD")) {
+            loadCSVFiles();
+        }
 
     }
+
 
     private void copyEditableService(EditableTrainService from, EditableTrainService to) {
         String origStartTime = from.getStartTime();
@@ -209,7 +262,7 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         int newHour = Integer.parseInt(newStartTime.substring(0, 2));
         to.setCallingPoints(new HashMap<>());
         for (Map.Entry<Integer, String> entry : from.getCallingPoints().entrySet()) {
-            to.getCallingPoints().put(entry.getKey(), entry.getValue().equals("") ? "" : adjHour(entry.getValue(), newHour - origHour));
+            to.getCallingPoints().put(entry.getKey(), entry.getValue().isEmpty() ? "" : adjHour(entry.getValue(), newHour - origHour));
         }
     }
 
@@ -229,8 +282,11 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
     }
 
     private int findfirstEmpty() {
-        for (int i = 0; i < dataBase.size(); i++) {
-            if (dataBase.get(i).hasNoEntries()) {
+        if (!dataLoaded) {
+            return 0;
+        }
+        for (int i = 0; i < editableTrainServices.size(); i++) {
+            if (editableTrainServices.get(i).hasNoEntries()) {
                 return i;
             }
         }
@@ -238,80 +294,261 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
     }
 
     private void updateServiceHeader() {
-        EditableTrainService srv = dataBase.get(currentDataPointer);
-        srv.setStartTime(this.txtService.getText());
-        srv.setStart(this.txtStart.getText());
-        srv.setDestination(this.txtDest.getText());
-        srv.setEngine(this.txtEquipment.getText());
-        srv.setServiceClass(txtClass.getText());
+//        if (dataLoaded) {
+//            EditableTrainService srv = editableTrainServices.get(currentDataPointer);
+//            srv.setStartTime(this.txtService.getText());
+//            srv.setStart(this.txtStart.getText());
+//            srv.setDestination(this.txtDest.getText());
+//            srv.setEngine(this.txtEquipment.getText());
+//            srv.setServiceClass(txtClass.getText());
+//        }
     }
 
-    private void loadData() {
-        theTableModel.clear();
-        loadTrackMap(getResource("classpath:TrackMapUp.csv"));
+    private void loadCSVFiles() {
+        // LoadDestinations
+        File destinationsFile;
+        try {
+            log.info("Loading destinations" );
+            destinationsFile = getResource("classpath:destinations.csv").getFile();
+            // Skip first line
+            destinations = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new FileReader(destinationsFile));
+            String line = br.readLine(); // SKIP HEADER
+            while ((line = br.readLine()) != null) {
+                destinations.add(new Destination(line));
+            }
+            br.close();
+            log.info(destinations.size() + " destinations loaded");
+        } catch (Exception e) {
+            log.error("Error loading " + "classpath:destinations.csv", e);
+        }
+        List<TrackDiagramEntry> upList = new ArrayList<>();
+        List<TrackDiagramEntry> downList = new ArrayList<>();
+        try {
 
+            log.info("Loading up Trackmap (Berths)");
+            upList = loadTrackMap(getResource("classpath:TrackMapUp.csv"), TrackDirection.UP);
+            log.info("Trackmap Up " + upList.size() + " Berths");
+        } catch(Exception e) {
+            log.error("Error loading " + "classpath:TrackMapUp.csv", e);
+        }
+        try {
+            log.info("Loading down Trackmap (Berths)");
+            downList = loadTrackMap(getResource("classpath:TrackMapDown.csv"),TrackDirection.DOWN);
+            log.info("Berths Down, total =  " + downList.size() + " Berths");
+        } catch(Exception e) {
+            log.error("Error loading " + "classpath:TrackMapDown.csv", e);
+        }
+        // Generate trackmap base entities
+        berths =  upList.stream().map(t -> track2Berth(t, TrackDirection.UP)).collect(Collectors.toList());
+        berths.addAll(downList.stream().map(t -> track2Berth(t, TrackDirection.DOWN)).collect(Collectors.toList()));
+        try {
+            log.info("Loading up Schedule");
+            loadServices(getResource("classpath:upPlan.csv"));
+            log.info("Schedule Up " + this.editableTrainServices.size() + " Services");
+        } catch(Exception e) {
+            log.error("Error loading " + "classpath:upPlan.csv", e);
+        }
+        try {
+            log.info("Loading down Schedule");
+            loadServices(getResource("classpath:downPlan.csv"));
+            log.info("Schecu;e Down, toel =  " + editableTrainServices.size() + " Services");
+        } catch(Exception e) {
+            log.error("Error loading " + "classpath:downPlan.csv", e);
+        }
+        // Copy editable services to entities
+        trainServices = editableTrainServices.stream()
+                .map(this::ed2Entity)
+                .collect(Collectors.toList());
 
-        theTableModel.setTrackNames(trackDiagram);
-        loadServices(getResource("classpath:ServicesUp1.csv"));
-        currentDataPointer = 0;
-        setCurrentDataToTableModel();
+        // Fill out references
+        log.info("DONE");
+        //TODO
+    }
+
+    private Berth track2Berth(TrackDiagramEntry t, TrackDirection direction) {
+        Berth ret = new Berth();
+        ret.setBerthId(t.getId().longValue());
+        ret.setDirection(direction);
+        ret.setHomeBase(findDestination( t.getName()));
+        ret.setLengthMiles(t.getLength());
+        ret.setMultiOccupancy(t.isAllowMultipleOccupancy());
+        ret.setMilesFromOrigin(0.0); //TODO
+        ret.setBerthName(t.getName());
+        ret.setSpeedLimit(t.getSpeedLimit());
+        return ret;
+    }
+
+    Destination findDestination(String name) {
+        return destinations.stream().filter(d -> d.getName().equals(name)).findFirst().orElse(null);
+    }
+
+    private TrainService ed2Entity(EditableTrainService ed) {
+        TrainService ret = new TrainService();
+        try {
+            ret.setEngine(ed.getEngine());
+            ret.setServiceClass(ed.getServiceClass());
+            ret.setDestination(findBerth(ed.getDestinationName()));
+            ret.setOrigin(findBerth(ed.getStartName()));
+            ret.setStartTime(LocalTime.parse(ed.getStartTime().replaceAll("\\.", ":"), DateTimeFormatter.ofPattern("HH:mm")));
+            ret.setRoutePoints(computeRoutePoints(ed.getCallingPoints()));
+        } catch(Exception e) {
+            log.error("Error converting ed --> Trainservice", e);
+        }
+
+        return ret;
+    }
+
+    private List<RouteStop> computeRoutePoints(Map<Integer, String> callingPoints) {
+        List<RouteStop> ret = new ArrayList<>();
+        // We have berth (int) and calling Data in key
+        // P with target time = passing
+        // P with no time, still passing
+        // S with time = Stopping target
+        // T with or without target termminate
+        for(Map.Entry<Integer, String> entry : callingPoints.entrySet()) {
+            if(!entry.getValue().equals("")) {
+                RouteStop t = new RouteStop();
+                t.setBerth(findBerth(entry.getKey()));
+                t.setService(TrainService.dummy());
+                t.setStopType(computeStopType(entry.getValue()));
+                t.setArrivalTime(computeArrivalTime(entry.getValue()));
+                t.setDepartureTime(computeDepartureTime(entry.getValue()));
+                ret.add(t);
+            }
+        }
+        return ret;
+    }
+
+    private LocalTime computeDepartureTime(String value) {
+       try {
+           if (value.contains("/")) {
+               String[] splitter = value.split("/");
+               String deptime = splitter[1];
+               return LocalTime.parse(deptime.replace(".",":"), DateTimeFormatter.ofPattern("HH:mm"));
+           } else {
+               return computeArrivalTime(value);
+           }
+       }catch(Exception e) {
+           log.error("Cannot compute departure time",e);
+           return LocalTime.MIN;
+       }
+     }
+
+    // S02.42/02.55
+    private LocalTime computeArrivalTime(String value) {
+        // Decimmal point ?
+        if(value.contains(".")) {
+            // We have something
+            String initValue = value.substring(1);
+            if(initValue.contains("/")) {
+                // We have stop and depart
+                initValue = initValue.substring(0, initValue.indexOf("/"));
+                try {
+                    return LocalTime.parse(initValue.replaceAll("\\.",":"), DateTimeFormatter.ofPattern("HH:mm"));
+                } catch(Exception e) {
+                    log.error("Error converting localtime " + value);
+                    return LocalTime.MIN;
+                }
+            }
+        }
+        return LocalTime.MIN;
     }
 
 
-    private void saveOutput() {
-        String outfileName = "c:\\temp.csv";
 
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(outfileName))) {
-
-            // Write header
-            writer.write("Train,From,Class,Engine,Destination");
-
-            // Write list of tracksections
-            trackDiagram.forEach(t -> {
-                try {
-                    writer.write("," + t.getId());
-                } catch (IOException ignore) {
-
-                }
-            });
-            writer.write("\r\n");
-
-            // Write each service
-            dataBase.forEach(srv -> {
-                try {
-                    writer.write(srv.getStartTime() + "," + srv.getStart() + "," + srv.getServiceClass() + "," +
-                            srv.getEngine() + "," + srv.getDestination());
-                    trackDiagram.forEach(dia -> {
-                        try {
-                            if (srv.getCallingPoints().containsKey(dia.getId())) {
-
-                                writer.write("," + srv.getCallingPoints().get(dia.getId()));
-                            } else {
-                                writer.write(",");
-                            }
-                        } catch (IOException ignore) {
-
-                        }
-                    });
-                    writer.write("\r\n");
-                } catch (IOException ignore) {
-
-                }
-            });
-       } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
+    private StopType computeStopType(String value) {
+        try {
+            if(value.isEmpty()){
+                return StopType.PASS;
+            }
+            return StopType.getFromTimeTable(value.substring(0,1));
+        } catch (IllegalArgumentException e) {
+            log.error("Invalid stop type " + value);
+            return StopType.INVALID;
         }
     }
 
+
+
+    private Berth findBerth(String berthName) {
+        return berths.stream().filter(b -> b.getBerthName().equals(berthName)).findFirst().orElse(null);
+    }
+
+    private Berth findBerth(int start) {
+        return berths.stream().filter(b -> b.getBerthId() == start).findFirst().orElse(null);
+    }
+
+
+
+
+//        theTableModel.clear();
+//        loadTrackMap(getResource("classpath:TrackMapUp.csv"));
+//
+//
+//        theTableModel.setTrackNames(trackDiagram);
+//        loadServices(getResource("classpath:ServicesUp1.csv"));
+//        currentDataPointer = 0;
+//        setCurrentDataToTableModel();
+    //   }
+
+
+ /*   private void saveOutput() {
+        if (dataLoaded) {
+            String outfileName = "c:\\temp.csv";
+
+            try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(outfileName))) {
+
+                // Write header
+                writer.write("Train,From,Class,Engine,Destination");
+
+                // Write list of tracksections
+                trackDiagram.forEach(t -> {
+                    try {
+                        writer.write("," + t.getId());
+                    } catch (IOException ignore) {
+
+                    }
+                });
+                writer.write("\r\n");
+
+                // Write each service
+                editableTrainServices.forEach(srv -> {
+                    try {
+                        writer.write(srv.getStartTime() + "," + srv.getStart() + "," + srv.getServiceClass() + "," +
+                                srv.getEngine() + "," + srv.getDestination());
+                        trackDiagram.forEach(dia -> {
+                            try {
+                                if (srv.getCallingPoints().containsKey(dia.getId())) {
+
+                                    writer.write("," + srv.getCallingPoints().get(dia.getId()));
+                                } else {
+                                    writer.write(",");
+                                }
+                            } catch (IOException ignore) {
+
+                            }
+                        });
+                        writer.write("\r\n");
+                    } catch (IOException ignore) {
+
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+        }
+    }
+*/
     private void setCurrentDataToTableModel() {
-        EditableTrainService srv = dataBase.get(currentDataPointer);
+        EditableTrainService srv = editableTrainServices.get(currentDataPointer);
         theTableModel.setData(srv);
         txtService.setText(srv.getStartTime());
-        txtStart.setText(srv.getStart());
+        txtStart.setText(srv.getStartName());
         txtClass.setText(srv.getServiceClass());
         txtEquipment.setText(srv.getEngine());
-        txtDest.setText(srv.getDestination());
+        txtDest.setText(srv.getDestinationName());
         filterCopyCombo(srv);
         buttonPanel.invalidate();
 
@@ -321,7 +558,8 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
 
         if (copyCombo != null) {
             copyCombo.removeAllItems();
-            dataBase.stream().filter(serv -> serv.getStart().equals(srv.getStart()) && serv.getDestination().equals(srv.getDestination()))
+            editableTrainServices.stream().filter(serv -> serv.getStartName().equals(srv.getStartName())
+                            && serv.getDestinationName().equals(srv.getDestinationName()))
                     .forEach(copyCombo::addItem);
         }
     }
@@ -335,12 +573,13 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
             String columnName = model.getColumnName(column);
             Object data = model.getValueAt(row, column);
 
-            EditableTrainService toChange = dataBase.get(currentDataPointer);
+            EditableTrainService toChange = editableTrainServices.get(currentDataPointer);
             toChange.getCallingPoints().put(trackDiagram.get(row).getId(), (String) data);
         }
     }
 
-    private void loadTrackMap(Resource trackMap) {
+    private List<TrackDiagramEntry> loadTrackMap(Resource trackMap, TrackDirection down) {
+       List<TrackDiagramEntry> toReturn = new ArrayList<>();
         try {
             //InputStream is = trackMap.getInputStream();
             File inFile = trackMap.getFile();
@@ -350,7 +589,7 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
             while ((line = br.readLine()) != null) {
                 TrackDiagramEntry diagramEntry = new TrackDiagramEntry(line);
                 //System.out.println(diagramEntry.getId() + ":" + diagramEntry.getName());
-                trackDiagram.add(diagramEntry);
+                toReturn.add(diagramEntry);
 
             }
             br.close();
@@ -359,10 +598,12 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        trackDiagram.addAll(toReturn);
+        return toReturn;
     }
 
     private void loadServices(Resource resource) {
+        // Train,From,Class,Engine,Destination,1,2,3,4,5,6,7,8,9,10,11,200,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,201,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81
 
         try {
             //InputStream is = resource.getInputStream();
@@ -373,20 +614,20 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
             String line;
             // Read the header line and index the track sections
             String headerLine = br.readLine();
-            List<Integer> indexList = new LinkedList<>();
+            this.berthLookup = new LinkedList<>();
             // System.out.println(headerLine);
-            if (headerLine != null && headerLine.length() > 0) {
-                String[] indexes = headerLine.split(",");
+            if (headerLine != null && !headerLine.isEmpty()) {
+                String[] indexes = headerLine.split(",",-1);
                 for (int i = 5; i < indexes.length; i++) {
                     int trackSection = Integer.parseInt(indexes[i]);
-                    indexList.add(trackSection);
+                    berthLookup.add(trackSection);
                 }
             }
             while ((line = br.readLine()) != null) {
                 // Only read lines with service defined (may be being built still!)
-                if (line.split(",").length >= 5) {
+                if (line.split(",",-1).length >= 5) {
 
-                    dataBase.add(new EditableTrainService(line, indexList));
+                    editableTrainServices.add(getEditableTrainService(line));
 
                 }
 
@@ -395,15 +636,64 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Failed to load services ", e);
         }
+    }
+
+    private EditableTrainService getEditableTrainService(String csvLine) {
+        // e.g
+        // Train,From,Class,Engine,Destination,1,2,3,4,5,6,7,8,9,10,11,200,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,201,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81
+        //  00:25,Victoria,Pass,EMU,,S00.25,,,,S00.31,,S00.35,,,S00.38,S00.40,,S00.44,S00.46,,,T00.48,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        String[] csv = csvLine.split(",",-1);
+
+        EditableTrainService ret = new EditableTrainService();
+        ret.setStartTime(csv[0]);
+        ret.setStartBerth(findStartBerth(csv));
+        ret.setStartName(csv[1]);
+        ret.setDestBerth(findTBerth(csv));
+        ret.setDestinationName(csv[4]);
+        ret.setServiceClass(csv[2]);
+        ret.setEngine(csv[3]);
+        ret.setCallingPoints(findCallingPoints(berthLookup,csv));
+        return ret;
+    }
+
+    private Berth findStartBerth(String[] csv) {
+        int index = 5;
+        while(index < csv.length && csv[index].isEmpty()) {
+            index++;
+        }
+        if(index < csv.length) {
+            return findBerth(berthLookup.get(index));
+        }
+        return new Berth();
+    }
+
+    private Berth findTBerth(String[] csv) {
+        int index = 4;
+        while(index < csv.length && !csv[index].startsWith("T")) {
+            index++;
+        }
+        if(index < csv.length) {
+            return findBerth(index);
+        }
+        return new Berth();
 
     }
 
-
-    public void setResourceLoader(ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
+    private Map<Integer, String> findCallingPoints(List<Integer> indexList, String[] csv) {
+        Map<Integer, String> ret = new HashMap<>();
+        for(int i = 5; i< csv.length; i++) {
+            ret.put(indexList.get(i-5), csv[i]);
+        }
+        if(csv.length-5 < indexList.size()) {
+            for(int i=csv.length-5; i<indexList.size(); i++) {
+                ret.put(indexList.get(i),"");
+            }
+        }
+        return ret;
     }
+
 
     private Resource getResource(String location) {
         return resourceLoader.getResource(location);

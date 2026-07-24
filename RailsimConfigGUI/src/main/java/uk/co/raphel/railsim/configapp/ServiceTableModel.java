@@ -3,6 +3,7 @@ package uk.co.raphel.railsim.configapp;
 import uk.co.raphel.railsim.common.TrackDiagramEntry;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
 public class ServiceTableModel extends AbstractTableModel {
 
     private final String[] columnNames = {"Route Point", "Action"};
-    private List<TrackDiagramEntry> trackNames; // Column 0
+    private List<TrackDiagramEntry> trackNames = new ArrayList<>() ;// Column 0
     private EditableTrainService service;
 
 

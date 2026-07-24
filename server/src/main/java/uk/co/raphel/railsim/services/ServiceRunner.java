@@ -1,12 +1,13 @@
 package uk.co.raphel.railsim.services;
-import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
 import uk.co.raphel.railsim.common.*;
+import uk.co.raphel.railsim.common.enums.MessageType;
+import uk.co.raphel.railsim.common.enums.SectionStatus;
+import uk.co.raphel.railsim.common.enums.ServiceEventType;
 import uk.co.raphel.railsim.kafka.KafkaProducer;
 
 import java.util.UUID;
