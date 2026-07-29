@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import uk.co.raphel.railsim.common.enums.TrackDirection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -14,7 +17,7 @@ import uk.co.raphel.railsim.common.enums.TrackDirection;
 public class Berth {
 
     @Id
-    @Column(name="berth_id")
+    @Column(name="berth_id",insertable=false, updatable=false)
     private Long berthId;
     @Column(name="berth_name")
     private String berthName;
@@ -28,12 +31,29 @@ public class Berth {
     private Boolean multiOccupancy;
     @Column(name="speed_limit")
     private Integer speedLimit;
+    @ManyToMany
+    @JoinTable(
+            name = "berth_connections",
+            joinColumns = @JoinColumn(name = "from_berth_id"),
+            inverseJoinColumns = @JoinColumn(name = "to_berth_id")
+    )
+    private List<Berth> pathTo = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "destination_number")
-    private Destination homeBase;
 
     public Berth(String part) {
+        this.berthId = Long.parseLong(part);
+        this.direction = TrackDirection.TERMINUS;
     }
 
+    public void updateFrom(Berth realBerth) {
+        berthId = realBerth.berthId;
+        berthName = realBerth.berthName;
+        direction = realBerth.direction;
+        milesFromOrigin = realBerth.milesFromOrigin;
+        lengthMiles = realBerth.lengthMiles;
+        multiOccupancy = realBerth.multiOccupancy;
+        speedLimit = realBerth.speedLimit;
+        pathTo = new ArrayList<>(realBerth.pathTo);
+
+    }
 }

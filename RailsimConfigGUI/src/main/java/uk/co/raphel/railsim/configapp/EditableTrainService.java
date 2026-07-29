@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import uk.co.raphel.railsim.common.entity.Berth;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +24,8 @@ public class EditableTrainService {
     private String serviceClass;
     private String engine;
 
-
-    private Map<Integer, String> callingPoints = new HashMap<>();
+    // Format is key = index in csv line, value = entry like "S03.23"
+    private Map<Integer,String> callingPoints = new HashMap<>();
 
 
     public String toString() {
@@ -37,17 +38,6 @@ public class EditableTrainService {
     boolean hasNoEntries() {
         return getCallingPoints() == null ||
                 getCallingPoints().isEmpty() ||
-                callingPoints.values()
-                        .stream()
-                        .noneMatch(m -> m != null && m.length() > 0);
-    }
-
-
-    Map<Integer, String> getCallingPoints() {
-        return callingPoints;
-    }
-
-    void setCallingPoints(Map<Integer, String> callingPoints) {
-        this.callingPoints = callingPoints;
+                callingPoints.isEmpty();
     }
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 
 @Entity(name = "TrainService")
 @Table(name = "train_service")
@@ -23,13 +24,10 @@ public class TrainService {
 
     @Column(name="start_time")
     private LocalTime startTime;
-    @ManyToOne
-    @JoinColumn(name = "origin_berth_id")
-    private Berth origin;
-    @ManyToOne
-    @JoinColumn(name = "destination_berth_id")
-    private Berth destination;
-
+    @Column(name="origin")
+     private String origin;
+    @Column(name="destination")
+    private String destination;
     @OneToMany(mappedBy = "service")
     private List<RouteStop> routePoints;
     @Column(name="service_class")
@@ -45,4 +43,9 @@ public class TrainService {
         return trainService;
     }
 
+    public String toString() {
+        return "Service Start time : " + startTime +
+                " Origin : " + origin + " Destination : " + destination + ", Route points= " + routePoints.size();
+
+    }
 }

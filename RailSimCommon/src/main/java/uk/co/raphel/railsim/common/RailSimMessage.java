@@ -57,7 +57,7 @@ public class RailSimMessage implements Serializable {
     }
 
     public String toString() {
-        return messageType + " " + trainService.getServiceName() + " " + sectionName + " " + sectionStatus + " " + miscInfo;
+        return messageType + " " + trainService.getId()+ " " + sectionName + " " + sectionStatus + " " + miscInfo;
     }
 
     public String toJson() {

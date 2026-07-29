@@ -118,6 +118,7 @@ public class TrainService {
         return 9999;
     }
 
+    @JsonIgnore
     private ServiceEvent generateServiceEvent(Integer trackSection, String eventBase) {
         // Event base is from csv and can be :
         // Sxx.xx - Stopping service
@@ -151,79 +152,10 @@ public class TrainService {
     }
 
     public String toString() {
-        return serviceName + " current evt=" + currentServiceEvent + " (" +
-                serviceEventList.get(currentServiceEvent) + ")";
+        return serviceName + " From " + origin + " to " + destination +
+                " Type=" + serviceClass + ", Pulled by " + engine
+                + ", Calling points total = " + serviceEventList.size();
     }
 
-    public Integer getStartTime() {
-        return startTime;
-    }
 
-    public void setStartTime(Integer startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-    }
-
-    public String getServiceClass() {
-        return serviceClass;
-    }
-
-    public void setServiceClass(String serviceClass) {
-        this.serviceClass = serviceClass;
-    }
-
-    public String getEngine() {
-        return engine;
-    }
-
-    public void setEngine(String engine) {
-        this.engine = engine;
-    }
-
-    public List<ServiceEvent> getServiceEventList() {
-        return serviceEventList;
-    }
-
-    public void setServiceEventList(List<ServiceEvent> serviceEventList) {
-        this.serviceEventList = serviceEventList;
-    }
-
-    public int getCurrentServiceEvent() {
-        return currentServiceEvent;
-    }
-
-    public void setCurrentServiceEvent(int currentServiceEvent) {
-        this.currentServiceEvent = currentServiceEvent;
-    }
-    @JsonIgnore
-    public boolean isStarted() {
-        return started;
-    }
-
-    public void setStarted(boolean started) {
-        this.started = started;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
 }

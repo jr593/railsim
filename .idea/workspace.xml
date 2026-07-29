@@ -4,45 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ae121b0-e85b-4536-be23-2a6e3570d3f0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/Berth.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/Destination.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/RouteStop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/TrainService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/LoadType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/StopType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/TrackDirection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/http/LoadRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/http/LoadResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/repository/DestinationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="9ae121b0-e85b-4536-be23-2a6e3570d3f0" name="Default" comment="Major re-write for using JPA">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/repository/BerthRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/repository/RouteStopRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/repository/TrainServiceRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/DestinationBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/DestinationBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/MessageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/MessageType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/RailSimMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/RailSimMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/SectionStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/SectionStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/ServiceEventType.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/ServiceEventType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrackDiagramEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrackDiagramEntry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/TrainService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/ServiceEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/ServiceEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/resources/ServicesDown1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/resources/ServicesUp1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/resources/TrackMapDown.csv" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/TrackMapDown.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/resources/TrackMapUp.csv" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/TrackMapUp.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/resources/destinations.csv" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/destinations.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/Berth.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/Berth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/Destination.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/Destination.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/TrainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/TrainService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/TrackDirection.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/TrackDirection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/EditableTrainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/EditableTrainService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/ServiceTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/ServiceTableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/TrackMapDown.csv" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/baseData/TrackMapDown.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/TrackMapUp.csv" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/baseData/TrackMapUp.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/destinations.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/uk/co/raphel/railsim/services/ServiceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/uk/co/raphel/railsim/services/ServiceFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/uk/co/raphel/railsim/services/ServiceRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/uk/co/raphel/railsim/services/ServiceRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,44 +80,51 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Application.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.RailSimClient [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.RailSimClient [package].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.RailSimConfigGui [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.RailSimConfigGui [package].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.railsimcommon [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.railsimcommon [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.railsimcommon [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.railwaysim [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.server [package].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;Spring Boot.Application (1).executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.Application.executor&quot;: &quot;Debug&quot;,
-    &quot;Spring Boot.ConfigGui.executor&quot;: &quot;Debug&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/johnr/projectsForex/forexServer/src/main/resources/application.yml&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;database.data.views.appearance&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Application.executor": "Run",
+    "Application.Server.executor": "Run",
+    "Maven.RailSimClient [clean].executor": "Run",
+    "Maven.RailSimClient [package].executor": "Run",
+    "Maven.RailSimConfigGui [clean].executor": "Run",
+    "Maven.RailSimConfigGui [install].executor": "Run",
+    "Maven.RailSimConfigGui [package].executor": "Run",
+    "Maven.railsimcommon [clean].executor": "Run",
+    "Maven.railsimcommon [compile].executor": "Run",
+    "Maven.railsimcommon [install].executor": "Run",
+    "Maven.railwaysim [clean].executor": "Run",
+    "Maven.server [package].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.Application (1).executor": "Run",
+    "Spring Boot.Application.executor": "Debug",
+    "Spring Boot.ConfigGui.executor": "Debug",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "copilot.chat.legacySessionMetadata.migrated": "true",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/johnr/projectsForex/hmm",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "database.data.views.appearance"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/server/src/main/java/uk/co/raphel/railsim" />
@@ -144,10 +134,13 @@
       <recent name="C:\projects\railsim\RailSimClient\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/baseData" />
+      <recent name="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/sql" />
       <recent name="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources" />
       <recent name="$PROJECT_DIR$/RailSimClient/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="uk.co.raphel.railsim.configapp.repository" />
       <recent name="uk.co.raphel.railsim.client" />
     </key>
   </component>
@@ -232,6 +225,15 @@
       <updated>1572707908337</updated>
       <workItem from="1600767263686" duration="9331000" />
     </task>
+    <task id="LOCAL-00001" summary="Major re-write for using JPA">
+      <option name="closed" value="true" />
+      <created>1784910674631</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1784910674631</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,21 +250,42 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Major re-write for using JPA" />
+    <option name="LAST_COMMIT_MESSAGE" value="Major re-write for using JPA" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java</url>
-          <line>342</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="28" />
+          <line>638</line>
+          <option name="timeStamp" value="113" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java</url>
+          <line>661</line>
+          <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java</url>
+          <line>677</line>
+          <option name="timeStamp" value="115" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java</url>
+          <line>667</line>
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java</url>
+          <line>284</line>
+          <option name="timeStamp" value="119" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java</url>
-          <line>432</line>
-          <option name="timeStamp" value="34" />
+          <line>262</line>
+          <option name="timeStamp" value="122" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

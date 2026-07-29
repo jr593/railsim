@@ -17,6 +17,7 @@ import uk.co.raphel.railsim.common.enums.MessageType;
 import uk.co.raphel.railsim.common.RailSimMessage;
 import uk.co.raphel.railsim.common.TrackDiagramEntry;
 import uk.co.raphel.railsim.common.TrainService;
+import uk.co.raphel.railsim.common.enums.TrackDirection;
 import uk.co.raphel.railsim.kafka.KafkaProducer;
 
 import java.io.*;
