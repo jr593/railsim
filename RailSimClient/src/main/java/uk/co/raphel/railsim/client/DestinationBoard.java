@@ -170,7 +170,7 @@ public class DestinationBoard extends JPanel  {
             switch (railSimMessage.getSectionStatus()) {
                 case CLEARED :lblArr.setText("");   break;
                 case OCCUPIED :
-                    lblArr.setText(railSimMessage.getTrainService().getDestination());
+                    lblArr.setText(railSimMessage.getTrainServiceDto().getDestination());
                     lbl1St.setText(railSimMessage.getClockTime());
                 break;
                 case HOLDING : lbl1St.setText(railSimMessage.getClockTime());    break;

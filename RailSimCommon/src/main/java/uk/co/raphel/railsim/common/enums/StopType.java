@@ -13,6 +13,7 @@ public enum StopType {
     }
 
     public static StopType getFromTimeTable(String timetable) {
+
         switch(timetable.toUpperCase().charAt(0)) {
             case 'P': return StopType.PASS;
             case 'T': return StopType.TERMINATE;

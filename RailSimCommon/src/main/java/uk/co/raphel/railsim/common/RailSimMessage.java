@@ -22,7 +22,7 @@ public class RailSimMessage implements Serializable {
     private UUID msgKey;
     private MessageType messageType;
     private String clockTime;
-    private TrainService trainService;
+    private TrainServiceDto trainServiceDto;
 
     private Integer sectionId;
     private String sectionName;
@@ -43,21 +43,21 @@ public class RailSimMessage implements Serializable {
         this.occSched = occSched;
     }
 
-    public RailSimMessage(UUID msgKey,MessageType messageType, String clockTime, TrainService trainService,
+    public RailSimMessage(UUID msgKey,MessageType messageType, String clockTime, TrainServiceDto trainServiceDto,
                           String sectionName,
                           SectionStatus sectionStatus, String miscInfo) {
         this.msgKey = msgKey;
         this.messageType = messageType;
         this.clockTime = clockTime;
-        this.trainService = trainService;
-        this.sectionId = trainService.getOccupiedSection();
+        this.trainServiceDto = trainServiceDto;
+        this.sectionId = trainServiceDto.getOccupiedSection();
         this.sectionName = sectionName;
         this.sectionStatus = sectionStatus;
         this.miscInfo = miscInfo;
     }
 
     public String toString() {
-        return messageType + " " + trainService.getId()+ " " + sectionName + " " + sectionStatus + " " + miscInfo;
+        return messageType + " " + trainServiceDto.getId()+ " " + sectionName + " " + sectionStatus + " " + miscInfo;
     }
 
     public String toJson() {

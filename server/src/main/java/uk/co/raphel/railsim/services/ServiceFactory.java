@@ -16,8 +16,7 @@ import org.springframework.stereotype.Component;
 import uk.co.raphel.railsim.common.enums.MessageType;
 import uk.co.raphel.railsim.common.RailSimMessage;
 import uk.co.raphel.railsim.common.TrackDiagramEntry;
-import uk.co.raphel.railsim.common.TrainService;
-import uk.co.raphel.railsim.common.enums.TrackDirection;
+import uk.co.raphel.railsim.common.TrainServiceDto;
 import uk.co.raphel.railsim.kafka.KafkaProducer;
 
 import java.io.*;
@@ -124,7 +123,7 @@ public class ServiceFactory implements Runnable, ResourceLoaderAware, Initializi
             while ((line = br.readLine()) != null) {
                 // Only read lines with service defined (may be being built still!)
                 if(line.split(",",-1)).length >=5) {
-                    TrainService service = new TrainService(line, indexList, retVal++);
+                    TrainServiceDto service = new TrainServiceDto(line, indexList, retVal++);
                     ds.addService(service);
                     constructOccupationSchedule(line, indexList);
                 }

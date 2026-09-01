@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +21,6 @@ public class TrainService {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @Column(name="start_time")
@@ -28,8 +29,13 @@ public class TrainService {
      private String origin;
     @Column(name="destination")
     private String destination;
-    @OneToMany(mappedBy = "service")
-    private List<RouteStop> routePoints;
+    @OneToMany(
+            mappedBy = "service",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<RouteStop> routePoints = new ArrayList<>();
     @Column(name="service_class")
     private String serviceClass;
     @Column(name="engine")
@@ -47,5 +53,17 @@ public class TrainService {
         return "Service Start time : " + startTime +
                 " Origin : " + origin + " Destination : " + destination + ", Route points= " + routePoints.size();
 
+    }
+
+    public Map<Integer, String> getRoutePointsAsMap() {
+        Map<Integer,String> ret = new HashMap<>();
+        routePoints.stream().forEach(routePoint -> {
+            ret.put(routePoint.getRouteStopNumber(), routePoint.getBerth().getBerthName());
+        });
+        return ret;
+    }
+
+    public Berth getTerminalBerth() {
+        return routePoints.get(routePoints.size() - 1).getBerth();
     }
 }

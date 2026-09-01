@@ -11,7 +11,7 @@ import java.util.List;
  * * Created : 30/05/2015
  * * Author  : johnr
  **/
-public class TrainService {
+public class TrainServiceDto {
 
     private Integer startTime;
     private String serviceName;
@@ -28,11 +28,11 @@ public class TrainService {
 
     private boolean started = false;
 
-    public TrainService() { // for Json
+    public TrainServiceDto() { // for Json
     }
 
-    public TrainService(int startTime, String serviceName, String origin, String destination, String serviceClass,
-                        String engine, int id, List<ServiceEvent> serviceEventList) {
+    public TrainServiceDto(int startTime, String serviceName, String origin, String destination, String serviceClass,
+                           String engine, int id, List<ServiceEvent> serviceEventList) {
         this.startTime = startTime;
         this.serviceName = serviceName;
         this.origin = origin;
@@ -44,7 +44,7 @@ public class TrainService {
 
         this.currentServiceEvent = 0;
     }
-    public TrainService(String csvLine, List<Integer> indexList, int id ) {
+    public TrainServiceDto(String csvLine, List<Integer> indexList, int id ) {
         // e.g
         // Train,From,Class,Engine,Destination,1,2,3,4,5,6,7,8,9,10,11,200,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,201,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81
        //  00:25,Victoria,Pass,EMU,,S00.25,,,,S00.31,,S00.35,,,S00.38,S00.40,,S00.44,S00.46,,,T00.48,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

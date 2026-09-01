@@ -22,8 +22,8 @@ public class RouteStop {
     @ManyToOne
     @JoinColumn(name = "berth_id")
     private Berth berth;
-    @ManyToOne
-    @JoinColumn(name = "service_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "service_id", nullable = false)
     private TrainService service;
     @Column(name="arrival_time")
     private LocalTime arrivalTime;
@@ -31,5 +31,7 @@ public class RouteStop {
     private LocalTime departureTime;
     @Column(name="stop_type")
     private StopType stopType;
+    @Column(name = "route_stop_number")
+    private Integer routeStopNumber;
 
 }
