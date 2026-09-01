@@ -1,0 +1,182 @@
+"service_id","origin","start_time","destination","route_stop_number","berth_name","arrival_time","departure_time","stop_type","berth_id"
+3464,BLA,01:00:00,Queenborough,1,Cuxton Road,00:00:00,00:00:00,2,34
+3464,BLA,01:00:00,Queenborough,1,Cobham Park,00:00:00,00:00:00,2,33
+3464,BLA,01:00:00,Queenborough,1,Meopham Down,00:00:00,00:00:00,2,31
+3464,BLA,01:00:00,Queenborough,1,Fawkham Junction Down,00:00:00,00:00:00,2,30
+3464,BLA,01:00:00,Queenborough,1,Farningham Road Down,00:00:00,00:00:00,2,29
+3465,BLA,01:10:00,Ramsgate,1,Broadstairs Down,00:00:00,00:00:00,2,63
+3465,BLA,01:10:00,Ramsgate,1,Westgate Down,00:00:00,00:00:00,2,60
+3465,BLA,01:10:00,Ramsgate,1,Birchington Down,00:00:00,00:00:00,2,59
+3465,BLA,01:10:00,Ramsgate,1,Reculver,00:00:00,00:00:00,2,57
+3465,BLA,01:10:00,Ramsgate,1,Chestfield Down,00:00:00,00:00:00,2,55
+3465,BLA,01:10:00,Ramsgate,1,Whitstable Down,00:00:00,00:00:00,2,54
+3465,BLA,01:10:00,Ramsgate,1,Graveney Down,00:00:00,00:00:00,2,53
+3465,BLA,01:10:00,Ramsgate,1,Teynham Down,00:00:00,00:00:00,2,50
+3465,BLA,01:10:00,Ramsgate,1,Murston Sidings,00:00:00,00:00:00,2,49
+3465,BLA,01:10:00,Ramsgate,1,Newington Down,00:00:00,00:00:00,2,43
+3465,BLA,01:10:00,Ramsgate,1,Rainham Down,00:00:00,00:00:00,2,42
+3465,BLA,01:10:00,Ramsgate,1,Rochester Bridge Junction Down,00:00:00,00:00:00,2,35
+3465,BLA,01:10:00,Ramsgate,1,Cuxton Road,00:00:00,00:00:00,2,34
+3465,BLA,01:10:00,Ramsgate,1,Cobham Park,00:00:00,00:00:00,2,33
+3465,BLA,01:10:00,Ramsgate,1,Meopham Down,00:00:00,00:00:00,2,31
+3465,BLA,01:10:00,Ramsgate,1,Fawkham Junction Down,00:00:00,00:00:00,2,30
+3465,BLA,01:10:00,Ramsgate,1,Minnis Bay,00:00:00,00:00:00,2,58
+3465,BLA,01:10:00,Ramsgate,1,Farningham Road Down,00:00:00,00:00:00,2,29
+3465,BLA,01:10:00,Ramsgate,1,DELETE ME,00:00:00,00:00:00,2,999
+3465,BLA,01:10:00,Ramsgate,1,DELETE ME,00:00:00,00:00:00,2,999
+3465,BLA,01:10:00,Ramsgate,1,Dumpton Park Down,00:00:00,00:00:00,2,64
+3467,Holbourn V,01:20:00,Orpington,1,Sydenham Hill Down,00:00:00,00:00:00,2,11
+3469,Herne Hill,01:35:00,Faversham,1,Penge East Down,00:00:00,00:00:00,2,12
+3469,Herne Hill,01:35:00,Faversham,1,West Dulwich Down,00:00:00,00:00:00,2,10
+3469,Herne Hill,01:35:00,Faversham,1,Sydenham Hill Down,00:00:00,00:00:00,2,11
+3469,Herne Hill,01:35:00,Faversham,1,Kent House Down Slow,00:00:00,00:00:00,2,13
+3469,Herne Hill,01:35:00,Faversham,1,DELETE ME,00:00:00,00:00:00,2,999
+3469,Herne Hill,01:35:00,Faversham,1,DELETE ME,00:00:00,00:00:00,2,999
+3469,Herne Hill,01:35:00,Faversham,1,Farningham Road Down,00:00:00,00:00:00,2,29
+3469,Herne Hill,01:35:00,Faversham,1,Rochester Bridge Junction Down,00:00:00,00:00:00,2,35
+3469,Herne Hill,01:35:00,Faversham,1,Rainham Down,00:00:00,00:00:00,2,42
+3469,Herne Hill,01:35:00,Faversham,1,Newington Down,00:00:00,00:00:00,2,43
+3469,Herne Hill,01:35:00,Faversham,1,Murston Sidings,00:00:00,00:00:00,2,49
+3469,Herne Hill,01:35:00,Faversham,1,Teynham Down,00:00:00,00:00:00,2,50
+3469,Herne Hill,01:35:00,Faversham,1,Cuxton Road,00:00:00,00:00:00,2,34
+3469,Herne Hill,01:35:00,Faversham,1,Meopham Down,00:00:00,00:00:00,2,31
+3469,Herne Hill,01:35:00,Faversham,1,Cobham Park,00:00:00,00:00:00,2,33
+3469,Herne Hill,01:35:00,Faversham,1,Fawkham Junction Down,00:00:00,00:00:00,2,30
+3470,Herne Hill,01:50:00,Farningham Rd,1,Penge East Down,00:00:00,00:00:00,2,12
+3470,Herne Hill,01:50:00,Farningham Rd,1,West Dulwich Down,00:00:00,00:00:00,2,10
+3470,Herne Hill,01:50:00,Farningham Rd,1,Kent House Down Fast,00:00:00,00:00:00,2,14
+3470,Herne Hill,01:50:00,Farningham Rd,1,Sydenham Hill Down,00:00:00,00:00:00,2,11
+3472,Blackfriars,02:20:00,Orpington,1,Sydenham Hill Down,00:00:00,00:00:00,2,11
+3473,Herne Hill,02:50:00,OFF MAP,1,West Dulwich Down,00:00:00,00:00:00,2,10
+3473,Herne Hill,02:50:00,OFF MAP,1,Sydenham Hill Down,00:00:00,00:00:00,2,11
+3473,Herne Hill,02:50:00,OFF MAP,1,Kent House Down Fast,00:00:00,00:00:00,2,14
+3474,Holbourn V,03:00:00,Ramsgate,1,DELETE ME,00:00:00,00:00:00,2,999
+3474,Holbourn V,03:00:00,Ramsgate,1,Chestfield Down,00:00:00,00:00:00,2,55
+3474,Holbourn V,03:00:00,Ramsgate,1,DELETE ME,00:00:00,00:00:00,2,999
+3474,Holbourn V,03:00:00,Ramsgate,1,Graveney Down,00:00:00,00:00:00,2,53
+3474,Holbourn V,03:00:00,Ramsgate,1,Minnis Bay,00:00:00,00:00:00,2,58
+3474,Holbourn V,03:00:00,Ramsgate,1,Reculver,00:00:00,00:00:00,2,57
+3474,Holbourn V,03:00:00,Ramsgate,1,Rainham Down,00:00:00,00:00:00,2,42
+3474,Holbourn V,03:00:00,Ramsgate,1,Newington Down,00:00:00,00:00:00,2,43
+3474,Holbourn V,03:00:00,Ramsgate,1,Murston Sidings,00:00:00,00:00:00,2,49
+3474,Holbourn V,03:00:00,Ramsgate,1,Teynham Down,00:00:00,00:00:00,2,50
+3476,Holbourn V,03:15:00,Orpington,1,Sydenham Hill Down,00:00:00,00:00:00,2,11
+3477,Victoria,03:30:00,Ramsgate,1,Factory Junction Down,00:00:00,00:00:00,2,3
+3477,Victoria,03:30:00,Ramsgate,1,Brixton Down,00:00:00,00:00:00,2,5
+3477,Victoria,03:30:00,Ramsgate,1,West Dulwich Down,00:00:00,00:00:00,2,10
+3477,Victoria,03:30:00,Ramsgate,1,Sydenham Hill Down,00:00:00,00:00:00,2,11
+3477,Victoria,03:30:00,Ramsgate,1,Penge East Down,00:00:00,00:00:00,2,12
+3477,Victoria,03:30:00,Ramsgate,1,Kent House Down Fast,00:00:00,00:00:00,2,14
+3477,Victoria,03:30:00,Ramsgate,1,Bromley South Down Fast,00:00:00,00:00:00,2,21
+3477,Victoria,03:30:00,Ramsgate,1,Farningham Road Down,00:00:00,00:00:00,2,29
+3477,Victoria,03:30:00,Ramsgate,1,Fawkham Junction Down,00:00:00,00:00:00,2,30
+3477,Victoria,03:30:00,Ramsgate,1,Meopham Down,00:00:00,00:00:00,2,31
+3477,Victoria,03:30:00,Ramsgate,1,Cobham Park,00:00:00,00:00:00,2,33
+3477,Victoria,03:30:00,Ramsgate,1,Teynham Down,00:00:00,00:00:00,2,50
+3477,Victoria,03:30:00,Ramsgate,1,Graveney Down,00:00:00,00:00:00,2,53
+3477,Victoria,03:30:00,Ramsgate,1,Chestfield Down,00:00:00,00:00:00,2,55
+3477,Victoria,03:30:00,Ramsgate,1,Reculver,00:00:00,00:00:00,2,57
+3477,Victoria,03:30:00,Ramsgate,1,Minnis Bay,00:00:00,00:00:00,2,58
+3477,Victoria,03:30:00,Ramsgate,1,Stewarts Lane Down,00:00:00,00:00:00,2,2
+3477,Victoria,03:30:00,Ramsgate,1,Dumpton Park Down,00:00:00,00:00:00,2,64
+3477,Victoria,03:30:00,Ramsgate,1,DELETE ME,00:00:00,00:00:00,2,999
+3477,Victoria,03:30:00,Ramsgate,1,DELETE ME,00:00:00,00:00:00,2,999
+3477,Victoria,03:30:00,Ramsgate,1,Shortlands Down Fast,00:00:00,00:00:00,2,19
+3477,Victoria,03:30:00,Ramsgate,1,Murston Sidings,00:00:00,00:00:00,2,49
+3477,Victoria,03:30:00,Ramsgate,1,Newington Down,00:00:00,00:00:00,2,43
+3477,Victoria,03:30:00,Ramsgate,1,Rainham Down,00:00:00,00:00:00,2,42
+3478,Chatham,03:58:00,Deal,1,Graveney Down,00:00:00,00:00:00,2,53
+3478,Chatham,03:58:00,Deal,1,Reculver,00:00:00,00:00:00,2,57
+3478,Chatham,03:58:00,Deal,1,Minnis Bay,00:00:00,00:00:00,2,58
+3478,Chatham,03:58:00,Deal,1,DELETE ME,00:00:00,00:00:00,2,999
+3478,Chatham,03:58:00,Deal,1,Murston Sidings,00:00:00,00:00:00,2,49
+3478,Chatham,03:58:00,Deal,1,Whitstable Down,00:00:00,00:00:00,2,54
+3478,Chatham,03:58:00,Deal,1,DELETE ME,00:00:00,00:00:00,2,999
+3478,Chatham,03:58:00,Deal,1,Chestfield Down,00:00:00,00:00:00,2,55
+3479,Hither Green,04:05:00,Gravesend,1,Swanley Down Chatham,00:00:00,00:00:00,2,27
+3481,Holbourn V,04:50:00,Orpington,1,Bickley Down Fast,00:00:00,00:00:00,2,23
+3482,Victoria,04:52:00,??,1,Brixton Down,00:00:00,00:00:00,2,5
+3482,Victoria,04:52:00,??,1,Stewarts Lane Down,00:00:00,00:00:00,2,2
+3482,Victoria,04:52:00,??,1,Factory Junction Down,00:00:00,00:00:00,2,3
+3484,Holbourn V,05:00:00,Sevenoaks,1,Bickley Down Fast,00:00:00,00:00:00,2,23
+3485,Faversham,05:05:00,Dover,1,Bekesbourne Down,00:00:00,00:00:00,2,69
+3485,Faversham,05:05:00,Dover,1,Selling Down,00:00:00,00:00:00,2,67
+3485,Faversham,05:05:00,Dover,1,Aylesham Down,00:00:00,00:00:00,2,71
+3486,Victoria,05:10:00,Ramsgate,1,Kent House Down Fast,00:00:00,00:00:00,2,14
+3486,Victoria,05:10:00,Ramsgate,1,Penge East Down,00:00:00,00:00:00,2,12
+3486,Victoria,05:10:00,Ramsgate,1,DELETE ME,00:00:00,00:00:00,2,999
+3486,Victoria,05:10:00,Ramsgate,1,DELETE ME,00:00:00,00:00:00,2,999
+3486,Victoria,05:10:00,Ramsgate,1,Stewarts Lane Down,00:00:00,00:00:00,2,2
+3486,Victoria,05:10:00,Ramsgate,1,Farningham Road Down,00:00:00,00:00:00,2,29
+3486,Victoria,05:10:00,Ramsgate,1,Factory Junction Down,00:00:00,00:00:00,2,3
+3486,Victoria,05:10:00,Ramsgate,1,Sydenham Hill Down,00:00:00,00:00:00,2,11
+3486,Victoria,05:10:00,Ramsgate,1,Murston Sidings,00:00:00,00:00:00,2,49
+3486,Victoria,05:10:00,Ramsgate,1,Fawkham Junction Down,00:00:00,00:00:00,2,30
+3486,Victoria,05:10:00,Ramsgate,1,Meopham Down,00:00:00,00:00:00,2,31
+3486,Victoria,05:10:00,Ramsgate,1,Cobham Park,00:00:00,00:00:00,2,33
+3486,Victoria,05:10:00,Ramsgate,1,Minnis Bay,00:00:00,00:00:00,2,58
+3486,Victoria,05:10:00,Ramsgate,1,Reculver,00:00:00,00:00:00,2,57
+3486,Victoria,05:10:00,Ramsgate,1,Graveney Down,00:00:00,00:00:00,2,53
+3486,Victoria,05:10:00,Ramsgate,1,West Dulwich Down,00:00:00,00:00:00,2,10
+3486,Victoria,05:10:00,Ramsgate,1,Brixton Down,00:00:00,00:00:00,2,5
+3486,Victoria,05:10:00,Ramsgate,1,St Mary Cray Down,00:00:00,00:00:00,2,26
+3488,Gillingham,05:20:00,Murston,1,DELETE ME,00:00:00,00:00:00,2,999
+3488,Gillingham,05:20:00,Murston,1,DELETE ME,00:00:00,00:00:00,2,999
+3488,Gillingham,05:20:00,Murston,1,Murston Sidings,00:00:00,00:00:00,2,49
+3494,Sheerness,05:31:00,Sittingbourne,1,DELETE ME,00:00:00,00:00:00,2,999
+3494,Sheerness,05:31:00,Sittingbourne,1,DELETE ME,00:00:00,00:00:00,2,999
+3497,Victoria,05:44:00,Sevenoaks,1,Stewarts Lane Down,00:00:00,00:00:00,2,2
+3497,Victoria,05:44:00,Sevenoaks,1,Factory Junction Down,00:00:00,00:00:00,2,3
+3498,Chatham,05:45:00,Faversham,1,DELETE ME,00:00:00,00:00:00,2,999
+3498,Chatham,05:45:00,Faversham,1,DELETE ME,00:00:00,00:00:00,2,999
+3498,Chatham,05:45:00,Faversham,1,Murston Sidings,00:00:00,00:00:00,2,49
+3499,Cannon Street,05:50:00,Dover,1,DELETE ME,00:00:00,00:00:00,2,999
+3499,Cannon Street,05:50:00,Dover,1,DELETE ME,00:00:00,00:00:00,2,999
+3507,Victoria,06:24:00,Orpington,1,Factory Junction Down,00:00:00,00:00:00,2,3
+3507,Victoria,06:24:00,Orpington,1,Stewarts Lane Down,00:00:00,00:00:00,2,2
+3508,Faversham,06:25:00,Snowdown,1,Adisham Down,00:00:00,00:00:00,2,70
+3508,Faversham,06:25:00,Snowdown,1,Selling Down,00:00:00,00:00:00,2,67
+3508,Faversham,06:25:00,Snowdown,1,Aylesham Down,00:00:00,00:00:00,2,71
+3508,Faversham,06:25:00,Snowdown,1,Bekesbourne Down,00:00:00,00:00:00,2,69
+3511,Sheerness,06:35:00,Sittingbourne,1,DELETE ME,00:00:00,00:00:00,2,999
+3511,Sheerness,06:35:00,Sittingbourne,1,DELETE ME,00:00:00,00:00:00,2,999
+3513,Faversham,06:40:00,Dover,1,Kearsney Down,00:00:00,00:00:00,2,74
+3514,Victoria,06:40:00,Chatham,1,Stewarts Lane Down,00:00:00,00:00:00,2,2
+3514,Victoria,06:40:00,Chatham,1,Factory Junction Down,00:00:00,00:00:00,2,3
+3513,Faversham,06:40:00,Dover,1,Snowdown Down,00:00:00,00:00:00,2,72
+3513,Faversham,06:40:00,Dover,1,Aylesham Down,00:00:00,00:00:00,2,71
+3515,Victoria,06:44:00,Orpington,1,Stewarts Lane Down,00:00:00,00:00:00,2,2
+3515,Victoria,06:44:00,Orpington,1,Factory Junction Down,00:00:00,00:00:00,2,3
+3522,Victoria,07:04:00,Orpington,1,Factory Junction Down,00:00:00,00:00:00,2,3
+3522,Victoria,07:04:00,Orpington,1,Stewarts Lane Down,00:00:00,00:00:00,2,2
+3525,Victoria,07:18:00,Gillingham,1,Factory Junction Down,00:00:00,00:00:00,2,3
+3525,Victoria,07:18:00,Gillingham,1,Stewarts Lane Down,00:00:00,00:00:00,2,2
+3781,Victoria,21:35:00,Ramsgate,1,Ramsgate Down Fast,00:00:00,00:00:00,3,66
+3788,Hither Green,22:00:00,Dover,1,Teynham Down,00:00:00,00:00:00,2,50
+3788,Hither Green,22:00:00,Dover,1,Selling Down,00:00:00,00:00:00,2,67
+3788,Hither Green,22:00:00,Dover,1,Bekesbourne Down,00:00:00,00:00:00,2,69
+3788,Hither Green,22:00:00,Dover,1,Adisham Down,00:00:00,00:00:00,2,70
+3788,Hither Green,22:00:00,Dover,1,Aylesham Down,00:00:00,00:00:00,2,71
+3788,Hither Green,22:00:00,Dover,1,Kearsney Down,00:00:00,00:00:00,2,74
+3788,Hither Green,22:00:00,Dover,1,DELETE ME,00:00:00,00:00:00,2,999
+3788,Hither Green,22:00:00,Dover,1,DELETE ME,00:00:00,00:00:00,2,999
+3788,Hither Green,22:00:00,Dover,1,Rainham Down,00:00:00,00:00:00,2,42
+3788,Hither Green,22:00:00,Dover,1,Newington Down,00:00:00,00:00:00,2,43
+3808,Farningham Rd,23:40:00,Chatham Goods,1,Sole Street Down,00:00:00,00:00:00,2,32
+3809,Herne Hill,23:40:00,"",1,Penge East Down,00:00:00,00:00:00,2,12
+3809,Herne Hill,23:40:00,"",1,West Dulwich Down,00:00:00,00:00:00,2,10
+3809,Herne Hill,23:40:00,"",1,Sydenham Hill Down,00:00:00,00:00:00,2,11
+3809,Herne Hill,23:40:00,"",1,Kent House Down Slow,00:00:00,00:00:00,2,13
+3809,Herne Hill,23:40:00,"",1,Shortlands Down Slow,00:00:00,00:00:00,2,18
+3809,Herne Hill,23:40:00,"",1,Bromley South Down Slow,00:00:00,00:00:00,2,20
+3809,Herne Hill,23:40:00,"",1,Fawkham Junction Down,00:00:00,00:00:00,2,30
+3809,Herne Hill,23:40:00,"",1,Meopham Down,00:00:00,00:00:00,2,31
+3809,Herne Hill,23:40:00,"",1,Cobham Park,00:00:00,00:00:00,2,33
+3809,Herne Hill,23:40:00,"",1,Cuxton Road,00:00:00,00:00:00,2,34
+3809,Herne Hill,23:40:00,"",1,Rochester Bridge Junction Down,00:00:00,00:00:00,2,35
+3811,Sittingbourne,23:55:00,S'well,1,Bekesbourne Down,00:00:00,00:00:00,2,69
+3811,Sittingbourne,23:55:00,S'well,1,Teynham Down,00:00:00,00:00:00,2,50
+3811,Sittingbourne,23:55:00,S'well,1,Aylesham Down,00:00:00,00:00:00,2,71
+3811,Sittingbourne,23:55:00,S'well,1,Selling Down,00:00:00,00:00:00,2,67
+3811,Sittingbourne,23:55:00,S'well,1,Adisham Down,00:00:00,00:00:00,2,70
+3811,Sittingbourne,23:55:00,S'well,1,Snowdown Down,00:00:00,00:00:00,2,72
