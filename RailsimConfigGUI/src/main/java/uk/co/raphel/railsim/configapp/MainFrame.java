@@ -83,7 +83,7 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         setSize(new Dimension(1200, 800));
 
         getDataFromDatabase();
-
+        editableTrainServices.addAll(trainServices.stream().map(this::trainToEditable).toList());
         theTableModel.addTableModelListener(this);
         JTable theTable = new JTable(theTableModel);
         JScrollPane scrollPane = new JScrollPane(theTable);
@@ -256,7 +256,7 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
                 }
                 br.close();
             } catch (Exception ex) {
-                log.error("error writing output...",ex);
+                log.error("error writing output...", ex);
             }
         }
 
@@ -278,7 +278,9 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
 
             this.destinations = destinationRepository.findAll();
             this.berths = berthRepository.findAll();
-            // trainServiceRepository.deleteAll();
+            routeStopRepository.deleteAll();
+            trainServiceRepository.deleteAll();
+
             List<TrainService> upServices = loadServiceAndStops(getResource("classpath:formattedUpPlan.csv"));
             List<TrainService> downServices = loadServiceAndStops(getResource("classpath:formattedDownPlan.csv"));
 
@@ -296,7 +298,7 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
     }
 
     private EditableTrainService trainToEditable(TrainService train) {
-        EditableTrainService ed= new EditableTrainService();
+        EditableTrainService ed = new EditableTrainService();
         ed.setStartBerth(train.getRoutePoints().get(0).getBerth());
         ed.setEngine(train.getEngine());
         ed.setCallingPoints(train.getRoutePointsAsMap());
@@ -318,7 +320,7 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
                     retval[0] = LocalTime.parse(parts[0].replace(".", ":"), DateTimeFormatter.ofPattern("HH:mm"));
                     retval[1] = LocalTime.parse(parts[1].replace(".", ":"), DateTimeFormatter.ofPattern("HH:mm"));
                 } catch (Exception e) {
-                    log.error("Error computing berth time : ",e);
+                    log.error("Error computing berth time : ", e);
                 }
             } else {
                 String[] parts = value.split("/");
@@ -435,7 +437,7 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
                     trainService.setServiceClass(splitLine[2]);
                     trainService.setEngine(splitLine[3]);
                     trainService.setRoutePoints(new ArrayList<>());
-                    log.info("Processing train service " + trainService.getStartTime() + " -> " + trainService.getOrigin() + " -> " + trainService.getDestination());
+                    //.log.info("Processing train service " + trainService.getStartTime() + " -> " + trainService.getOrigin() + " -> " + trainService.getDestination());
                     // Fill in  the routepoints
                     boolean haveStart = false;
                     boolean haveTerminate = false;
@@ -478,8 +480,10 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
                 }
             }
             br.close();
-            for(TrainService trainService : toReturn) {
-                trainService.getRoutePoints().sort(Comparator.comparing(RouteStop::getDepartureTime));
+            for (TrainService trainService : toReturn) {
+                if(trainService.getRoutePoints() == null || trainService.getRoutePoints().isEmpty()){
+                   log.warn("No routepoints for trainservice " + trainService.getStartTime() + " -> " + trainService.getOrigin() + " -> " + trainService.getDestination());
+                }
             }
             return toReturn;
         } catch (IOException e) {
@@ -489,18 +493,24 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
     }
 
     private RouteStop buildRouteStop(TrainService trainService, String entry) {
-        if (entry.contains(".")) {
-            if (entry.contains(":")) {
-                RouteStop routeStop = new RouteStop();
-                routeStop.setService(trainService);
-                routeStop.setStopType(computeStopType(entry));
-                routeStop.setBerth(findBerth(Integer.parseInt(entry.substring(entry.indexOf(":") + 1))));
+        if (entry.contains(".") && entry.contains(":")) {
+            RouteStop routeStop = new RouteStop();
+            routeStop.setService(trainService);
+            routeStop.setStopType(computeStopType(entry));
+            Berth berth = findBerth(Integer.parseInt(entry.substring(entry.indexOf(":") + 1)));
+            if(berth != null && berth.getBerthId() > 0) {
+                routeStop.setBerth(berth);
                 LocalTime[] times = computeBerthTimes(entry.substring(1, entry.indexOf(":")));
                 routeStop.setDepartureTime(times[1]);
                 routeStop.setArrivalTime(times[0]);
-                routeStop.setRouteStopNumber(trainService.getRoutePoints().size()+1);
-               // trainService.getRoutePoints().add(routeStop);
+                routeStop.setRouteStopNumber(trainService.getRoutePoints().size() + 1);
+                // trainService.getRoutePoints().add(routeStop);
                 return routeStop;
+            }else {
+                log.warn("Could not get berth on service " + trainService.getStartTime() +
+                        " -> " + trainService.getOrigin() + " -> " + trainService.getDestination()
+                        + " Stop : " + entry);
+                return null;
             }
         }
         return null;

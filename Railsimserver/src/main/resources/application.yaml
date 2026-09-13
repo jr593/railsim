@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: railsimserver
+  main:
+    web-application-type: none
+  datasource:
+    url: jdbc:postgresql://rk1-b:5432/railsim
+    username: railsim
+    password: railsim
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+server:
+  port: 8083
