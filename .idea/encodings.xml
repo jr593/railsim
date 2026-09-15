@@ -6,12 +6,15 @@
     <file url="file://$PROJECT_DIR$/RailSimClient/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RailSimCommon" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RailSimCommon/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/RailSimServer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RailsimConfigGUI" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RailsimConfigGUI/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Railsimserver/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/server" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$USER_HOME$/src/main/java" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

@@ -16,9 +16,10 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
         </processorPath>
         <module name="RailSimConfigGui" />
-        <module name="railsimcommon" />
         <module name="server" />
+        <module name="railsimcommon" />
         <module name="RailSimClient" />
+        <module name="trainsimserver" />
       </profile>
     </annotationProcessing>
   </component>
@@ -29,6 +30,7 @@
       <module name="railsimcommon" options="-parameters" />
       <module name="railwaysim" options="-parameters" />
       <module name="server" options="-parameters" />
+      <module name="trainsimserver" options="-parameters" />
     </option>
   </component>
 </project>

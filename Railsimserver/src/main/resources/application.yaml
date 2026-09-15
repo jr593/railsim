@@ -1,8 +1,15 @@
 spring:
   application:
     name: railsimserver
-  main:
-    web-application-type: none
+  task:
+    scheduling:
+      pool:
+        size: 5
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+    mapper:
+      default-view-inclusion: true
   datasource:
     url: jdbc:postgresql://rk1-b:5432/railsim
     username: railsim

@@ -5,11 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ae121b0-e85b-4536-be23-2a6e3570d3f0" name="Default" comment="ccc">
+      <change afterPath="$PROJECT_DIR$/.idea/.copilot-plugin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeInsightSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/frontend/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/StatsEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/gui/TrainMessageListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/DashboardBroadcaster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/StatsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/DashboardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/formattedDownPlan.csv" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/formattedDownPlan.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/formattedUpPlan.csv" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources/formattedUpPlan.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ServiceList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ServiceList.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/TrainsimserverApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/TrainsimserverApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +78,10 @@
   &quot;fromUser&quot;: false
 }</component>
   <component name="ProjectId" id="1hrRWxNMvzFkAbNghc0qRGMlInu" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="2" id="Remove" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -73,13 +89,15 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Application.executor": "Run",
-    "Application.Server.executor": "Debug",
+    "Application.Server.executor": "Run",
     "Maven.RailSimClient [clean].executor": "Run",
     "Maven.RailSimClient [package].executor": "Run",
     "Maven.RailSimConfigGui [clean].executor": "Run",
     "Maven.RailSimConfigGui [compile].executor": "Run",
     "Maven.RailSimConfigGui [install].executor": "Run",
     "Maven.RailSimConfigGui [package].executor": "Run",
+    "Maven.RailSimServer [clean].executor": "Run",
+    "Maven.RailSimServer [package].executor": "Run",
     "Maven.railsimcommon [clean].executor": "Run",
     "Maven.railsimcommon [compile].executor": "Run",
     "Maven.railsimcommon [install].executor": "Run",
@@ -104,7 +122,7 @@
     "database.data.extractors.current.id": "Comma-separated (CSV)_id",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/johnr/projects/railsimtemplate",
+    "last_opened_file_path": "/home/johnr/Projects/railsim/Railsimserver/src/main/frontend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -113,7 +131,9 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "database.data.views.appearance",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Confirmation",
+    "ts.external.directory.path": "/home/johnr/apps/idea-IU-262.9437.185/plugins/javascript-plugin/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -124,11 +144,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Railsimserver/src/main/frontend" />
       <recent name="$PROJECT_DIR$/server/src/main/java/uk/co/raphel/railsim" />
       <recent name="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp" />
       <recent name="$PROJECT_DIR$/RailSimClient/src/main/java/uk/co/raphel/railsim/client" />
       <recent name="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/kafka" />
-      <recent name="C:\projects\railsim\RailSimClient\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/RailsimConfigGUI/src/main/resources" />
@@ -137,11 +157,23 @@
       <recent name="$PROJECT_DIR$/RailSimClient/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="uk.co.raphel.trainsimserver.service" />
+      <recent name="uk.co.raphel.trainsimserver.views" />
       <recent name="uk.co.raphel.railsim.configapp.repository" />
       <recent name="uk.co.raphel.railsim.client" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.ConfigGui">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Server">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -158,8 +190,8 @@
       </method>
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="uk.co.raphel.railsim.Application" />
-      <module name="server" />
+      <option name="MAIN_CLASS_NAME" value="uk.co.raphel.trainsimserver.TrainsimserverApplication" />
+      <module name="trainsimserver" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -177,8 +209,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="RailSimClient" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="uk.co.raphel.railsim.client.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ConfigGui" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="RailSimConfigGui" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="uk.co.raphel.railsim.configapp.Application" />
       <extension name="coverage">
@@ -187,6 +227,14 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TrainsimserverApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="trainsimserver" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="uk.co.raphel.trainsimserver.TrainsimserverApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -205,6 +253,14 @@
         <item itemvalue="Spring Boot.ConfigGui" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-34e2839f716b-intellij.indexing.shared.core-IU-262.9437.185" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.9437.185" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -250,8 +306,21 @@
     <option name="version" value="3" />
   </component>
   <component name="UnknownFeatures">
-    <option featureType="com.intellij.configurationType" implementationName="Application" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-core" />
+    <option featureType="dependencySupport" implementationName="java:org.apache.kafka:kafka_2.13" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.validation:jakarta.validation-api" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.data:spring-data-commons" />
+    <option featureType="dependencySupport" implementationName="java:org.hibernate.validator:hibernate-validator" />
     <option featureType="com.intellij.configurationType" implementationName="SpringBootApplicationConfigurationType" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-webmvc" />
+    <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-websocket" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.persistence:jakarta.persistence-api" />
+    <option featureType="com.intellij.configurationType" implementationName="Application" />
+    <option featureType="dependencySupport" implementationName="java:com.vaadin:vaadin-core" />
+    <option featureType="dependencySupport" implementationName="java:com.vaadin:flow-server" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-messaging" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -284,6 +353,10 @@
         <PinnedItemInfo parentTag="uk.co.raphel.railsim.common.entity.TrainService" memberName="routePoints" />
       </pinned-members>
     </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
