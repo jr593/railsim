@@ -1,19 +1,17 @@
 package uk.co.raphel.trainsimserver.views;
 
-
 import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 import uk.co.raphel.trainsimserver.service.DashboardBroadcaster;
 
-
-@Route("")
-//@Push
+@Route(value = "", layout = MainLayout.class)
 @UIScope
-public class DashboardView extends AppLayout {
+public class DashboardView extends VerticalLayout {
 
     private final Div ordersTile = new Div();
 
@@ -23,32 +21,38 @@ public class DashboardView extends AppLayout {
     public DashboardView(DashboardBroadcaster broadcaster) {
         this.broadcaster = broadcaster;
 
-        createHeader();
-        createMenu();
         createDashboard();
     }
 
-    private void createHeader() {
-        addToNavbar(ordersTile);
-    }
-
-    private void createMenu() {
-        // Add menu items here
-    }
-
     private void createDashboard() {
-        // Add dashboard content here
+        H1 title = new H1("Dashboard");
+
+        ordersTile.setText("Orders: 0");
+
+        ordersTile.getStyle()
+                .set("font-size", "24px")
+                .set("font-weight", "bold")
+                .set("padding", "20px")
+                .set("border", "1px solid #ccc")
+                .set("border-radius", "8px");
+
+        add(title, ordersTile);
     }
 
-    /** Safe update called by broadcaster */
+    /**
+     * Called by DashboardBroadcaster when an update arrives.
+     */
     public void update(String value) {
         ordersTile.setText(value);
     }
 
-    /** Register UI with broadcaster when attached */
+    /**
+     * Register this dashboard when the browser attaches.
+     */
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
-        broadcaster.register(getUI().get());
+
+        broadcaster.register(this);
     }
 }

@@ -5,23 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ae121b0-e85b-4536-be23-2a6e3570d3f0" name="Default" comment="ccc">
-      <change afterPath="$PROJECT_DIR$/.idea/.copilot-plugin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeInsightSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/frontend/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/StatsEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/gui/TrainMessageListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/DashboardBroadcaster.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/StatsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/DashboardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/MainLayout.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/resources/ChatGptLayout.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.copilot-plugin" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.copilot-plugin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/TrainsimserverApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/TrainsimserverApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/config/ShellConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/config/ShellConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/DashboardBroadcaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/DashboardBroadcaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TimerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TimerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/DashboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/DashboardView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,9 +36,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -157,6 +148,7 @@
       <recent name="$PROJECT_DIR$/RailSimClient/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="uk.co.raphel.trainsimserver.config" />
       <recent name="uk.co.raphel.trainsimserver.service" />
       <recent name="uk.co.raphel.trainsimserver.views" />
       <recent name="uk.co.raphel.railsim.configapp.repository" />

@@ -1,0 +1,346 @@
+Absolutely. Here is a minimal working setup for the architecture we've discussed.
+
+This gives you:
+    A MainLayout using AppLayout
+    A DashboardView
+    A DashboardBroadcaster
+    Application-wide @Push
+    A simple background publisher so you can actually see the dashboard update
+    Safe UI.access() usage
+
+    Automatic removal when the browser tab disconnects
+
+1. ShellConfig.java
+
+package uk.co.raphel.trainsimserver.config;
+
+import com.vaadin.flow.component.page.AppShellConfigurator;
+import com.vaadin.flow.component.page.Push;
+import org.springframework.stereotype.Component;
+
+@Push
+@Component
+public class ShellConfig implements AppShellConfigurator {
+}
+
+You don't strictly need @Component in every Vaadin setup, but including it makes the configuration explicit to Spring.
+2. MainLayout.java
+
+This is your application shell.
+
+package uk.co.raphel.trainsimserver.views;
+
+import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.RouterLink;
+
+public class MainLayout extends AppLayout {
+
+    public MainLayout() {
+        createHeader();
+        createMenu();
+    }
+
+    private void createHeader() {
+        H1 title = new H1("Train Simulator");
+        title.getStyle()
+                .set("margin", "0")
+                .set("font-size", "var(--lumo-font-size-l)");
+
+        addToNavbar(title);
+    }
+
+    private void createMenu() {
+        Span menuTitle = new Span("Navigation");
+
+        RouterLink dashboard =
+                new RouterLink("Dashboard", DashboardView.class);
+
+        addToDrawer(
+                new VerticalLayout(
+                        menuTitle,
+                        dashboard
+                )
+        );
+    }
+}
+
+This is responsible for the stuff that stays around while you navigate between pages.
+3. DashboardView.java
+
+This is the actual dashboard.
+
+package uk.co.raphel.trainsimserver.views;
+
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.spring.annotation.UIScope;
+import org.springframework.beans.factory.annotation.Autowired;
+import uk.co.raphel.trainsimserver.service.DashboardBroadcaster;
+
+@Route(value = "", layout = MainLayout.class)
+@UIScope
+public class DashboardView extends VerticalLayout {
+
+    private final Div ordersTile = new Div();
+
+    private final DashboardBroadcaster broadcaster;
+
+    @Autowired
+    public DashboardView(DashboardBroadcaster broadcaster) {
+        this.broadcaster = broadcaster;
+
+        createDashboard();
+    }
+
+    private void createDashboard() {
+        H1 title = new H1("Dashboard");
+
+        ordersTile.setText("Orders: 0");
+
+        ordersTile.getStyle()
+                .set("font-size", "24px")
+                .set("font-weight", "bold")
+                .set("padding", "20px")
+                .set("border", "1px solid #ccc")
+                .set("border-radius", "8px");
+
+        add(title, ordersTile);
+    }
+
+    /**
+     * Called by DashboardBroadcaster when an update arrives.
+     */
+    public void update(String value) {
+        ordersTile.setText(value);
+    }
+
+    /**
+     * Register this dashboard when the browser attaches.
+     */
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+
+        broadcaster.register(this);
+    }
+}
+
+Notice that DashboardView doesn't extend AppLayout anymore.
+
+It extends:
+
+VerticalLayout
+
+because MainLayout is now responsible for the AppLayout.
+4. DashboardBroadcaster.java
+
+This is the important part.
+
+package uk.co.raphel.trainsimserver.service;
+
+import com.vaadin.flow.component.UI;
+import org.springframework.stereotype.Service;
+import uk.co.raphel.trainsimserver.views.DashboardView;
+
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+@Service
+public class DashboardBroadcaster {
+
+    private final List<DashboardView> listeners =
+            new CopyOnWriteArrayList<>();
+
+    /**
+     * Register a dashboard for updates.
+     */
+    public void register(DashboardView view) {
+
+        if (listeners.contains(view)) {
+            return;
+        }
+
+        listeners.add(view);
+
+        view.getUI().ifPresent(ui ->
+                ui.addDetachListener(event ->
+                        listeners.remove(view)
+                )
+        );
+    }
+
+    /**
+     * Send an update to every connected dashboard.
+     */
+    public void broadcast(String value) {
+
+        for (DashboardView view : listeners) {
+
+            view.getUI().ifPresent(ui -> {
+
+                ui.access(() -> {
+                    view.update(value);
+                });
+
+            });
+        }
+    }
+}
+
+The important bit is:
+
+ui.access(() -> {
+    view.update(value);
+});
+
+Your background code must not directly modify Vaadin components.
+
+UI.access() schedules the update on the Vaadin UI thread.
+
+Because you have @Push, the browser then receives the changed state.
+5. A test publisher
+
+You need something that calls:
+
+broadcaster.broadcast(...)
+
+to prove the whole thing works.
+
+For now, let's make a simple service that updates the dashboard every two seconds.
+
+package uk.co.raphel.trainsimserver.service;
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalTime;
+
+@Service
+public class DashboardTestPublisher {
+
+    private final DashboardBroadcaster broadcaster;
+
+    public DashboardTestPublisher(DashboardBroadcaster broadcaster) {
+        this.broadcaster = broadcaster;
+    }
+
+    @Scheduled(fixedRate = 2000)
+    public void publish() {
+
+        String value =
+                "Last update: " + LocalTime.now();
+
+        broadcaster.broadcast(value);
+    }
+}
+
+6. Enable scheduled tasks
+
+Because we're using @Scheduled, add @EnableScheduling to your Spring Boot application.
+
+For example:
+
+package uk.co.raphel.trainsimserver;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+@SpringBootApplication
+@EnableScheduling
+public class TrainSimServerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(
+                TrainSimServerApplication.class,
+                args
+        );
+    }
+}
+
+If you already have an application class, don't create another one. Just add:
+
+@EnableScheduling
+
+to your existing @SpringBootApplication class.
+What you should see
+
+Start the Spring Boot application and navigate to:
+
+http://localhost:8080/
+
+You should get something roughly like:
+
+┌─────────────────────────────────────────────┐
+│ Train Simulator                             │
+├──────────────┬──────────────────────────────┤
+│ Navigation   │ Dashboard                    │
+│              │                              │
+│ Dashboard    │ Last update: 19:42:01        │
+│              │                              │
+│              │                              │
+└──────────────┴──────────────────────────────┘
+
+And every two seconds:
+
+Last update: 19:42:01
+Last update: 19:42:03
+Last update: 19:42:05
+Last update: 19:42:07
+
+without refreshing the browser.
+
+That proves:
+
+Scheduled task
+      ↓
+DashboardTestPublisher
+      ↓
+DashboardBroadcaster
+      ↓
+UI.access()
+      ↓
+DashboardView.update()
+      ↓
+ordersTile
+      ↓
+@Push
+      ↓
+Browser
+
+Your eventual setup
+
+You can then delete DashboardTestPublisher.
+
+Your real train/server code will simply do:
+
+broadcaster.broadcast("Orders: 27");
+
+For example:
+
+@Service
+public class TrainService {
+
+    private final DashboardBroadcaster broadcaster;
+
+    public TrainService(DashboardBroadcaster broadcaster) {
+        this.broadcaster = broadcaster;
+    }
+
+    public void orderReceived() {
+
+        // Process train order...
+
+        broadcaster.broadcast("Orders: 1");
+    }
+}
+
+That is the point where your train simulator backend becomes connected to the live Vaadin dashboard.
+
+One small caveat: if your application is going to have multiple dashboard widgets (orders, trains, signals, status, etc.), I'd change the broadcaster from passing a raw String to passing a small dashboard/event object. That will scale much better once you start adding the actual train simulation data.

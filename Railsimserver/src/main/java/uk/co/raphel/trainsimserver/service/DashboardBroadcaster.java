@@ -1,10 +1,8 @@
 package uk.co.raphel.trainsimserver.service;
 
-
 import com.vaadin.flow.component.UI;
 import org.springframework.stereotype.Service;
 import uk.co.raphel.trainsimserver.views.DashboardView;
-
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -12,22 +10,40 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Service
 public class DashboardBroadcaster {
 
-    private final List<UI> listeners = new CopyOnWriteArrayList<>();
+    private final List<DashboardView> listeners =
+            new CopyOnWriteArrayList<>();
 
-    /** Register a UI for updates */
-    public void register(UI ui) {
-        listeners.add(ui);
-        ui.addDetachListener(event -> listeners.remove(ui));
+    /**
+     * Register a dashboard for updates.
+     */
+    public void register(DashboardView view) {
+
+        if (listeners.contains(view)) {
+            return;
+        }
+
+        listeners.add(view);
+
+        view.getUI().ifPresent(ui ->
+                ui.addDetachListener(event ->
+                        listeners.remove(view)
+                )
+        );
     }
 
-    /** Push update to all registered UIs */
+    /**
+     * Send an update to every connected dashboard.
+     */
     public void broadcast(String value) {
-        for (UI ui : listeners) {
-            ui.access(() -> {
-                ui.getChildren()
-                  .filter(c -> c instanceof DashboardView)
-                  .map(c -> (DashboardView) c)
-                  .forEach(view -> view.update(value));
+
+        for (DashboardView view : listeners) {
+
+            view.getUI().ifPresent(ui -> {
+
+                ui.access(() -> {
+                    view.update(value);
+                });
+
             });
         }
     }

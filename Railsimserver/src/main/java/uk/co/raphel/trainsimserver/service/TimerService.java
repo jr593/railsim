@@ -15,20 +15,25 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 
-
 @Service
 @Slf4j(topic = "TimerService")
 public class TimerService {
 
     private final TaskExecutor taskExecutor;
     private final TrainServiceRepository trainServiceRepository;
+    List<TrainService> servicesDue;
+
+    private final DashboardBroadcaster dashboardBroadcaster;
 
     public TimerService(
             @Qualifier("applicationTaskExecutor") TaskExecutor taskExecutor,
-            TrainServiceRepository trainServiceRepository) {
+            TrainServiceRepository trainServiceRepository, DashboardBroadcaster dashboardBroadcaster) {
         this.taskExecutor = taskExecutor;
         this.trainServiceRepository = trainServiceRepository;
+        this.dashboardBroadcaster = dashboardBroadcaster;
     }
+
+    boolean needRefresh = false;
 
     @Scheduled(fixedRate = 60000)
     public void timer() {
@@ -36,23 +41,30 @@ public class TimerService {
         log.info("Checking for starters");
          LocalTime currentTriggerTime = LocalTime .now().truncatedTo(ChronoUnit.MINUTES);
 
-        //LocalTime.now().withSecond(0);
-        List<TrainService> trainServices =
-                trainServiceRepository.findNextDepartures(
-                        currentTriggerTime,
-                        PageRequest.of(0, 3)
-                );
+         servicesDue = getNextDepartures(currentTriggerTime);
 
-        log.info("Next departures = {}", trainServices);
-        if (trainServices != null && !trainServices.isEmpty()) {
-            trainServices.forEach(trainService -> {
-                        if (trainService.getStartTime().equals(currentTriggerTime)) {
-                            taskExecutor.execute(new RailsimRunnerTask(trainService));
-                        } else {
-                            log.info("Not ready yet for service {}", trainService);
-                        }
-                    }
-            );
+        log.info("Next departures = {}", servicesDue);
+        if (servicesDue != null && !servicesDue.isEmpty()) {
+            servicesDue.stream().filter(s -> s.getStartTime().equals(currentTriggerTime))
+                    .forEach(s -> startService(s,currentTriggerTime ));
+
+
+            if(needRefresh) {
+                servicesDue = getNextDepartures(currentTriggerTime);
+            }
         }
+        dashboardBroadcaster.broadcast("We send the list of waiting services");
+    }
+
+    private void startService(TrainService trainService, LocalTime triggerTime) {
+        taskExecutor.execute(new RailsimRunnerTask(trainService));
+        needRefresh = true;
+
+    }
+    private List<TrainService> getNextDepartures(LocalTime triggerTime) {
+        return trainServiceRepository.findNextDepartures(
+                triggerTime,
+                PageRequest.of(0, 3)
+        );
     }
 }
