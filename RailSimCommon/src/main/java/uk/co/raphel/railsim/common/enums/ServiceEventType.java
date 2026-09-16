@@ -6,7 +6,8 @@ package uk.co.raphel.railsim.common.enums;
  **/
 public enum ServiceEventType {
     TERMINATING,
+    STARTING,
     STOPPING,
     PASSING,
-    ARRIVESTOP;
+    ARRIVESTOP
 }

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-import uk.co.raphel.railsim.common.RailSimMessage;
+import uk.co.raphel.railsim.common.dto.RailSimMessage;
 
 @Slf4j(topic = "KafkaProducer")
 @Component

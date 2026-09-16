@@ -6,13 +6,16 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import uk.co.raphel.railsim.common.dto.RailSimMessage;
 import uk.co.raphel.railsim.common.entity.TrainService;
+import uk.co.raphel.railsim.common.enums.MessageType;
 import uk.co.raphel.trainsimserver.railsimRunner.RailsimRunnerTask;
 import uk.co.raphel.trainsimserver.repository.TrainServiceRepository;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -46,18 +49,23 @@ public class TimerService {
         log.info("Next departures = {}", servicesDue);
         if (servicesDue != null && !servicesDue.isEmpty()) {
             servicesDue.stream().filter(s -> s.getStartTime().equals(currentTriggerTime))
-                    .forEach(s -> startService(s,currentTriggerTime ));
+                    .forEach(s -> startService(s,currentTriggerTime , dashboardBroadcaster));
 
 
             if(needRefresh) {
                 servicesDue = getNextDepartures(currentTriggerTime);
             }
         }
-        dashboardBroadcaster.broadcast("We send the list of waiting services");
+        RailSimMessage<List<TrainService>> msg =  new RailSimMessage<>();
+        msg.setMsgKey(UUID.randomUUID());
+        msg.setMessageType(MessageType.SCHEDULE);
+        msg.setMessageBody(servicesDue);
+
+        dashboardBroadcaster.broadcast(msg);
     }
 
-    private void startService(TrainService trainService, LocalTime triggerTime) {
-        taskExecutor.execute(new RailsimRunnerTask(trainService));
+    private void startService(TrainService trainService, LocalTime triggerTime, DashboardBroadcaster dashboardBroadcaster) {
+        taskExecutor.execute(new RailsimRunnerTask(trainService, dashboardBroadcaster));
         needRefresh = true;
 
     }

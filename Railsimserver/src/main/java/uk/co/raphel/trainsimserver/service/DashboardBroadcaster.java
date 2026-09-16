@@ -1,11 +1,23 @@
 package uk.co.raphel.trainsimserver.service;
 
-import com.vaadin.flow.component.UI;
 import org.springframework.stereotype.Service;
+import uk.co.raphel.railsim.common.dto.DashboardMessage;
 import uk.co.raphel.trainsimserver.views.DashboardView;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+/*The important bit is:
+
+        ui.access(() -> {
+        view.update(value);
+});
+
+Your background code must not directly modify Vaadin components.
+
+        UI.access() schedules the update on the Vaadin UI thread.
+
+Because you have @Push, the browser then receives the changed state.
+*/
 
 @Service
 public class DashboardBroadcaster {
@@ -34,14 +46,14 @@ public class DashboardBroadcaster {
     /**
      * Send an update to every connected dashboard.
      */
-    public void broadcast(String value) {
+    public void broadcast(Object messge) {
 
         for (DashboardView view : listeners) {
 
             view.getUI().ifPresent(ui -> {
 
                 ui.access(() -> {
-                    view.update(value);
+                    view.sendDataToClient(messge);
                 });
 
             });

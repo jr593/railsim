@@ -1,5 +1,7 @@
 package uk.co.raphel.railsim.common.dto;
 
+import lombok.Getter;
+import lombok.Setter;
 import uk.co.raphel.railsim.common.enums.ServiceEventType;
 
 import static uk.co.raphel.railsim.common.enums.ServiceEventType.ARRIVESTOP;
@@ -8,6 +10,8 @@ import static uk.co.raphel.railsim.common.enums.ServiceEventType.ARRIVESTOP;
  * * Created : 07/06/2015
  * * Author  : johnr
  **/
+@Setter
+@Getter
 public class ServiceEvent {
 
     private ServiceEventType serviceEventType;
@@ -30,39 +34,7 @@ public class ServiceEvent {
         this.departureTime = departure;
     }
 
-    public int getEventSection() {
-        return eventSection;
-    }
-
-    public void setEventSection(int eventSection) {
-        this.eventSection = eventSection;
-    }
-
-    public int getTimeOfDay() {
-        return timeOfDay;
-    }
-
-    public void setTimeOfDay(int timeOfDay) {
-        this.timeOfDay = timeOfDay;
-    }
-
-    public ServiceEventType getServiceEventType() {
-        return serviceEventType;
-    }
-
-    public void setServiceEventType(ServiceEventType serviceEventType) {
-        this.serviceEventType = serviceEventType;
-    }
-
-    public int getDepartureTime() {
-        return departureTime;
-    }
-
-    public void setDepartureTime(int departureTime) {
-        this.departureTime = departureTime;
-    }
-
-   /* public boolean isStopping() {
+    /* public boolean isStopping() {
         switch (serviceEventType) {
             case ARRIVESTOP:
                 return true;

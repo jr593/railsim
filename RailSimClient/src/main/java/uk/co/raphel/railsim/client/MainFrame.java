@@ -5,7 +5,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.kafka.annotation.KafkaListener;
 import uk.co.raphel.railsim.common.enums.MessageType;
-import uk.co.raphel.railsim.common.RailSimMessage;
+import uk.co.raphel.railsim.common.dto.RailSimMessage;
 
 
 import javax.swing.*;

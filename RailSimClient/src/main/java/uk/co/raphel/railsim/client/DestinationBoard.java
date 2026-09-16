@@ -3,7 +3,7 @@ package uk.co.raphel.railsim.client;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import uk.co.raphel.railsim.common.RailSimMessage;
+import uk.co.raphel.railsim.common.dto.RailSimMessage;
 
 import javax.swing.*;
 import java.awt.*;
