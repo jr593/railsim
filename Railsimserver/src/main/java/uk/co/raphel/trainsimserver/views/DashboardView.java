@@ -1,17 +1,20 @@
 package uk.co.raphel.trainsimserver.views;
 
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 import uk.co.raphel.railsim.common.dto.RailSimMessage;
-import uk.co.raphel.railsim.common.dto.StatusMessage;
-import uk.co.raphel.railsim.common.entity.TrainService;
+import uk.co.raphel.railsim.common.dto.SystemStatus;
+import uk.co.raphel.railsim.common.enums.MessageType;
+import uk.co.raphel.trainsimserver.service.BroadcastListener;
 import uk.co.raphel.trainsimserver.service.DashboardBroadcaster;
+
+import java.util.Optional;
 
 /*
 This is responsible for the stuff that stays around while you navigate between pages.
@@ -29,13 +32,10 @@ because MainLayout is now responsible for the AppLayout.
  */
 @Route(value = "", layout = MainLayout.class)
 @UIScope
-public class DashboardView extends VerticalLayout {
+public class DashboardView extends VerticalLayout implements BroadcastListener {
 
     private final Div statusTile = new Div();
 
-    private NextDeparturesPanel nextDeparturesPanel;
-    private CurrentTrainsPanel currentTrainsPanel;
-    private CompletedServicesPanel completedServicesPanel;
 
     private final DashboardBroadcaster broadcaster;
 
@@ -59,28 +59,22 @@ public class DashboardView extends VerticalLayout {
                 .set("border-radius", "8px");
 
         add(title, statusTile);
-        HorizontalLayout panels = new HorizontalLayout(nextDeparturesPanel, currentTrainsPanel, completedServicesPanel);
+        add(new NextDeparturesPanel(broadcaster));
 
     }
 
     /**
      * Called by DashboardBroadcaster when an update arrives.
      */
-    public void sendDataToClient(Object message) {
-        if(message instanceof StatusMessage) {
-            statusTile.setText(((StatusMessage)message).getMessageBody());
+    public void onMessage(RailSimMessage<?> message) {
+        if(message != null && message.getMessageType().equals(MessageType.STATUS)) {
+            statusTile.setText(((SystemStatus) message.getMessageBody()).simulatorTime());
         }
-        if(message instanceof RailSimMessage) {
-            switch(((RailSimMessage) message).getMessageType()) {
-                case ERROR -> statusTile.setText(((RailSimMessage)message).getMiscInfo());
-                case BLOCKING ->  ;
-                case MOVEMENT -> ;
-                case SCHEDULE -> ;
-                case COMPLETION -> ;
-                case SERVICESTART -> currentTrainsPanel.addService(((RailSimMessage<TrainService>) message).getMessageBody());
+    }
 
-            }
-        }
+    @Override
+    public Optional<UI> retrieveUI() {
+        return this.getUI();
     }
 
     /**

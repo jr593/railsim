@@ -1,9 +1,12 @@
 package uk.co.raphel.trainsimserver.service;
 
+import com.vaadin.flow.component.Component;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import uk.co.raphel.railsim.common.dto.DashboardMessage;
-import uk.co.raphel.trainsimserver.views.DashboardView;
+import uk.co.raphel.railsim.common.dto.RailSimMessage;
 
+
+import javax.swing.text.View;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 /*The important bit is:
@@ -20,40 +23,42 @@ Because you have @Push, the browser then receives the changed state.
 */
 
 @Service
+@Slf4j(topic = "DashboardBroadcaster")
 public class DashboardBroadcaster {
 
-    private final List<DashboardView> listeners =
+    private final List<BroadcastListener> listeners =
             new CopyOnWriteArrayList<>();
 
     /**
      * Register a dashboard for updates.
      */
-    public void register(DashboardView view) {
+    public void register(BroadcastListener listener) {
 
-        if (listeners.contains(view)) {
+        if (listeners.contains(listener)) {
             return;
         }
 
-        listeners.add(view);
+        listeners.add(listener);
 
-        view.getUI().ifPresent(ui ->
+        listener.retrieveUI().ifPresent(ui ->
                 ui.addDetachListener(event ->
-                        listeners.remove(view)
+                        listeners.remove(listener)
                 )
         );
     }
 
     /**
-     * Send an update to every connected dashboard.
+     * Send an update to every connected View.
      */
-    public void broadcast(Object messge) {
+    public void broadcast(RailSimMessage<?> messge) {
 
-        for (DashboardView view : listeners) {
+        //log.info("Msg Type = " + messge.getClass().getName());
+        for (BroadcastListener view : listeners) {
 
-            view.getUI().ifPresent(ui -> {
+            view.retrieveUI().ifPresent(ui -> {
 
                 ui.access(() -> {
-                    view.sendDataToClient(messge);
+                    view.onMessage(messge);
                 });
 
             });

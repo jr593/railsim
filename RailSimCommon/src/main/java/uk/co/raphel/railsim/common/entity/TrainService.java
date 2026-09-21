@@ -66,4 +66,9 @@ public class TrainService {
     public Berth getTerminalBerth() {
         return routePoints.get(routePoints.size() - 1).getBerth();
     }
+
+    public LocalTime getTerminalTime() {
+        // wikll report time of final arrival
+        return LocalTime.now();
+    }
 }

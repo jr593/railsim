@@ -11,6 +11,6 @@ public enum MessageType {
     BLOCKING,
     COMPLETION,
     SCHEDULE,
-
+    STATUS,
     ERROR
 }
