@@ -37,6 +37,9 @@ public class NextDeparturesPanel extends AbstractPanel<List<TrainService>> {
         scheduleList.addColumn(TrainService::getOrigin)
                 .setHeader("Starting At");
 
+        scheduleList.addColumn(TrainService::getDestination)
+                .setHeader("Destination");
+
         scheduleList.addColumn(t -> t.getRoutePoints().size())
                 .setHeader("Number Stops");
 

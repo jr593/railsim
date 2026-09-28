@@ -34,7 +34,7 @@ because MainLayout is now responsible for the AppLayout.
 @UIScope
 public class DashboardView extends VerticalLayout implements BroadcastListener {
 
-    private final Div statusTile = new Div();
+    private final Div systemClock = new Div();
 
 
     private final DashboardBroadcaster broadcaster;
@@ -49,17 +49,22 @@ public class DashboardView extends VerticalLayout implements BroadcastListener {
     private void createDashboard() {
         H1 title = new H1("Dashboard");
 
-        statusTile.setText("");
+        systemClock.setText("");
 
-        statusTile.getStyle()
+        systemClock.getStyle()
                 .set("font-size", "24px")
                 .set("font-weight", "bold")
                 .set("padding", "20px")
                 .set("border", "1px solid #ccc")
                 .set("border-radius", "8px");
 
-        add(title, statusTile);
+        add(title, systemClock);
+        add(new Div("Upcoming Departures"));
         add(new NextDeparturesPanel(broadcaster));
+        add(new Div("Running Services"));
+        add(new CurrentTrainsPanel(broadcaster));
+        add(new Div("Completed Services"));
+        add(new CompletedServicesPanel(broadcaster));
 
     }
 
@@ -68,7 +73,7 @@ public class DashboardView extends VerticalLayout implements BroadcastListener {
      */
     public void onMessage(RailSimMessage<?> message) {
         if(message != null && message.getMessageType().equals(MessageType.STATUS)) {
-            statusTile.setText(((SystemStatus) message.getMessageBody()).simulatorTime());
+            systemClock.setText(((SystemStatus) message.getMessageBody()).simulatorTime());
         }
     }
 

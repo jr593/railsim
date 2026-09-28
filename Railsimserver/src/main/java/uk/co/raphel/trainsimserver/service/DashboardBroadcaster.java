@@ -4,6 +4,8 @@ import com.vaadin.flow.component.Component;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uk.co.raphel.railsim.common.dto.RailSimMessage;
+import uk.co.raphel.railsim.common.dto.RunningService;
+import uk.co.raphel.railsim.common.enums.MessageType;
 
 
 import javax.swing.text.View;
@@ -53,6 +55,9 @@ public class DashboardBroadcaster {
     public void broadcast(RailSimMessage<?> messge) {
 
         //log.info("Msg Type = " + messge.getClass().getName());
+        if(messge.getMessageBody() == null ) {
+            log.warn("WHOOPS");
+        }
         for (BroadcastListener view : listeners) {
 
             view.retrieveUI().ifPresent(ui -> {
@@ -64,4 +69,5 @@ public class DashboardBroadcaster {
             });
         }
     }
+
 }

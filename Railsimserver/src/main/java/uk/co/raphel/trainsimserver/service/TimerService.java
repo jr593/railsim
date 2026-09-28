@@ -10,7 +10,6 @@ import uk.co.raphel.railsim.common.dto.RailSimMessage;
 import uk.co.raphel.railsim.common.dto.RunningService;
 import uk.co.raphel.railsim.common.entity.TrainService;
 import uk.co.raphel.railsim.common.enums.MessageType;
-import uk.co.raphel.trainsimserver.TrainUtils;
 import uk.co.raphel.trainsimserver.railsimRunner.RailsimRunnerTask;
 import uk.co.raphel.trainsimserver.repository.TrainServiceRepository;
 
@@ -29,14 +28,15 @@ public class TimerService {
     private final TaskExecutor taskExecutor;
     private final TrainServiceRepository trainServiceRepository;
     List<TrainService> servicesDue;
-
+    private final TrackManagerService trackManagerService;
     private final DashboardBroadcaster dashboardBroadcaster;
 
     public TimerService(
             @Qualifier("applicationTaskExecutor") TaskExecutor taskExecutor,
-            TrainServiceRepository trainServiceRepository, DashboardBroadcaster dashboardBroadcaster) {
+            TrainServiceRepository trainServiceRepository, TrackManagerService trackManagerService, DashboardBroadcaster dashboardBroadcaster) {
         this.taskExecutor = taskExecutor;
         this.trainServiceRepository = trainServiceRepository;
+        this.trackManagerService = trackManagerService;
         this.dashboardBroadcaster = dashboardBroadcaster;
     }
 
@@ -66,6 +66,7 @@ public class TimerService {
         msg.setMessageBody(servicesDue);
 
         dashboardBroadcaster.broadcast(msg);
+
     }
 
     private boolean isDueOff(TrainService trainService, LocalTime currentTriggerTime) {
@@ -76,7 +77,7 @@ public class TimerService {
     }
 
     private void startService(TrainService trainService, LocalTime triggerTime, DashboardBroadcaster dashboardBroadcaster) {
-        taskExecutor.execute(new RailsimRunnerTask(trainService, dashboardBroadcaster));
+        taskExecutor.execute(new RailsimRunnerTask(trainService, dashboardBroadcaster, trackManagerService));
         needRefresh = true;
         log.info(trainService.getStartTime() + " " + trainService.getOrigin() + " to " + trainService.getDestination() + " sets off");
 

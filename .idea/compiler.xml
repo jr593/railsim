@@ -17,16 +17,6 @@
         </processorPath>
         <module name="server" />
       </profile>
-      <profile name="Annotation profile for RailSimClient" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
-        </processorPath>
-        <module name="RailSimClient" />
-      </profile>
       <profile name="Annotation profile for railsimcommon" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -58,6 +48,9 @@
         <module name="trainsimserver" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="RailSimClient" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

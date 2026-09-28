@@ -1,20 +1,18 @@
 package uk.co.raphel.trainsimserver.views;
 
-import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.raphel.railsim.common.dto.RailSimMessage;
 import uk.co.raphel.railsim.common.dto.RunningService;
 import uk.co.raphel.railsim.common.entity.TrainService;
-import uk.co.raphel.trainsimserver.TrainUtils;
-import uk.co.raphel.trainsimserver.service.BroadcastListener;
 import uk.co.raphel.trainsimserver.service.DashboardBroadcaster;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j(topic = "CurrentTrainsPanel")
@@ -73,9 +71,9 @@ public class CurrentTrainsPanel extends AbstractPanel<List<TrainService>> {
             switch(msg.getMessageType()) {
                 case SERVICESTART : addService((TrainService) msg.getMessageBody()); break;
                 case COMPLETION : removeService((TrainService)msg.getMessageBody()); break;
-                case BLOCKING: markTrainBlockingSection(msg.getMessageBody()); break;
+                case BLOCKING: markTrainBlockingSection((TrainService)msg.getMessageBody()); break;
                 case SCHEDULE:  break;
-                case MOVEMENT: trackTrainSrevice(msg.getMessageBody()); break;
+                case MOVEMENT: trackTrainService((RunningService) msg.getMessageBody()); break;
                 case ERROR:
                     log.warn("Received error msg in stream {}", msg.getMiscInfo()); break;
             }
@@ -91,6 +89,38 @@ public class CurrentTrainsPanel extends AbstractPanel<List<TrainService>> {
         }
     }
 
+    private void trackTrainService(RunningService service) {
+        // Do we need to do anything ?
+    }
+
+
+    private void removeService(TrainService trainService) {
+        Optional<RunningService> runner = serviceList.stream()
+                .filter(s -> Objects.equals(s.getServiceId(), trainService.getId())).findFirst();
+        if(runner.isPresent()) {
+            RunningService serv = runner.get();
+            serv.setBlocked(false);
+            serv.setActualArrivalTime(LocalTime.now());
+            serv.setTerminated(true);
+
+        } else {
+            log.error("Unable to find trainservice " + trainService.toString() + " in running services.");
+        }
+
+    }
+
+
+    private void markTrainBlockingSection(TrainService trainService) {
+        Optional<RunningService> runner = serviceList.stream()
+                .filter(s -> Objects.equals(s.getServiceId(), trainService.getId())).findFirst();
+        if(runner.isPresent()) {
+            RunningService serv = runner.get();
+            serv.setBlocked(true);
+        } else {
+            log.error("Unable to find trainservice " + trainService.toString() + " in running services.");
+        }
+
+    }
 
 
     /**
@@ -105,7 +135,7 @@ public class CurrentTrainsPanel extends AbstractPanel<List<TrainService>> {
             serviceList.removeFirst();
         }
 
-        serviceList.add(TrainUtils.trainServiceToRunningService(trainService));
+        serviceList.add(RunningService.from(trainService));
 
         dataProvider.refreshAll();
     }

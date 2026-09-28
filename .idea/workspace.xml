@@ -5,26 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ae121b0-e85b-4536-be23-2a6e3570d3f0" name="Default" comment="ccc">
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningRouteStop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/SystemStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/TrainUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/BroadcastListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/AbstractPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/ViewBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/LiveBerth.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TrackManagerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.copilot-plugin" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.copilot-plugin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/StatusMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/TrainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/TrainService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/MessageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/MessageType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningRouteStop.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningRouteStop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/TrainUtils.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/railsimRunner/RailsimRunnerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/railsimRunner/RailsimRunnerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/repository/BerthRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/repository/BerthRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/DashboardBroadcaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/DashboardBroadcaster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/StatsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/StatsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TimerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TimerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CompletedServicesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CompletedServicesPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CurrentTrainsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CurrentTrainsPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/DashboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/DashboardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/MainLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/MainLayout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/NextDeparturesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/NextDeparturesPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -145,7 +142,7 @@
     "database.data.extractors.current.id": "Comma-separated (CSV)_id",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/johnr/ProjectsFamHist/ancestris",
+    "last_opened_file_path": "/home/johnr/Projects/spring-boot-admin",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -366,6 +363,22 @@
     <option name="LAST_COMMIT_MESSAGE" value="Working on csv loading and output of listing" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/DashboardBroadcaster.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="uk.co.raphel.railsim.common.entity.TrainService" memberName="routePoints" />
