@@ -28,15 +28,22 @@ public class RunningService {
     private int currentRouteStop;
     private boolean blocked;
     private boolean terminated;
+    private String serviceClass;
+    private String engine;
+
 
     private DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
 
-    public static RunningService from(TrainService trainService) {
+   public static RunningService from(TrainService trainService) {
+       return from(trainService, trainService.getStartTime());
+   }
+
+    public static RunningService from(TrainService trainService, LocalTime simulatorTime) {
         RunningService ret = new RunningService();
         ret.setBlocked(false);
         ret.setCurrentRouteStop(0);
         ret.setOrigin(trainService.getOrigin());
-        ret.setActualStartTime(LocalTime.now());
+        ret.setActualStartTime(simulatorTime);
         ret.setDestination(trainService.getDestination());
         ret.setActualArrivalTime(LocalTime.MAX);
         ret.setRouteStops(trainService.getRoutePoints().stream().map(r ->  RunningRouteStop.from(r, trainService.getId()))
@@ -46,6 +53,8 @@ public class RunningService {
         ret.setServiceId(trainService.getId());
         ret.setStartTime(trainService.getStartTime());
         ret.setTerminated(false);
+        ret.setEngine(trainService.getEngine());
+        ret.setServiceClass(trainService.getServiceClass());
 
         return ret;
     }
@@ -55,16 +64,16 @@ public class RunningService {
                 routeStops.length + " stops. Current stop" + routeStops[currentRouteStop].getBerth().getBerthName();
     }
 
-        public void moveToNextRouteStop(LocalTime scheduledTimeForNext) {
+        public void moveToNextRouteStop(LocalTime scheduledTimeForNext, LocalTime simulatorTime) {
         RunningRouteStop lastStop = routeStops[currentRouteStop];
-        lastStop.setActualDepartureTime(LocalTime.now());
+        lastStop.setActualDepartureTime(simulatorTime);
         currentRouteStop++;
         if(currentRouteStop >= routeStops.length) {
             terminated = true;
         } else {
             lastStop = routeStops[currentRouteStop];
             lastStop.setScheduledArrivalTime(scheduledArrivalTime);
-            lastStop.setActualArrivalTime(LocalTime.now());
+            lastStop.setActualArrivalTime(simulatorTime);
         }
 
     }

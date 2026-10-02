@@ -12,8 +12,9 @@ import uk.co.raphel.railsim.common.dto.RailSimMessage;
 import uk.co.raphel.railsim.common.dto.SystemStatus;
 import uk.co.raphel.railsim.common.enums.MessageType;
 import uk.co.raphel.trainsimserver.service.BroadcastListener;
-import uk.co.raphel.trainsimserver.service.DashboardBroadcaster;
+import uk.co.raphel.trainsimserver.service.MessageBroadcaster;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 /*
@@ -36,11 +37,12 @@ public class DashboardView extends VerticalLayout implements BroadcastListener {
 
     private final Div systemClock = new Div();
 
+    private DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
 
-    private final DashboardBroadcaster broadcaster;
+    private final MessageBroadcaster broadcaster;
 
     @Autowired
-    public DashboardView(DashboardBroadcaster broadcaster) {
+    public DashboardView(MessageBroadcaster broadcaster) {
         this.broadcaster = broadcaster;
 
         createDashboard();
@@ -59,21 +61,21 @@ public class DashboardView extends VerticalLayout implements BroadcastListener {
                 .set("border-radius", "8px");
 
         add(title, systemClock);
-        add(new Div("Upcoming Departures"));
-        add(new NextDeparturesPanel(broadcaster));
-        add(new Div("Running Services"));
-        add(new CurrentTrainsPanel(broadcaster));
-        add(new Div("Completed Services"));
-        add(new CompletedServicesPanel(broadcaster));
+      //  add(new Div("Upcoming Departures"));
+        add(new NextDeparturesView(broadcaster));
+      //  add(new Div("Running Services"));
+        add(new CurrentTrainsView(broadcaster));
+     //   add(new Div("Completed Services"));
+        add(new CompletedServicesView(broadcaster));
 
     }
 
     /**
-     * Called by DashboardBroadcaster when an update arrives.
+     * Called by MessageBroadcaster when an update arrives.
      */
     public void onMessage(RailSimMessage<?> message) {
         if(message != null && message.getMessageType().equals(MessageType.STATUS)) {
-            systemClock.setText(((SystemStatus) message.getMessageBody()).simulatorTime());
+            systemClock.setText(df.format(((SystemStatus) message.getMessageBody()).simulatorTime()));
         }
     }
 

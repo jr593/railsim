@@ -21,3 +21,5 @@ spring:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 server:
   port: 8083
+sim:
+  rate-multiplier: 1

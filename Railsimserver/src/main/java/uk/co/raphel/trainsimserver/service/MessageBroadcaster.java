@@ -1,15 +1,13 @@
 package uk.co.raphel.trainsimserver.service;
 
-import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uk.co.raphel.railsim.common.dto.RailSimMessage;
-import uk.co.raphel.railsim.common.dto.RunningService;
-import uk.co.raphel.railsim.common.enums.MessageType;
 
 
-import javax.swing.text.View;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 /*The important bit is:
 
@@ -25,8 +23,8 @@ Because you have @Push, the browser then receives the changed state.
 */
 
 @Service
-@Slf4j(topic = "DashboardBroadcaster")
-public class DashboardBroadcaster {
+@Slf4j(topic = "MessageBroadcaster")
+public class MessageBroadcaster {
 
     private final List<BroadcastListener> listeners =
             new CopyOnWriteArrayList<>();
@@ -52,21 +50,23 @@ public class DashboardBroadcaster {
     /**
      * Send an update to every connected View.
      */
-    public void broadcast(RailSimMessage<?> messge) {
+    public void broadcast(RailSimMessage<?> msg) {
 
         //log.info("Msg Type = " + messge.getClass().getName());
-        if(messge.getMessageBody() == null ) {
+        if(msg.getMessageBody() == null ) {
             log.warn("WHOOPS");
         }
-        for (BroadcastListener view : listeners) {
+        for (BroadcastListener listener : listeners) {
 
-            view.retrieveUI().ifPresent(ui -> {
-
-                ui.access(() -> {
-                    view.onMessage(messge);
+            Optional<UI> hasUi = listener.retrieveUI();
+            if(hasUi.isPresent()) {
+                hasUi.get().access(() -> {
+                    listener.onMessage(msg);
                 });
+            } else {
+                listener.onMessage(msg);
+            }
 
-            });
         }
     }
 

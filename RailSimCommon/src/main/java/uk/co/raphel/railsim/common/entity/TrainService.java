@@ -41,13 +41,8 @@ public class TrainService {
     @Column(name="engine")
     private String engine;
 
-
-    public static TrainService dummy() {
-
-        TrainService trainService = new TrainService();
-        trainService.setStartTime(LocalTime.now());
-        return trainService;
-    }
+    @Transient
+    private boolean started;
 
     public String toString() {
         return "Service Start time : " + startTime +
@@ -69,6 +64,6 @@ public class TrainService {
 
     public LocalTime getTerminalTime() {
         // wikll report time of final arrival
-        return LocalTime.now();
+        return routePoints.get(routePoints.size()-1).getArrivalTime();
     }
 }

@@ -1,4 +1,6 @@
 package uk.co.raphel.railsim.common.dto;
 
-public record SystemStatus(String simulatorTime) {
+import java.time.LocalTime;
+
+public record SystemStatus(LocalTime simulatorTime) {
 }

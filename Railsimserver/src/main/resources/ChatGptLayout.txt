@@ -81,7 +81,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
-import uk.co.raphel.trainsimserver.service.DashboardBroadcaster;
+import uk.co.raphel.trainsimserver.service.MessageBroadcaster;
 
 @Route(value = "", layout = MainLayout.class)
 @UIScope

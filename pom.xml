@@ -14,7 +14,7 @@
     <artifactId>railwaysim</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>RailSimClient</module>
+<!--        <module>RailSimClient</module>-->
         <module>RailSimCommon</module>
         <module>RailsimConfigGUI</module>
         <module>Railsimserver</module>

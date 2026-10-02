@@ -6,6 +6,7 @@ package uk.co.raphel.railsim.common.enums;
  **/
 public enum MessageType {
 
+    CLOCK,
     SERVICESTART,
     MOVEMENT,
     BLOCKING,
