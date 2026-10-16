@@ -5,10 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uk.co.raphel.railsim.common.dto.LiveBerth;
 import uk.co.raphel.railsim.common.dto.RunningRouteStop;
+import uk.co.raphel.railsim.common.dto.RunningService;
 import uk.co.raphel.railsim.common.entity.Berth;
 import uk.co.raphel.trainsimserver.repository.BerthRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -22,6 +24,7 @@ public class TrackManagerService {
 
     private Map<Long, LiveBerth> trackMap;
     private final BerthRepository berthRepository;
+    private List<RunningService> runningServices;
 
     public TrackManagerService(BerthRepository berthRepository) {
 
@@ -35,6 +38,7 @@ public class TrackManagerService {
                         Berth::getBerthId,
                         this::berthToLiveBerth
                 ));
+        runningServices = new ArrayList<>();
     }
 
     private LiveBerth berthToLiveBerth(Berth b) {

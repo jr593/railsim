@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import uk.co.raphel.railsim.common.entity.TrainService;
+import uk.co.raphel.railsim.common.enums.ServiceEventType;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -30,6 +31,7 @@ public class RunningService {
     private boolean terminated;
     private String serviceClass;
     private String engine;
+    private ServiceEventType latestStatus;
 
 
     private DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
@@ -55,25 +57,28 @@ public class RunningService {
         ret.setTerminated(false);
         ret.setEngine(trainService.getEngine());
         ret.setServiceClass(trainService.getServiceClass());
+        ret.setLatestStatus(ServiceEventType.NOTREADY);
 
         return ret;
     }
 
     public String getForLog() {
         return df.format(startTime) + " from " + origin + ". " +
-                routeStops.length + " stops. Current stop" + routeStops[currentRouteStop].getBerth().getBerthName();
+                routeStops.length + " stops. Current stop " + routeStops[currentRouteStop].getBerth().getBerthName();
     }
 
         public void moveToNextRouteStop(LocalTime scheduledTimeForNext, LocalTime simulatorTime) {
         RunningRouteStop lastStop = routeStops[currentRouteStop];
         lastStop.setActualDepartureTime(simulatorTime);
         currentRouteStop++;
-        if(currentRouteStop >= routeStops.length) {
+        if(currentRouteStop >= routeStops.length-1) {
             terminated = true;
+            latestStatus = ServiceEventType.TERMINATING;
         } else {
             lastStop = routeStops[currentRouteStop];
             lastStop.setScheduledArrivalTime(scheduledArrivalTime);
             lastStop.setActualArrivalTime(simulatorTime);
+            latestStatus = ServiceEventType.ARRIVESTOP;
         }
 
     }
@@ -86,7 +91,7 @@ public class RunningService {
         if(terminated) {
             return "FINISHED";
         } else {
-            return routeStops[currentRouteStop+1].getBerth().getBerthName();
+            return currentRouteStop == routeStops.length - 1 ? "N/A" : routeStops[currentRouteStop + 1].getBerth().getBerthName();
         }
     }
 
@@ -104,4 +109,7 @@ public class RunningService {
     }
 
 
+    public String getTitle() {
+       return df.format(startTime) + " from " + getOrigin();
+    }
 }

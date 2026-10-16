@@ -1,28 +1,23 @@
 package uk.co.raphel.trainsimserver.views;
 
-import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.data.provider.ListDataProvider;
-import com.vaadin.flow.router.Route;
-import com.vaadin.flow.spring.annotation.UIScope;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.raphel.railsim.common.dto.RailSimMessage;
 import uk.co.raphel.railsim.common.dto.RunningService;
 import uk.co.raphel.railsim.common.entity.TrainService;
 import uk.co.raphel.railsim.common.enums.MessageType;
-import uk.co.raphel.trainsimserver.service.BroadcastListener;
 import uk.co.raphel.trainsimserver.service.MessageBroadcaster;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 //@Route(value = "Running", layout = MainLayout.class)
 //@UIScope
-@Slf4j(topic = "CurrentTrainsView")
-public class CurrentTrainsView extends AbstractPanel<List<TrainService>> {
+@Slf4j(topic = "CurrentServicesPanel")
+public class CurrentServicesPanel extends AbstractPanel<List<TrainService>> {
 
     private static final int MAX_NUMBER_RUNNERS = 99;
 
@@ -32,7 +27,7 @@ public class CurrentTrainsView extends AbstractPanel<List<TrainService>> {
     private List<RunningService> serviceList;
     private ListDataProvider<RunningService> dataProvider;
 
-    public CurrentTrainsView(MessageBroadcaster broadcaster) {
+    public CurrentServicesPanel(MessageBroadcaster broadcaster) {
         super(broadcaster);
         this.broadcaster = broadcaster;
 
@@ -143,7 +138,7 @@ public class CurrentTrainsView extends AbstractPanel<List<TrainService>> {
                 break;
 
             case SCHEDULE:
-                // Schedule messages are handled by NextDeparturesView.
+                // Schedule messages are handled by NextDeparturesPanel.
                 break;
 
             case ERROR:

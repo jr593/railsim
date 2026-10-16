@@ -23,9 +23,10 @@ public class MainLayout extends AppLayout {
     }
 
     private void createMenu() {
-        Span menuTitle = new Span("Navigation");
+        Span menuTitle = new Span("Menu");
 
         RouterLink dashboard = new RouterLink("Dashboard", DashboardView.class);
         addToDrawer(new VerticalLayout(menuTitle,  dashboard));
+
     }
 }

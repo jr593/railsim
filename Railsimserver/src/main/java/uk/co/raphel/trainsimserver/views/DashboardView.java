@@ -62,11 +62,11 @@ public class DashboardView extends VerticalLayout implements BroadcastListener {
 
         add(title, systemClock);
       //  add(new Div("Upcoming Departures"));
-        add(new NextDeparturesView(broadcaster));
+        add(new NextDeparturesPanel(broadcaster));
       //  add(new Div("Running Services"));
-        add(new CurrentTrainsView(broadcaster));
+        add(new CurrentServicesPanel(broadcaster));
      //   add(new Div("Completed Services"));
-        add(new CompletedServicesView(broadcaster));
+        add(new CompletedServicesPanel(broadcaster));
 
     }
 

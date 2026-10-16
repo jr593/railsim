@@ -9,5 +9,6 @@ public enum ServiceEventType {
     STARTING,
     STOPPING,
     PASSING,
-    ARRIVESTOP
+    ARRIVESTOP,
+    NOTREADY
 }

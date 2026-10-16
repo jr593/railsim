@@ -4,8 +4,6 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.data.provider.ListDataProvider;
-import com.vaadin.flow.router.Route;
-import com.vaadin.flow.spring.annotation.UIScope;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.raphel.railsim.common.dto.RailSimMessage;
 import uk.co.raphel.railsim.common.entity.TrainService;
@@ -18,8 +16,8 @@ import java.util.Objects;
 
 //@Route(value = "Completed", layout = MainLayout.class)
 //@UIScope
-@Slf4j(topic = "CompletedServicesView")
-public class CompletedServicesView
+@Slf4j(topic = "CompletedServicesPanel")
+public class CompletedServicesPanel
         extends AbstractPanel<RailSimMessage<?>> {
 
     private static final int NUMBER_OF_PAST_TRAINS = 5;
@@ -29,7 +27,7 @@ public class CompletedServicesView
     private ListDataProvider<TrainService> dataProvider;
     private List<TrainService> serviceList;
 
-    public CompletedServicesView(MessageBroadcaster broadcaster) {
+    public CompletedServicesPanel(MessageBroadcaster broadcaster) {
         super(broadcaster);
         this.broadcaster = broadcaster;
 

@@ -9,13 +9,15 @@ import uk.co.raphel.railsim.common.entity.TrainService;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TrainServiceRepository extends JpaRepository<TrainService, Long> {
 
 
     @Query("""
-    SELECT r
+
+            SELECT r
     FROM TrainService r
     ORDER BY
         CASE
@@ -28,4 +30,7 @@ public interface TrainServiceRepository extends JpaRepository<TrainService, Long
             Pageable pageable
     );
 
+    Optional<TrainService> findOneByStartTime(LocalTime startTime);
+
+    Optional<TrainService> findFirstByStartTimeAfterOrderByStartTimeAsc(LocalTime localTime);
 }

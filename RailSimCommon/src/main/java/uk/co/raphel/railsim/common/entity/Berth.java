@@ -1,5 +1,6 @@
 package uk.co.raphel.railsim.common.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,7 @@ public class Berth {
             joinColumns = @JoinColumn(name = "from_berth_id"),
             inverseJoinColumns = @JoinColumn(name = "to_berth_id")
     )
+    @JsonIgnore
     private List<Berth> pathTo = new ArrayList<>();
 
 

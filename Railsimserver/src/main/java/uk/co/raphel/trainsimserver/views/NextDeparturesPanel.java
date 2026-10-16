@@ -4,8 +4,6 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.data.provider.ListDataProvider;
-import com.vaadin.flow.router.Route;
-import com.vaadin.flow.spring.annotation.UIScope;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.raphel.railsim.common.dto.RailSimMessage;
 import uk.co.raphel.railsim.common.dto.RunningService;
@@ -15,12 +13,11 @@ import uk.co.raphel.trainsimserver.service.MessageBroadcaster;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 //@Route(value = "Scheduled", layout = MainLayout.class)
 //@UIScope
 @Slf4j
-public class NextDeparturesView extends AbstractPanel<List<TrainService>> {
+public class NextDeparturesPanel extends AbstractPanel<List<TrainService>> {
 
 
     private static final int MAX_NUMBER_SCHEDULES = 10;
@@ -30,7 +27,7 @@ public class NextDeparturesView extends AbstractPanel<List<TrainService>> {
     private  List<RunningService> serviceList;
     private  ListDataProvider<RunningService> dataProvider;
 
-    public NextDeparturesView(MessageBroadcaster broadcaster) {
+    public NextDeparturesPanel(MessageBroadcaster broadcaster) {
 
         super(broadcaster);
         this.broadcaster = broadcaster;
