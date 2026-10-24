@@ -24,7 +24,6 @@ public class TrackManagerService {
 
     private Map<Long, LiveBerth> trackMap;
     private final BerthRepository berthRepository;
-    private List<RunningService> runningServices;
 
     public TrackManagerService(BerthRepository berthRepository) {
 
@@ -38,7 +37,7 @@ public class TrackManagerService {
                         Berth::getBerthId,
                         this::berthToLiveBerth
                 ));
-        runningServices = new ArrayList<>();
+
     }
 
     private LiveBerth berthToLiveBerth(Berth b) {

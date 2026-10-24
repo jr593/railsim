@@ -3,13 +3,8 @@ package uk.co.raphel.trainsimserver.service;
 import com.vaadin.flow.component.UI;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.InvalidPropertyException;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.cglib.core.Local;
 import org.springframework.core.task.TaskExecutor;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import uk.co.raphel.railsim.common.dto.RailSimMessage;
 import uk.co.raphel.railsim.common.dto.RunningService;
@@ -17,11 +12,9 @@ import uk.co.raphel.railsim.common.dto.SystemStatus;
 import uk.co.raphel.railsim.common.entity.TrainService;
 import uk.co.raphel.railsim.common.enums.MessageType;
 
-import uk.co.raphel.trainsimserver.exception.InvalidTimeTableEntryException;
 import uk.co.raphel.trainsimserver.railsimRunner.RailsimRunnerTask;
 import uk.co.raphel.trainsimserver.repository.TrainServiceRepository;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -31,17 +24,30 @@ import java.util.*;
 @Slf4j(topic = "TimerService")
 public class TimerService implements BroadcastListener {
 
+    private static final int NUMBER_UPCOMING_SERVICES = 10;
+    // The upcoming list is re-sent every N clock ticks even when unchanged,
+    // so newly opened dashboards receive it promptly.
+    private static final int SCHEDULE_REBROADCAST_TICKS = 5;
+
     private final TaskExecutor taskExecutor;
     private final TrainServiceRepository trainServiceRepository;
+    // Sorted by start time (see TrainServiceRepository.findAllWithRoutePoints); not modified after init.
     List<TrainService> timeTable;
     private final TrackManagerService trackManagerService;
     private final MessageBroadcaster messageBroadcaster;
     private final ProfileService profileService;
     private final TrainManagerService trainMonitor;
 
-    private LocalTime simulatorTime = LocalTime.MIN;
+    // null until the first STATUS message arrives
+    private LocalTime simulatorTime;
 
-    private List<Long> startedServices = new ArrayList<>();
+    // Index into timeTable of the next service due to depart today.
+    private int nextDepartureIdx = 0;
+
+    // Cached SCHEDULE body; only rebuilt when nextDepartureIdx moves.
+    private List<RunningService> upcomingServices = List.of();
+    private int upcomingServicesIdx = -1;
+    private int ticksSinceScheduleSent = 0;
 
     public TimerService(
             @Qualifier("applicationTaskExecutor") TaskExecutor taskExecutor,
@@ -59,72 +65,66 @@ public class TimerService implements BroadcastListener {
     public void init() {
         messageBroadcaster.register(this);
         timeTable = loadTimeTable();
-        // Pre mark timetable entries that should be skipped
-        timeTable.stream().filter(t -> t.getStartTime().isBefore(LocalTime.now()))
-                .forEach(t -> t.setStarted(true));
-    }
-
-    @Scheduled(fixedRate = 5000, initialDelay = 10000)
-    public void timer() {
-
-//          log.info("Checking for starters");
-        LocalTime currentTriggerTime = simulatorTime.truncatedTo(ChronoUnit.MINUTES);
-
-
-//        log.info("Next departures");
-        List<TrainService> upcomingServices = getNextDepartures(currentTriggerTime, 3);
-//        for(TrainService t : upcomingServices ) {
-//            log.info("               " + t.toString());
-//        }
-        // TODO Trains must set off at time of dirst routestop, not time from origin.
-        List<TrainService> toDepart = timeTable.stream()
-                .filter(t -> isDueOff(t, currentTriggerTime) && !startedServices.contains(t.getId()))
-                .toList();
-
-        for (TrainService s : toDepart) {
-            startService(s, trainMonitor, currentTriggerTime, messageBroadcaster);
-            startedServices.add(s.getId());
-            // Task runner responsible for logging running service actions
-        }
-        // Notify upcoming services
-        RailSimMessage<List<RunningService>> msg = new RailSimMessage<>();
-        msg.setMsgKey(UUID.randomUUID());
-        msg.setMessageType(MessageType.SCHEDULE);
-        List<RunningService> msgServices = new ArrayList<>();
-        for (TrainService trainService : upcomingServices) {
-            msgServices.add(RunningService.from(trainService, simulatorTime));
-        }
-        msg.setMessageBody(msgServices);
-
-        messageBroadcaster.broadcast(msg);
-
-    }
-
-    private boolean isDueOff(TrainService trainService, LocalTime currentTriggerTime) {
-        LocalTime servTime = trainService.getStartTime();
-        return !trainService.isStarted() && (currentTriggerTime.withSecond(0).isAfter(servTime) ||
-                currentTriggerTime.withSecond(0).equals(servTime));
-
-    }
-
-    private void startService(TrainService trainService, TrainManagerService trainMonitor, LocalTime triggerTime, MessageBroadcaster messageBroadcaster) {
-        trainService.setStarted(true);
-        taskExecutor.execute(new RailsimRunnerTask(trainService, messageBroadcaster, trackManagerService, trainMonitor));
-        // needRefresh = true;
-        log.info(trainService.getStartTime() + " " + trainService.getOrigin() + " to " + trainService.getDestination() + " sets off");
-
     }
 
     @Override
     public void onMessage(RailSimMessage<?> message) {
         if (message.getMessageType() == MessageType.STATUS) {
-            LocalTime newTime = ((SystemStatus) message.getMessageBody()).simulatorTime();
-            if (newTime.isBefore(simulatorTime)) {
-                timeTable.forEach(t -> t.setStarted(false));
-
-            }
-            simulatorTime = newTime;
+            onClockTick(((SystemStatus) message.getMessageBody()).simulatorTime());
         }
+    }
+
+    /*
+     * Departures are driven by the StatsService clock tick rather than a separate schedule,
+     * so services set off in step with simulator time.
+     * synchronized: successive ticks may arrive on different (virtual) scheduler threads.
+     */
+    private synchronized void onClockTick(LocalTime newTime) {
+        if (simulatorTime == null) {
+            // First tick - skip services that should already have departed.
+            nextDepartureIdx = firstIndexNotBefore(newTime);
+        } else if (newTime.isBefore(simulatorTime)) {
+            // Midnight rollover - start any of yesterday's stragglers, then begin the new day.
+            startDueServices(LocalTime.MAX);
+            nextDepartureIdx = 0;
+        }
+        simulatorTime = newTime;
+
+        // TODO Trains must set off at time of first routestop, not time from origin.
+        startDueServices(newTime.truncatedTo(ChronoUnit.MINUTES));
+        broadcastUpcomingServices();
+    }
+
+    private void startDueServices(LocalTime triggerTime) {
+        while (nextDepartureIdx < timeTable.size()
+                && !timeTable.get(nextDepartureIdx).getStartTime().isAfter(triggerTime)) {
+            startService(timeTable.get(nextDepartureIdx++));
+        }
+    }
+
+    private void startService(TrainService trainService) {
+        taskExecutor.execute(new RailsimRunnerTask(trainService, messageBroadcaster, trackManagerService, trainMonitor));
+        log.info(trainService.getStartTime() + " " + trainService.getOrigin() + " to " + trainService.getDestination() + " sets off");
+    }
+
+    private void broadcastUpcomingServices() {
+        boolean changed = upcomingServicesIdx != nextDepartureIdx;
+        if (changed) {
+            upcomingServicesIdx = nextDepartureIdx;
+            upcomingServices = getNextDepartures(NUMBER_UPCOMING_SERVICES).stream()
+                    .map(t -> RunningService.from(t, simulatorTime))
+                    .toList();
+        }
+        if (!changed && ++ticksSinceScheduleSent < SCHEDULE_REBROADCAST_TICKS) {
+            return;
+        }
+        ticksSinceScheduleSent = 0;
+
+        RailSimMessage<List<RunningService>> msg = new RailSimMessage<>();
+        msg.setMsgKey(UUID.randomUUID());
+        msg.setMessageType(MessageType.SCHEDULE);
+        msg.setMessageBody(upcomingServices);
+        messageBroadcaster.broadcast(msg);
     }
 
     @Override
@@ -136,27 +136,25 @@ public class TimerService implements BroadcastListener {
         if (profileService.isProfileActive("test")) {
             Optional<TrainService> t =
                     trainServiceRepository.findFirstByStartTimeAfterOrderByStartTimeAsc(LocalTime.now());
-            if (t.isPresent()) {
-                return new ArrayList<>(List.of(t.get()));
-            }
-            return new ArrayList<>();
+            return t.<List<TrainService>>map(trainService -> new ArrayList<>(List.of(trainService))).orElseGet(ArrayList::new);
         } else {
-            List<TrainService> ret = trainServiceRepository.findAll();
-            ret.stream().forEach(r -> r.setStarted(false));
-            return ret;
+            return trainServiceRepository.findAllWithRoutePoints();
         }
     }
 
+    private int firstIndexNotBefore(LocalTime time) {
+        int i = 0;
+        while (i < timeTable.size() && timeTable.get(i).getStartTime().isBefore(time)) {
+            i++;
+        }
+        return i;
+    }
 
-    private List<TrainService> getNextDepartures(LocalTime triggerTime, int numberOfServices) {
-        List<TrainService> ret = new ArrayList<>();
-        for (TrainService t : timeTable) {
-            if (t.getStartTime().isAfter(triggerTime)) {
-                ret.add(t);
-            }
-            if (ret.size() == numberOfServices) {
-                return ret; // Only the first three
-            }
+    private List<TrainService> getNextDepartures(int numberOfServices) {
+        List<TrainService> ret = new ArrayList<>(numberOfServices);
+        // Wraps past midnight so late-evening dashboards show the next morning's services.
+        for (int i = 0; i < timeTable.size() && ret.size() < numberOfServices; i++) {
+            ret.add(timeTable.get((nextDepartureIdx + i) % timeTable.size()));
         }
         return ret;
     }

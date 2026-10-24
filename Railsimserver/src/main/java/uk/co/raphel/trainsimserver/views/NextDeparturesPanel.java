@@ -21,16 +21,13 @@ public class NextDeparturesPanel extends AbstractPanel<List<TrainService>> {
 
 
     private static final int MAX_NUMBER_SCHEDULES = 10;
-    private final MessageBroadcaster broadcaster;
 
-     private  Grid<RunningService> scheduleList;
     private  List<RunningService> serviceList;
     private  ListDataProvider<RunningService> dataProvider;
 
-    public NextDeparturesPanel(MessageBroadcaster broadcaster) {
+    public NextDeparturesPanel() {
 
-        super(broadcaster);
-        this.broadcaster = broadcaster;
+        super();
 
         createSchedulesView();
     }
@@ -38,7 +35,7 @@ public class NextDeparturesPanel extends AbstractPanel<List<TrainService>> {
     private void createSchedulesView(){
         setHeadings("Upcoming Departures");
 
-        scheduleList = new Grid<>();
+        Grid<RunningService> scheduleList = new Grid<>();
 
         scheduleList.addColumn(RunningService::getStartTime)
                 .setHeader("Start Time");
@@ -72,8 +69,6 @@ public class NextDeparturesPanel extends AbstractPanel<List<TrainService>> {
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
-
-        broadcaster.register(this);
     }
 
     @Override
@@ -93,20 +88,14 @@ public class NextDeparturesPanel extends AbstractPanel<List<TrainService>> {
             return;
         }
 
-        UI ui = retrieveUI().orElse(null);
+        // Already running inside ui.access() (see MessageBroadcaster).
+        List<RunningService> newServices =
+                (List<RunningService>) railSimMessage.getMessageBody();
 
-        if (ui == null) {
-            return;
-        }
-        ui.access(() -> {
-            List<RunningService> newServices =
-                    (List<RunningService>) railSimMessage.getMessageBody();
+        serviceList.clear();
+        serviceList.addAll(newServices);
 
-            serviceList.clear();
-            serviceList.addAll(newServices);
-
-            dataProvider.refreshAll();
-        });
+        dataProvider.refreshAll();
 
 //         ui.access(() -> {
 //            for (RunningService trainService : (List<RunningService>)railSimMessage.getMessageBody()) {

@@ -30,6 +30,17 @@ public interface TrainServiceRepository extends JpaRepository<TrainService, Long
             Pageable pageable
     );
 
+    // Loads the whole timetable with route stops and berths in one query (avoids N+1),
+    // ordered by start time so callers can rely on the list being sorted.
+    @Query("""
+            SELECT DISTINCT t
+            FROM TrainService t
+            LEFT JOIN FETCH t.routePoints rp
+            LEFT JOIN FETCH rp.berth
+            ORDER BY t.startTime ASC, rp.routeStopNumber ASC
+            """)
+    List<TrainService> findAllWithRoutePoints();
+
     Optional<TrainService> findOneByStartTime(LocalTime startTime);
 
     Optional<TrainService> findFirstByStartTimeAfterOrderByStartTimeAsc(LocalTime localTime);

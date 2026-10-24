@@ -20,15 +20,16 @@ public class RailsimRunnerTask implements Runnable, BroadcastListener {
     private final RunningService runningService;
     private final MessageBroadcaster messageBroadcaster;
 
-    private LocalTime simulatorTime;
+    // Written by the scheduler thread (onMessage), read by this task's thread.
+    private volatile LocalTime simulatorTime;
 
     private final TrackManagerService trackManagerService;
     private final TrainManagerService trainMonitor;
-    private Boolean atDestination;
 
-    private static int loopDelay = 20;
+    @SuppressWarnings("FieldCanBeLocal")
+    private static final int loopDelay = 20;
 
-    private boolean receivingMessages ;
+    private volatile boolean receivingMessages ;
 
     private DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -59,11 +60,11 @@ public class RailsimRunnerTask implements Runnable, BroadcastListener {
             runningService.setCurrentRouteStop(0);
             // we 'arrive' at the origin as we start.
             runningService.getRouteStops()[runningService.getCurrentRouteStop()].setActualArrivalTime(runningService.getActualStartTime());
-            msg.setMessageBody(runningService);
+            msg.setMessageBody(runningService.copy());
             log.info("Created running service :" + runningService.getForLog());
             messageBroadcaster.broadcast(msg);
 
-            atDestination = false;
+            Boolean atDestination = false;
         //    long iterationCount = 1;
             if (!receivingMessages) {
                 log.info(runningService.getTitle() + " Waiting for msgs to start");
@@ -164,7 +165,8 @@ public class RailsimRunnerTask implements Runnable, BroadcastListener {
         RailSimMessage<RunningService> msg = new RailSimMessage<>();
         msg.setMsgKey(UUID.randomUUID());
         msg.setMessageType(type);
-        msg.setMessageBody(runningService);
+        // Send a snapshot: this task keeps mutating runningService while listeners render it.
+        msg.setMessageBody(runningService.copy());
         log.info("Runner broadcast Service = " + runningService.getStartTime() + " from " + runningService.getOrigin() +
                 " Msg type " + type + " Current berth " + runningService.getRouteStops()[runningService.getCurrentRouteStop()]);
         messageBroadcaster.broadcast(msg);

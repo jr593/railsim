@@ -60,7 +60,12 @@ public class CompletedServicesPanel
 
         serviceList = new ArrayList<>();
 
-        dataProvider = new ListDataProvider<>(serviceList);
+        dataProvider = new ListDataProvider<>(serviceList) {
+            @Override
+            public Object getId(TrainService item) {
+                return item.getId();
+            }
+        };
         scheduleList.setDataProvider(dataProvider);
 
         setSizeFull();
@@ -95,23 +100,15 @@ public class CompletedServicesPanel
             return;
         }
 
-        UI ui = retrieveUI().orElse(null);
-
-        if (ui == null) {
-            return;
-        }
-
         List<?> services = (List<?>) railSimMessage.getMessageBody();
 
-        ui.access(() -> {
+        // Already running inside ui.access() (see MessageBroadcaster).
+        for (Object service : services) {
 
-            for (Object service : services) {
-
-                if (service instanceof TrainService trainService) {
-                    addService(trainService);
-                }
+            if (service instanceof TrainService trainService) {
+                addService(trainService);
             }
-        });
+        }
     }
 
     /**
@@ -133,7 +130,7 @@ public class CompletedServicesPanel
                 // Existing service - replace it with the updated version.
                 serviceList.set(i, trainService);
 
-                dataProvider.refreshAll();
+                dataProvider.refreshItem(trainService);
                 return;
             }
         }

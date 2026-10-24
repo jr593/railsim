@@ -37,7 +37,7 @@ public class DashboardView extends VerticalLayout implements BroadcastListener {
 
     private final Div systemClock = new Div();
 
-    private DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
+    private final DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
 
     private final MessageBroadcaster broadcaster;
 
@@ -62,7 +62,7 @@ public class DashboardView extends VerticalLayout implements BroadcastListener {
 
         add(title, systemClock);
       //  add(new Div("Upcoming Departures"));
-        add(new NextDeparturesPanel(broadcaster));
+        add(new NextDeparturesPanel());
       //  add(new Div("Running Services"));
         add(new CurrentServicesPanel(broadcaster));
      //   add(new Div("Completed Services"));

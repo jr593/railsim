@@ -1,6 +1,11 @@
 spring:
   application:
     name: railsimserver
+  threads:
+    virtual:
+      # Each RailsimRunnerTask blocks while sleeping; virtual threads make that cheap
+      # and remove the 8-thread cap of the default applicationTaskExecutor.
+      enabled: true
   task:
     scheduling:
       pool:
@@ -19,6 +24,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.default_batch_fetch_size: 50
 server:
   port: 8083
 sim:

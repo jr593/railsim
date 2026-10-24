@@ -6,26 +6,27 @@
   <component name="ChangeListManager">
     <list default="true" id="989709d3-80b5-4c80-b9cc-624bfacf9aac" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/.copilot-plugin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/http/TrainsResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/exception/InvalidTimeTableEntryException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/ProfileService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/RestService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TrainManagerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeInsightSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningRouteStop.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningRouteStop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/Berth.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/entity/Berth.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/ServiceEventType.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/enums/ServiceEventType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/http/LoadResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/http/LoadResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/mvnw" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/railsimRunner/RailsimRunnerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/railsimRunner/RailsimRunnerTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/repository/TrainServiceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/repository/TrainServiceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/MessageBroadcaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/MessageBroadcaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/StatsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/StatsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TimerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TimerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TrackManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TrackManagerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CompletedServicesView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CompletedServicesPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CurrentTrainsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CurrentServicesPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TrainManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TrainManagerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/AbstractPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/AbstractPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CompletedServicesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CompletedServicesPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CurrentServicesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CurrentServicesPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/DashboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/DashboardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/MainLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/MainLayout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/NextDeparturesView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/NextDeparturesPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/NextDeparturesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/NextDeparturesPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/ViewBase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +40,8 @@
     </colors>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="188" />
+    <option name="cachedIndexableFilesCount" value="717" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -69,62 +71,65 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="9.498605165676753E-4" />
-      <entry key="MS500" value="0.26712178610351667" />
-      <entry key="S2" value="1.0749500682145168" />
-      <entry key="S5" value="1.5416226972680198" />
-      <entry key="S10" value="1.7921154811352429" />
-      <entry key="S30" value="2.903698602321244" />
-      <entry key="S60" value="4.875505138918441" />
-      <entry key="M2" value="7.635361568901879" />
-      <entry key="M5" value="11.177826302450972" />
-      <entry key="M10" value="13.42459810150438" />
-      <entry key="M15" value="15.75631258811387" />
-      <entry key="M30" value="29.9325763952503" />
-      <entry key="H1" value="69.96802637102613" />
-      <entry key="H2" value="141.60680782133457" />
-      <entry key="H4" value="257.76287398325894" />
-      <entry key="D1" value="629.6278599538803" />
-      <entry key="W1" value="778.4187782894892" />
+      <entry key="MS100" value="1.0000000047811342" />
+      <entry key="MS500" value="1.021672358892678" />
+      <entry key="S2" value="1.3836909425366222" />
+      <entry key="S5" value="1.6889087245051124" />
+      <entry key="S10" value="1.9105776515879485" />
+      <entry key="S30" value="2.377695803561966" />
+      <entry key="S60" value="2.632689553876999" />
+      <entry key="M2" value="2.927861360147981" />
+      <entry key="M5" value="9.307423976568003" />
+      <entry key="M10" value="33.51398595583189" />
+      <entry key="M15" value="57.19790958828566" />
+      <entry key="M30" value="107.39015028425281" />
+      <entry key="H1" value="172.50596869850412" />
+      <entry key="H2" value="261.56090859187816" />
+      <entry key="H4" value="390.0450373731363" />
+      <entry key="D1" value="785.5456246934652" />
+      <entry key="W1" value="944.3415597277437" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000000000952318" />
-      <entry key="S5" value="1.0001466045042517" />
-      <entry key="S10" value="1.0202362550635464" />
-      <entry key="S30" value="1.7268269259296578" />
-      <entry key="S60" value="3.3450352139689232" />
-      <entry key="M2" value="5.981995816328825" />
-      <entry key="M5" value="9.957965446850555" />
-      <entry key="M10" value="12.513908984051369" />
-      <entry key="M15" value="14.288895821142972" />
-      <entry key="M30" value="23.053625876448937" />
-      <entry key="H1" value="49.50578931176771" />
-      <entry key="H2" value="100.4508562855632" />
-      <entry key="H4" value="183.67442086159815" />
-      <entry key="D1" value="419.25495953266034" />
-      <entry key="W1" value="504.4691817508729" />
+      <entry key="MS100" value="5.536419643563736E-98" />
+      <entry key="MS500" value="3.537087473200188E-20" />
+      <entry key="S2" value="1.3713914895798183E-5" />
+      <entry key="S5" value="0.01134656956275058" />
+      <entry key="S10" value="0.1065202777068788" />
+      <entry key="S30" value="0.47403798344308584" />
+      <entry key="S60" value="0.6912898926389053" />
+      <entry key="M2" value="0.9212631306336847" />
+      <entry key="M5" value="1.7902865843321776" />
+      <entry key="M10" value="3.9078538432229304" />
+      <entry key="M15" value="6.36898391070854" />
+      <entry key="M30" value="14.992978215327962" />
+      <entry key="H1" value="38.751243612773834" />
+      <entry key="H2" value="88.38503597191422" />
+      <entry key="H4" value="172.5946057350519" />
+      <entry key="D1" value="418.55505340087353" />
+      <entry key="W1" value="509.3109692577365" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.0010262032869538785" />
-      <entry key="MS500" value="0.375777472975333" />
-      <entry key="S2" value="1.5836642241540706" />
-      <entry key="S5" value="2.2885192678003525" />
-      <entry key="S10" value="2.6683693359019256" />
-      <entry key="S30" value="4.526424884742512" />
-      <entry key="S60" value="8.08027824051425" />
-      <entry key="M2" value="13.450603906572809" />
-      <entry key="M5" value="21.002608992382765" />
-      <entry key="M10" value="25.8504348524803" />
-      <entry key="M15" value="29.97701164499452" />
-      <entry key="M30" value="52.930989511184556" />
-      <entry key="H1" value="119.41790292447048" />
-      <entry key="H2" value="242.00465377782973" />
-      <entry key="H4" value="441.39093740161667" />
-      <entry key="D1" value="1048.8654026378651" />
-      <entry key="W1" value="1282.8849558209151" />
+      <entry key="MS100" value="1.4821715786988345E-4" />
+      <entry key="MS500" value="0.17763030826798457" />
+      <entry key="S2" value="0.9236983149184187" />
+      <entry key="S5" value="1.453360103595997" />
+      <entry key="S10" value="1.8556891452425155" />
+      <entry key="S30" value="2.757750379276125" />
+      <entry key="S60" value="3.264888325836628" />
+      <entry key="M2" value="3.8140550107576345" />
+      <entry key="M5" value="11.076418275842931" />
+      <entry key="M10" value="37.39882389695884" />
+      <entry key="M15" value="63.540605129259376" />
+      <entry key="M30" value="122.34987976605588" />
+      <entry key="H1" value="211.21460734148928" />
+      <entry key="H2" value="349.8997127774578" />
+      <entry key="H4" value="562.5962258097021" />
+      <entry key="D1" value="1204.0833112574821" />
+      <entry key="W1" value="1453.6494990450517" />
     </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -135,42 +140,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.RailSimServer [clean].executor": "Run",
-    "Maven.RailSimServer [package].executor": "Run",
-    "Maven.railsimcommon [install].executor": "Run",
-    "Maven.railwaysim [package].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.Application.executor": "Run",
-    "Spring Boot.TrainsimserverApplication.executor": "Debug",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
-    "ignore.preview.features.used": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/johnr/Projects/fleetpulse",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
-    "ts.external.directory.path": "/home/johnr/apps/idea-IU-262.9437.185/plugins/javascript-plugin/jsLanguageServicesImpl/external",
-    "vaadin.notify.Confirmation": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.RailSimServer [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.RailSimServer [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.railsimcommon [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.railwaysim [package].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.TrainsimserverApplication.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/johnr/Projects/railsim&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/johnr/apps/idea-IU-262.9437.185/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;vaadin.notify.Confirmation&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="uk.co.raphel.railsim.common.http" />
@@ -224,34 +230,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/RestService.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <condition expression="runningService.getOrigin().equalsIgnoreCase(&quot;Orpington&quot;) &amp;&amp; runningService.getServiceId() == 1638" language="JAVA" />
-          <url>file://$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/railsimRunner/RailsimRunnerTask.java</url>
-          <line>85</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TrackManagerService.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TimerService.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TimerService.java</url>
           <line>135</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/railsimRunner/RailsimRunnerTask.java</url>
-          <line>135</line>
+          <line>136</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>

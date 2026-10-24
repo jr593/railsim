@@ -9,6 +9,7 @@ import uk.co.raphel.railsim.common.enums.ServiceEventType;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /*
@@ -59,6 +60,30 @@ public class RunningService {
         ret.setServiceClass(trainService.getServiceClass());
         ret.setLatestStatus(ServiceEventType.NOTREADY);
 
+        return ret;
+    }
+
+    /**
+     * Snapshot copy, safe to hand to other threads. Route stops are copied too;
+     * Berth entities are shared as they are not modified while running.
+     */
+    public RunningService copy() {
+        RunningService ret = new RunningService();
+        ret.setServiceId(ServiceId);
+        ret.setRouteStops(routeStops == null ? null :
+                Arrays.stream(routeStops).map(RunningRouteStop::copy).toArray(RunningRouteStop[]::new));
+        ret.setStartTime(startTime);
+        ret.setOrigin(origin);
+        ret.setDestination(destination);
+        ret.setScheduledArrivalTime(scheduledArrivalTime);
+        ret.setActualStartTime(actualStartTime);
+        ret.setActualArrivalTime(actualArrivalTime);
+        ret.setCurrentRouteStop(currentRouteStop);
+        ret.setBlocked(blocked);
+        ret.setTerminated(terminated);
+        ret.setServiceClass(serviceClass);
+        ret.setEngine(engine);
+        ret.setLatestStatus(latestStatus);
         return ret;
     }
 

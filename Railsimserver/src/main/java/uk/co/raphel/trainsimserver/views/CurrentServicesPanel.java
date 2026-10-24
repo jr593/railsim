@@ -21,15 +21,12 @@ public class CurrentServicesPanel extends AbstractPanel<List<TrainService>> {
 
     private static final int MAX_NUMBER_RUNNERS = 99;
 
-    private final MessageBroadcaster broadcaster;
 
-    private Grid<RunningService> runningServicesGrid;
     private List<RunningService> serviceList;
     private ListDataProvider<RunningService> dataProvider;
 
     public CurrentServicesPanel(MessageBroadcaster broadcaster) {
         super(broadcaster);
-        this.broadcaster = broadcaster;
 
         createCurrentRunnersView();
     }
@@ -38,7 +35,7 @@ public class CurrentServicesPanel extends AbstractPanel<List<TrainService>> {
 
         setHeadings("Running Services");
 
-        runningServicesGrid = new Grid<>();
+        Grid<RunningService> runningServicesGrid = new Grid<>();
 
         runningServicesGrid.addColumn(RunningService::getStartTime)
                 .setHeader("Departure Time");
@@ -63,7 +60,14 @@ public class CurrentServicesPanel extends AbstractPanel<List<TrainService>> {
 
         serviceList = new ArrayList<>();
 
-        dataProvider = new ListDataProvider<>(serviceList);
+        // Identify rows by serviceId so refreshItem() works when a row is
+        // replaced by a newer snapshot of the same service.
+        dataProvider = new ListDataProvider<>(serviceList) {
+            @Override
+            public Object getId(RunningService item) {
+                return item.getServiceId();
+            }
+        };
         runningServicesGrid.setDataProvider(dataProvider);
 
         setSizeFull();
@@ -81,17 +85,9 @@ public class CurrentServicesPanel extends AbstractPanel<List<TrainService>> {
 
         super.onMessage(message);
 
-        UI ui = retrieveUI().orElse(null);
-
-        if (ui == null) {
-            return;
-        }
-
-        /*
-         * All changes to the Grid's backing list must happen inside
-         * the UI access block.
-         */
-        ui.access(() -> processMessage(message));
+        // MessageBroadcaster already invokes onMessage inside ui.access(),
+        // so the Grid's backing list can be modified directly here.
+        processMessage(message);
     }
 
     private void processMessage(RailSimMessage<?> message) {
@@ -168,7 +164,7 @@ public class CurrentServicesPanel extends AbstractPanel<List<TrainService>> {
                 // Existing service - replace it with the updated version.
                 serviceList.set(i, trainService);
 
-                dataProvider.refreshAll();
+                dataProvider.refreshItem(trainService);
                 return;
             }
         }
@@ -201,7 +197,7 @@ public class CurrentServicesPanel extends AbstractPanel<List<TrainService>> {
         existing.setActualArrivalTime(simulatorTime);
         existing.setTerminated(true);
 
-        dataProvider.refreshAll();
+        dataProvider.refreshItem(existing);
     }
 
     /**
@@ -220,7 +216,7 @@ public class CurrentServicesPanel extends AbstractPanel<List<TrainService>> {
 
         existing.setBlocked(true);
 
-        dataProvider.refreshAll();
+        dataProvider.refreshItem(existing);
     }
 
     /**
@@ -241,7 +237,7 @@ public class CurrentServicesPanel extends AbstractPanel<List<TrainService>> {
 
                 serviceList.set(i, trainService);
 
-                dataProvider.refreshAll();
+                dataProvider.refreshItem(trainService);
                 return;
             }
         }

@@ -44,6 +44,11 @@ public class RunningRouteStop {
         return ret;
     }
 
+    public RunningRouteStop copy() {
+        return new RunningRouteStop(id, berth, baseServiceId, scheduledArrivalTime, scheduledDepartureTime,
+                actualArrivalTime, actualDepartureTime);
+    }
+
     @Override
     public String toString() {
         return berth.getBerthName();

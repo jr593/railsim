@@ -8,14 +8,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
-import uk.co.raphel.railsim.common.TrackDiagramEntry;
 import uk.co.raphel.railsim.common.entity.Berth;
-import uk.co.raphel.railsim.common.entity.Destination;
 import uk.co.raphel.railsim.common.entity.RouteStop;
 import uk.co.raphel.railsim.common.entity.TrainService;
 import uk.co.raphel.railsim.common.enums.StopType;
 import uk.co.raphel.railsim.configapp.repository.BerthRepository;
-import uk.co.raphel.railsim.configapp.repository.DestinationRepository;
 import uk.co.raphel.railsim.configapp.repository.RouteStopRepository;
 import uk.co.raphel.railsim.configapp.repository.TrainServiceRepository;
 
@@ -32,7 +29,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Slf4j(topic = "MainFrame")
 @Component
@@ -45,17 +41,14 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
     private ResourceLoader resourceLoader;
 
 
-    private final DestinationRepository destinationRepository;
     private final BerthRepository berthRepository;
     private final RouteStopRepository routeStopRepository;
     private final TrainServiceRepository trainServiceRepository;
 
-    private final List<TrackDiagramEntry> trackDiagram = new LinkedList<>();
+   // private final List<TrackDiagramEntry> trackDiagram = new LinkedList<>();
 
-    private List<Destination> destinations;
     private List<Berth> berths;
     private List<TrainService> trainServices;
-    private final Map<Integer, Berth> berthLookup = new HashMap<>();
 
     private final List<EditableTrainService> editableTrainServices = new ArrayList<>();
 
@@ -70,8 +63,7 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
     private final JPanel buttonPanel = new JPanel();
     private JComboBox<EditableTrainService> copyCombo;
 
-    public MainFrame(DestinationRepository destinationRepository, BerthRepository berthRepository, RouteStopRepository routeStopRepository, TrainServiceRepository trainServiceRepository) {
-        this.destinationRepository = destinationRepository;
+    public MainFrame(BerthRepository berthRepository, RouteStopRepository routeStopRepository, TrainServiceRepository trainServiceRepository) {
         this.berthRepository = berthRepository;
         this.routeStopRepository = routeStopRepository;
         this.trainServiceRepository = trainServiceRepository;
@@ -274,9 +266,6 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
         }
 
         if (e.getActionCommand().equals("LOAD")) {
-            log.info("Loading destinations with dummy berths");
-
-            this.destinations = destinationRepository.findAll();
             this.berths = berthRepository.findAll();
             routeStopRepository.deleteAll();
             trainServiceRepository.deleteAll();
@@ -396,7 +385,6 @@ public class MainFrame extends JFrame implements ActionListener, TableModelListe
             TableModel model = (TableModel) e.getSource();
             Object data = model.getValueAt(row, column);
             EditableTrainService toChange = editableTrainServices.get(currentDataPointer);
-            toChange.getCallingPoints().put(trackDiagram.get(row).getId(), (String) data);
         }
     }
 

@@ -3,7 +3,6 @@ package uk.co.raphel.trainsimserver.service;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import uk.co.raphel.railsim.common.dto.RailSimMessage;
@@ -12,16 +11,18 @@ import uk.co.raphel.railsim.common.enums.MessageType;
 
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 
 @Service
-@EnableScheduling
 public class StatsService {
     private final MessageBroadcaster broadcaster;
 
-    private LocalTime simTime = LocalTime.now();
+    // Sim time is derived from elapsed real time since these were captured,
+    // so late or skipped ticks don't make the clock drift.
+    private long startNanos;
+    private LocalTime startTime;
 
     @Value("${sim.rate-multiplier:1}")
     private int clockRateMultiplier;
@@ -34,21 +35,22 @@ public class StatsService {
 
     @PostConstruct
     public void init() {
-        simTime = LocalTime.now();
+        startNanos = System.nanoTime();
+        startTime = LocalTime.now();
     }
 
 
-    private DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
-
-      // Example: send a new value every second
+      // Send the simulator time every second
+      // synchronized: with virtual threads the scheduler may overlap fixed-rate runs
       @Scheduled(fixedRate = 1000, initialDelay = 5000)
-      public void sendTimeUpdate() {
+      public synchronized void sendTimeUpdate() {
+          LocalTime simTime = startTime
+                  .plusNanos((System.nanoTime() - startNanos) * clockRateMultiplier)
+                  .truncatedTo(ChronoUnit.SECONDS);
           RailSimMessage<SystemStatus> statusMessage = new RailSimMessage<>();
           statusMessage.setMsgKey(UUID.randomUUID());
           statusMessage.setMessageType(MessageType.STATUS);
-          SystemStatus status = new SystemStatus(simTime);
-          simTime = simTime.plusSeconds(clockRateMultiplier);
-          statusMessage.setMessageBody(status);
+          statusMessage.setMessageBody(new SystemStatus(simTime));
           broadcaster.broadcast(statusMessage);
       }
 

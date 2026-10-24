@@ -23,8 +23,14 @@ public abstract class AbstractPanel<E> extends VerticalLayout implements Broadca
     //private final Div systemClock = new Div();
 
     protected LocalTime simulatorTime;
-    private DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
 
+    protected AbstractPanel(MessageBroadcaster broadcaster) {
+        this.broadcaster = broadcaster;
+    }
+
+    protected AbstractPanel() {
+        this.broadcaster = null;
+    }
 
     public void onMessage(RailSimMessage<?> message) {
         if (message != null && message.getMessageType().equals(MessageType.STATUS)) {
@@ -34,15 +40,13 @@ public abstract class AbstractPanel<E> extends VerticalLayout implements Broadca
          }
     }
 
-    protected AbstractPanel(MessageBroadcaster broadcaster) {
-        this.broadcaster = broadcaster;
-    }
-
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
 
-        broadcaster.register(this);
+        if(broadcaster != null) {
+            broadcaster.register(this);
+        }
     }
 
 
