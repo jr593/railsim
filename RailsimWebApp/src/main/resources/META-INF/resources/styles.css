@@ -1,0 +1,16 @@
+vaadin-grid::part(blocked-row) {
+    color: var(--lumo-error-text-color);
+    font-weight: bold;
+}
+
+.sim-clock {
+    margin-left: auto;
+    margin-right: var(--lumo-space-l);
+    font-size: var(--lumo-font-size-l);
+    font-weight: bold;
+}
+
+.connection-status {
+    margin-right: var(--lumo-space-m);
+    font-size: var(--lumo-font-size-s);
+}

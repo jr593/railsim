@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: railsimwebapp
+  threads:
+    virtual:
+      enabled: true
+server:
+  port: 8084
+railsim:
+  # Railsimserver base URL; the SSE stream is read from <server-url>/api/events
+  server-url: http://localhost:8083
+  reconnect-seconds: 5
