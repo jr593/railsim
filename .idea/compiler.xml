@@ -9,10 +9,10 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
         </processorPath>
         <module name="RailSimConfigGui" />
         <module name="railsimcommon" />
+        <module name="RailsimWebApp" />
         <module name="RailSimServer" />
       </profile>
     </annotationProcessing>
@@ -21,6 +21,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="RailSimConfigGui" options="-parameters" />
       <module name="RailSimServer" options="-parameters" />
+      <module name="RailsimWebApp" options="-parameters" />
       <module name="railsimcommon" options="-parameters" />
       <module name="railwaysim" options="-parameters" />
     </option>

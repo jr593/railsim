@@ -4,7 +4,6 @@ import com.vaadin.flow.component.UI;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uk.co.raphel.railsim.common.dto.RailSimMessage;
-import uk.co.raphel.trainsimserver.railsimRunner.RailsimRunnerTask;
 
 
 import java.util.List;
@@ -71,7 +70,7 @@ public class MessageBroadcaster {
         }
     }
 
-    public void unregister(RailsimRunnerTask railsimRunnerTask) {
-        listeners.remove(railsimRunnerTask);
+    public void unregister(BroadcastListener listener) {
+        listeners.remove(listener);
     }
 }

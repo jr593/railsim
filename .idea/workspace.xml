@@ -5,28 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="989709d3-80b5-4c80-b9cc-624bfacf9aac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.copilot-plugin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeInsightSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningRouteStop.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningRouteStop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/dto/RunningService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/http/LoadResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailSimCommon/src/main/java/uk/co/raphel/railsim/common/http/LoadResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/RailsimConfigGUI/src/main/java/uk/co/raphel/railsim/configapp/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/railsimRunner/RailsimRunnerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/railsimRunner/RailsimRunnerTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/repository/TrainServiceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/repository/TrainServiceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/StatsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/StatsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TimerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TimerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TrackManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TrackManagerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/MessageBroadcaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/MessageBroadcaster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TrainManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/service/TrainManagerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/AbstractPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/AbstractPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CompletedServicesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CompletedServicesPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CurrentServicesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/CurrentServicesPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/DashboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/DashboardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/NextDeparturesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/NextDeparturesPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/java/uk/co/raphel/trainsimserver/views/ViewBase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Railsimserver/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Railsimserver/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,61 +55,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000000047811342" />
-      <entry key="MS500" value="1.021672358892678" />
-      <entry key="S2" value="1.3836909425366222" />
-      <entry key="S5" value="1.6889087245051124" />
-      <entry key="S10" value="1.9105776515879485" />
-      <entry key="S30" value="2.377695803561966" />
-      <entry key="S60" value="2.632689553876999" />
-      <entry key="M2" value="2.927861360147981" />
-      <entry key="M5" value="9.307423976568003" />
-      <entry key="M10" value="33.51398595583189" />
-      <entry key="M15" value="57.19790958828566" />
-      <entry key="M30" value="107.39015028425281" />
-      <entry key="H1" value="172.50596869850412" />
-      <entry key="H2" value="261.56090859187816" />
-      <entry key="H4" value="390.0450373731363" />
-      <entry key="D1" value="785.5456246934652" />
-      <entry key="W1" value="944.3415597277437" />
+      <entry key="MS100" value="1.0000000335219472" />
+      <entry key="MS500" value="1.0859193489508316" />
+      <entry key="S2" value="5.2573324459314135" />
+      <entry key="S5" value="17.480281870661646" />
+      <entry key="S10" value="34.16143162971385" />
+      <entry key="S30" value="78.99192729023883" />
+      <entry key="S60" value="134.66246226344643" />
+      <entry key="M2" value="218.91252769003526" />
+      <entry key="M5" value="332.25649287524396" />
+      <entry key="M10" value="407.1653354209007" />
+      <entry key="M15" value="450.5358962458881" />
+      <entry key="M30" value="524.1209287614749" />
+      <entry key="H1" value="603.5169395852162" />
+      <entry key="H2" value="701.0451792012464" />
+      <entry key="H4" value="834.5072325436872" />
+      <entry key="D1" value="1236.217648862054" />
+      <entry key="W1" value="1396.9571442545923" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="5.536419643563736E-98" />
-      <entry key="MS500" value="3.537087473200188E-20" />
-      <entry key="S2" value="1.3713914895798183E-5" />
-      <entry key="S5" value="0.01134656956275058" />
-      <entry key="S10" value="0.1065202777068788" />
-      <entry key="S30" value="0.47403798344308584" />
-      <entry key="S60" value="0.6912898926389053" />
-      <entry key="M2" value="0.9212631306336847" />
-      <entry key="M5" value="1.7902865843321776" />
-      <entry key="M10" value="3.9078538432229304" />
-      <entry key="M15" value="6.36898391070854" />
-      <entry key="M30" value="14.992978215327962" />
-      <entry key="H1" value="38.751243612773834" />
-      <entry key="H2" value="88.38503597191422" />
-      <entry key="H4" value="172.5946057350519" />
-      <entry key="D1" value="418.55505340087353" />
-      <entry key="W1" value="509.3109692577365" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="1.0071915109793184E-190" />
+      <entry key="S2" value="3.1679477803500924E-48" />
+      <entry key="S5" value="1.0007168343406056E-19" />
+      <entry key="S10" value="3.163410871734161E-10" />
+      <entry key="S30" value="6.813771722414163E-4" />
+      <entry key="S60" value="0.026208817451199507" />
+      <entry key="M2" value="0.1793813550053414" />
+      <entry key="M5" value="0.9304220647007905" />
+      <entry key="M10" value="2.817195813127428" />
+      <entry key="M15" value="5.120621000898532" />
+      <entry key="M30" value="13.443555690234348" />
+      <entry key="H1" value="36.69431331286701" />
+      <entry key="H2" value="86.00729781317465" />
+      <entry key="H4" value="170.2572044737975" />
+      <entry key="D1" value="417.6049486108184" />
+      <entry key="W1" value="509.14564872496163" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.4821715786988345E-4" />
-      <entry key="MS500" value="0.17763030826798457" />
-      <entry key="S2" value="0.9236983149184187" />
-      <entry key="S5" value="1.453360103595997" />
-      <entry key="S10" value="1.8556891452425155" />
-      <entry key="S30" value="2.757750379276125" />
-      <entry key="S60" value="3.264888325836628" />
-      <entry key="M2" value="3.8140550107576345" />
-      <entry key="M5" value="11.076418275842931" />
-      <entry key="M10" value="37.39882389695884" />
-      <entry key="M15" value="63.540605129259376" />
-      <entry key="M30" value="122.34987976605588" />
-      <entry key="H1" value="211.21460734148928" />
-      <entry key="H2" value="349.8997127774578" />
-      <entry key="H4" value="562.5962258097021" />
-      <entry key="D1" value="1204.0833112574821" />
-      <entry key="W1" value="1453.6494990450517" />
+      <entry key="MS100" value="0.9794203304190026" />
+      <entry key="MS500" value="1.0814157681532268" />
+      <entry key="S2" value="5.252064948527356" />
+      <entry key="S5" value="17.4733411991606" />
+      <entry key="S10" value="34.154632002152375" />
+      <entry key="S30" value="78.98716812777944" />
+      <entry key="S60" value="134.68174651337785" />
+      <entry key="M2" value="219.0810818577631" />
+      <entry key="M5" value="333.17334139654747" />
+      <entry key="M10" value="409.96444767612616" />
+      <entry key="M15" value="455.63432554456995" />
+      <entry key="M30" value="537.5341101690249" />
+      <entry key="H1" value="640.1706197012968" />
+      <entry key="H2" value="787.0073417991282" />
+      <entry key="H4" value="1004.7215335439419" />
+      <entry key="D1" value="1653.805257615573" />
+      <entry key="W1" value="1906.0997622431153" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -140,43 +124,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.RailSimServer [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.RailSimServer [package].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.railsimcommon [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.railwaysim [package].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.TrainsimserverApplication.executor&quot;: &quot;Run&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/johnr/Projects/railsim&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/johnr/apps/idea-IU-262.9437.185/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
-    &quot;vaadin.notify.Confirmation&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.RailSimServer [clean].executor": "Run",
+    "Maven.RailSimServer [package].executor": "Run",
+    "Maven.RailsimWebApp [clean].executor": "Run",
+    "Maven.RailsimWebApp [package].executor": "Run",
+    "Maven.railsimcommon [install].executor": "Run",
+    "Maven.railwaysim [package].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.Application.executor": "Run",
+    "Spring Boot.TrainsimserverApplication.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "master",
+    "ignore.preview.features.used": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/johnr/Projects/railsim",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/home/johnr/apps/idea-IU-262.9437.185/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vaadin.notify.Confirmation": "false"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="uk.co.raphel.railsim.common.http" />
