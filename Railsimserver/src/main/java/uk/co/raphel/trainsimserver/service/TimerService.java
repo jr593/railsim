@@ -1,6 +1,5 @@
 package uk.co.raphel.trainsimserver.service;
 
-import com.vaadin.flow.component.UI;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -125,11 +124,6 @@ public class TimerService implements BroadcastListener {
         msg.setMessageType(MessageType.SCHEDULE);
         msg.setMessageBody(upcomingServices);
         messageBroadcaster.broadcast(msg);
-    }
-
-    @Override
-    public Optional<UI> retrieveUI() {
-        return Optional.empty();
     }
 
     public List<TrainService> loadTimeTable() {

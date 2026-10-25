@@ -1,6 +1,5 @@
 package uk.co.raphel.trainsimserver.service;
 
-import com.vaadin.flow.component.UI;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ import uk.co.raphel.railsim.common.dto.SystemStatus;
 import uk.co.raphel.railsim.common.enums.MessageType;
 
 import java.io.IOException;
-import java.util.Optional;
 
 /*
   Streams train service updates to external clients (e.g. RailsimWebApp) as Server-Sent Events.
@@ -93,11 +91,6 @@ public class SseController {
                 messageBroadcaster.unregister(this);
                 emitter.completeWithError(e);
             }
-        }
-
-        @Override
-        public Optional<UI> retrieveUI() {
-            return Optional.empty();
         }
     }
 }

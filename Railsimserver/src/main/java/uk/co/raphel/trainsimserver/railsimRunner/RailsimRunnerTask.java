@@ -1,6 +1,5 @@
 package uk.co.raphel.trainsimserver.railsimRunner;
 
-import com.vaadin.flow.component.UI;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.raphel.railsim.common.dto.*;
 import uk.co.raphel.railsim.common.entity.TrainService;
@@ -11,7 +10,6 @@ import uk.co.raphel.trainsimserver.service.*;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j(topic = "RailSimRunnerTask")
@@ -180,10 +178,5 @@ public class RailsimRunnerTask implements Runnable, BroadcastListener {
             simulatorTime = ((SystemStatus) message.getMessageBody()).simulatorTime();
             receivingMessages = true;
         }
-    }
-
-    @Override
-    public Optional<UI> retrieveUI() {
-        return Optional.empty();
     }
 }
