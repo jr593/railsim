@@ -15,6 +15,10 @@ import uk.co.raphel.railsim.common.dto.SystemStatus;
 import uk.co.raphel.railsim.common.enums.MessageType;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static java.util.Arrays.stream;
 
 /*
   Streams train service updates to external clients (e.g. RailsimWebApp) as Server-Sent Events.
@@ -65,9 +69,14 @@ public class SseController {
         @Override
         public void onMessage(RailSimMessage<?> message) {
             switch (message.getMessageType()) {
-                case SERVICESTART, MOVEMENT, BLOCKING, COMPLETION -> {
+                case SERVICESTART, MOVEMENT, BLOCKING, COMPLETION, SCHEDULE -> {
                     if (message.getMessageBody() instanceof RunningService service) {
                         send(message.getMessageType(), ServiceBoardEntry.from(service));
+                    } else {
+                        Object body = message.getMessageBody();
+                        for(Object o : (List<Object>)body) {
+                            send(message.getMessageType(), ServiceBoardEntry.from((RunningService)o));
+                        }
                     }
                 }
                 case STATUS -> {
