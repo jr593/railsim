@@ -6,6 +6,7 @@ import uk.co.raphel.railsim.common.dto.RunningService;
 import uk.co.raphel.railsim.common.enums.ServiceEventType;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -33,4 +34,13 @@ public class TrainManagerService {
         });
     }
 
+    /**
+     * Snapshot copies of services that have not yet completed.
+     */
+    public List<RunningService> getRunningServices() {
+        return services.values().stream()
+                .filter(s -> !s.isTerminated() && s.getLatestStatus() != ServiceEventType.TERMINATING)
+                .map(RunningService::copy)
+                .toList();
+    }
 }
