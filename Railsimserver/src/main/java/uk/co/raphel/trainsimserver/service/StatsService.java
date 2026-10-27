@@ -5,9 +5,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import uk.co.raphel.railsim.common.dto.RailSimMessage;
-import uk.co.raphel.railsim.common.dto.SystemStatus;
-import uk.co.raphel.railsim.common.enums.MessageType;
+import uk.co.raphel.railsim.common.nats.StatsMessage;
 
 
 import java.time.LocalTime;
@@ -47,11 +45,7 @@ public class StatsService {
           LocalTime simTime = startTime
                   .plusNanos((System.nanoTime() - startNanos) * clockRateMultiplier)
                   .truncatedTo(ChronoUnit.SECONDS);
-          RailSimMessage<SystemStatus> statusMessage = new RailSimMessage<>();
-          statusMessage.setMsgKey(UUID.randomUUID());
-          statusMessage.setMessageType(MessageType.STATUS);
-          statusMessage.setMessageBody(new SystemStatus(simTime));
-          broadcaster.broadcast(statusMessage);
+          broadcaster.broadcast(new StatsMessage(UUID.randomUUID(), simTime));
       }
 
 }

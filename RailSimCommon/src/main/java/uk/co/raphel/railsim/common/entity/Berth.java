@@ -47,6 +47,7 @@ public class Berth {
         this.direction = TrackDirection.TERMINUS;
     }
 
+    @Deprecated
     public void updateFrom(Berth realBerth) {
         berthId = realBerth.berthId;
         berthName = realBerth.berthName;

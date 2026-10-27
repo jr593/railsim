@@ -16,6 +16,7 @@ import java.util.Set;
  * on the map that a running service can occupy
  **/
 @Getter @Setter
+@Deprecated
 public class TrackDiagramEntry implements Serializable {
 
     private Integer id; // Will be the berth id of this track section

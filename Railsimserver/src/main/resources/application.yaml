@@ -29,3 +29,8 @@ server:
   port: 8083
 sim:
   rate-multiplier: 1
+broadcast:
+  nats:
+    enabled: true
+    url: nats://localhost:4222
+    subject: app.broadcast

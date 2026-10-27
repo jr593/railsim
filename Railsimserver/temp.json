@@ -1,0 +1,248 @@
+{
+  "type": "UpcomingDepartures",
+  "payload": {
+    "msgKey": "81a4c66a-35bc-4215-8d0c-2669eefbaebb",
+    "messageBody": [
+      {
+        "routeStops": [
+          {
+            "id": "c35bbd7c-b1c7-4834-82a7-8a3fbfb8d473",
+            "berth": {
+              "berthId": 144,
+              "berthName": "Tonbridge Up loop (Join)",
+              "direction": "UP",
+              "milesFromOrigin": 67.12,
+              "lengthMiles": 0.0,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:23:00",
+            "scheduledDepartureTime": "15:23:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          },
+          {
+            "id": "282fce7f-fe86-4010-b47e-ca6ec86b791d",
+            "berth": {
+              "berthId": 146,
+              "berthName": "Bickley Up Slow",
+              "direction": "UP",
+              "milesFromOrigin": 67.31,
+              "lengthMiles": 2.78,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:29:00",
+            "scheduledDepartureTime": "15:29:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          },
+          {
+            "id": "3997c4a8-3a9b-4d68-ba8c-ef316b7a9435",
+            "berth": {
+              "berthId": 148,
+              "berthName": "Bromley South Up Slow",
+              "direction": "UP",
+              "milesFromOrigin": 68.38,
+              "lengthMiles": 1.07,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:31:00",
+            "scheduledDepartureTime": "15:32:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          },
+          {
+            "id": "44dd0144-f886-454b-a680-1cdf704435e7",
+            "berth": {
+              "berthId": 150,
+              "berthName": "Shortlands Up Slow",
+              "direction": "UP",
+              "milesFromOrigin": 69.23,
+              "lengthMiles": 0.85,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:35:00",
+            "scheduledDepartureTime": "15:35:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          },
+          {
+            "id": "df943aa1-1904-4c82-b887-9ae54f7efd8e",
+            "berth": {
+              "berthId": 152,
+              "berthName": "Beckenham Junction Up",
+              "direction": "UP",
+              "milesFromOrigin": 70.6,
+              "lengthMiles": 1.37,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:38:00",
+            "scheduledDepartureTime": "15:38:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          },
+          {
+            "id": "8129a973-bdd1-4b51-867c-beb0903af8a9",
+            "berth": {
+              "berthId": 155,
+              "berthName": "Kent House Up Slow",
+              "direction": "UP",
+              "milesFromOrigin": 71.44,
+              "lengthMiles": 0.84,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:40:00",
+            "scheduledDepartureTime": "15:40:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          },
+          {
+            "id": "66b525ff-ac92-44c2-a3c3-75b11c7d5770",
+            "berth": {
+              "berthId": 156,
+              "berthName": "Penge East Up",
+              "direction": "UP",
+              "milesFromOrigin": 72.08,
+              "lengthMiles": 0.64,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:42:00",
+            "scheduledDepartureTime": "15:42:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          },
+          {
+            "id": "268718ce-3ef4-484d-89aa-9db90b333bb4",
+            "berth": {
+              "berthId": 157,
+              "berthName": "Sydenham Hill Up",
+              "direction": "UP",
+              "milesFromOrigin": 73.55,
+              "lengthMiles": 1.47,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:45:00",
+            "scheduledDepartureTime": "15:45:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          },
+          {
+            "id": "f82faf49-9caa-487f-9f48-b193af358ea5",
+            "berth": {
+              "berthId": 158,
+              "berthName": "West Dulwich Up",
+              "direction": "UP",
+              "milesFromOrigin": 74.24,
+              "lengthMiles": 0.69,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:47:00",
+            "scheduledDepartureTime": "15:47:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          },
+          {
+            "id": "42b882e6-5f09-461b-be42-14935c821d74",
+            "berth": {
+              "berthId": 161,
+              "berthName": "Herne Hill Up Slow",
+              "direction": "UP",
+              "milesFromOrigin": 75.31,
+              "lengthMiles": 1.07,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:49:00",
+            "scheduledDepartureTime": "15:49:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          },
+          {
+            "id": "12f5279d-601c-4af8-a129-b61615df38f4",
+            "berth": {
+              "berthId": 163,
+              "berthName": "Brixton Up",
+              "direction": "UP",
+              "milesFromOrigin": 76.09,
+              "lengthMiles": 0.78,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:51:00",
+            "scheduledDepartureTime": "15:51:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          },
+          {
+            "id": "cad149fc-0ee2-4f02-a57b-375f344f8a4f",
+            "berth": {
+              "berthId": 167,
+              "berthName": "Victoria Up Main",
+              "direction": "TERMINUS",
+              "milesFromOrigin": 79.26,
+              "lengthMiles": 1.94,
+              "multiOccupancy": false,
+              "speedLimit": 40
+            },
+            "baseServiceId": 1605,
+            "scheduledArrivalTime": "15:57:00",
+            "scheduledDepartureTime": "15:57:00",
+            "actualArrivalTime": "23:59:59.999999999",
+            "actualDepartureTime": "23:59:59.999999999"
+          }
+        ],
+        "startTime": "15:18:00",
+        "origin": "Orpington",
+        "destination": "Victoria",
+        "scheduledArrivalTime": "15:57:00",
+        "actualStartTime": "15:17:35",
+        "actualArrivalTime": "23:59:59.999999999",
+        "currentRouteStop": 0,
+        "blocked": false,
+        "terminated": false,
+        "serviceClass": "Pass",
+        "engine": "EMU",
+        "latestStatus": "NOTREADY",
+        "df": {
+          "locale": "en_US",
+          "decimalStyle": {
+            "zeroDigit": "0",
+            "positiveSign": "+",
+            "negativeSign": "-",
+            "decimalSeparator": "."
+          },
+          "resolverStyle": "SMART",
+          "resolverFields": null,
+          "zone": null,
+          "chronology": null
+        },
+        "serviceId": 1605,
+        "lastBerth": "Tonbridge Up loop (Join)",
+        "nextBerth": "Bickley Up Slow",
+        "nextBerthDueAt": "15:29",
+        "terminalBerth": false,
+        "forLog": "15:18 from Orpington. 12 stops. Current stop Tonbridge Up loop (Join)",
+        "title": "15:18 from Orpington"
+      }
+    ]
+  }
+}

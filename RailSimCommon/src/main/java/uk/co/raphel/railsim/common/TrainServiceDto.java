@@ -11,6 +11,7 @@ import java.util.List;
  * * Created : 30/05/2015
  * * Author  : johnr
  **/
+@Deprecated
 public class TrainServiceDto {
 
     private Integer startTime;

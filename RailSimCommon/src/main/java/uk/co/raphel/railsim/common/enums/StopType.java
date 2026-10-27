@@ -12,14 +12,15 @@ public enum StopType {
         this.description = description;
     }
 
+    @Deprecated
     public static StopType getFromTimeTable(String timetable) {
 
-        switch(timetable.toUpperCase().charAt(0)) {
-            case 'P': return StopType.PASS;
-            case 'T': return StopType.TERMINATE;
-            case 'S': return StopType.STOP;
-            default: return StopType.INVALID;
-        }
+        return switch (timetable.toUpperCase().charAt(0)) {
+            case 'P' -> StopType.PASS;
+            case 'T' -> StopType.TERMINATE;
+            case 'S' -> StopType.STOP;
+            default -> StopType.INVALID;
+        };
     }
 
     @Override

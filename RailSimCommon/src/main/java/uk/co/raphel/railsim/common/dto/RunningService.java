@@ -10,7 +10,6 @@ import uk.co.raphel.railsim.common.enums.ServiceEventType;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /*
  Used to hold the details of aservice while it is running
@@ -92,7 +91,7 @@ public class RunningService {
                 routeStops.length + " stops. Current stop " + routeStops[currentRouteStop].getBerth().getBerthName();
     }
 
-        public void moveToNextRouteStop(LocalTime scheduledTimeForNext, LocalTime simulatorTime) {
+        public void moveToNextRouteStop(LocalTime simulatorTime) {
         RunningRouteStop lastStop = routeStops[currentRouteStop];
         lastStop.setActualDepartureTime(simulatorTime);
         currentRouteStop++;
@@ -112,6 +111,7 @@ public class RunningService {
         return routeStops[currentRouteStop].getBerth().getBerthName();
     }
 
+    @Deprecated
     public String getNextBerth() {
         if(terminated) {
             return "FINISHED";
@@ -121,6 +121,7 @@ public class RunningService {
     }
 
 
+    @Deprecated
     public String getNextBerthDueAt() {
         if(terminated) {
             return "N/A";

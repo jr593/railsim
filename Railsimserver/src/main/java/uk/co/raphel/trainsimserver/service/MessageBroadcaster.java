@@ -1,11 +1,10 @@
 package uk.co.raphel.trainsimserver.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import uk.co.raphel.railsim.common.dto.RailSimMessage;
-
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import uk.co.raphel.broadcast.api.BroadcastBus;
+import uk.co.raphel.railsim.common.nats.RailSimMessage;
 
 /*
   Routes simulator messages to registered listeners.
@@ -15,37 +14,22 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 @Slf4j(topic = "MessageBroadcaster")
+@RequiredArgsConstructor
 public class MessageBroadcaster {
 
-    private final List<BroadcastListener> listeners =
-            new CopyOnWriteArrayList<>();
-
-    /**
-     * Register a listener for simulator updates (e.g. an SSE client).
-     */
-    public void register(BroadcastListener listener) {
-
-        if (listeners.contains(listener)) {
-            return;
-        }
-
-        listeners.add(listener);
-    }
+    private final BroadcastBus broadcastBus;
 
     /**
      * Send an update to every registered listener.
      */
-    public void broadcast(RailSimMessage<?> msg) {
+    public void broadcast(RailSimMessage<?>  msg) {
 
         if (msg.getMessageBody() == null) {
-            log.warn("Message broadcast with no body: " + msg.getMessageType());
+            log.warn("Message broadcast with no body: " + msg.getClass().getName());
         }
-        for (BroadcastListener listener : listeners) {
-            listener.onMessage(msg);
-        }
+        log.info("broardcast : " + msg.toString());
+        broadcastBus.publish(msg);
     }
 
-    public void unregister(BroadcastListener listener) {
-        listeners.remove(listener);
-    }
+
 }

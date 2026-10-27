@@ -7,15 +7,17 @@ import uk.co.raphel.railsim.common.dto.RunningService;
 
 import java.util.List;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 public class TrainsResponse {
-private Boolean success;
-private String errorMessage;
-private List<RunningService> trains;
+    private Boolean success;
+    private String errorMessage;
+    private List<RunningService> trains;
 
+    @Deprecated
     public TrainsResponse(Boolean status, String errorMessage, List<RunningService> trains) {
-        this.success = status ;
+        this.success = status;
         this.errorMessage = errorMessage;
         this.trains = trains;
     }

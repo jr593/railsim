@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uk.co.raphel.railsim.common.enums.TrackDirection;
 
 import java.util.HashSet;
 import java.util.Set;

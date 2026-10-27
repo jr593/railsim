@@ -1,16 +1,20 @@
 package uk.co.raphel.trainsimserver.service;
 
+
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
-import uk.co.raphel.railsim.common.dto.RailSimMessage;
+import uk.co.raphel.broadcast.api.BroadcastBus;
+import uk.co.raphel.broadcast.api.MessageHandler;
+import uk.co.raphel.broadcast.api.Subscription;
 import uk.co.raphel.railsim.common.dto.RunningService;
-import uk.co.raphel.railsim.common.dto.SystemStatus;
 import uk.co.raphel.railsim.common.entity.TrainService;
-import uk.co.raphel.railsim.common.enums.MessageType;
 
+import uk.co.raphel.railsim.common.nats.StatsMessage;
+import uk.co.raphel.railsim.common.nats.UpcomingDeparturesMessage;
 import uk.co.raphel.trainsimserver.railsimRunner.RailsimRunnerTask;
 import uk.co.raphel.trainsimserver.repository.TrainServiceRepository;
 
@@ -21,7 +25,7 @@ import java.util.*;
 
 @Service
 @Slf4j(topic = "TimerService")
-public class TimerService implements BroadcastListener {
+public class TimerService  {
 
     private static final int NUMBER_UPCOMING_SERVICES = 10;
     // The upcoming list is re-sent every N clock ticks even when unchanged,
@@ -48,30 +52,56 @@ public class TimerService implements BroadcastListener {
     private int upcomingServicesIdx = -1;
     private int ticksSinceScheduleSent = 0;
 
+    private final BroadcastBus broadcastBus;
+
+    private List<Subscription> subscriptions = new ArrayList<>();
+
+
     public TimerService(
             @Qualifier("applicationTaskExecutor") TaskExecutor taskExecutor,
             TrainServiceRepository trainServiceRepository, TrackManagerService trackManagerService,
-            MessageBroadcaster messageBroadcaster, ProfileService profileService, TrainManagerService trainMonitor) {
+            MessageBroadcaster messageBroadcaster, ProfileService profileService, TrainManagerService trainMonitor, BroadcastBus broadcastBus) {
         this.taskExecutor = taskExecutor;
         this.trainServiceRepository = trainServiceRepository;
         this.trackManagerService = trackManagerService;
         this.messageBroadcaster = messageBroadcaster;
         this.profileService = profileService;
         this.trainMonitor = trainMonitor;
+        this.broadcastBus = broadcastBus;
     }
 
+
+    public void publish(Object message) {
+
+    }
+
+    public <T> void subscribe(Class<T> messageClass, MessageHandler<T> handler) {
+
+        Subscription subscription = broadcastBus.subscribe(
+                messageClass,
+                handler
+        );
+
+        subscriptions.add(subscription);
+    }
+
+    @PreDestroy
+    public void unsubscribe() {
+        subscriptions.forEach(Subscription::close);
+        subscriptions.clear();
+    }
     @PostConstruct
     public void init() {
-        messageBroadcaster.register(this);
+
+        this.subscribe(StatsMessage.class, this::handleStatus);
         timeTable = loadTimeTable();
     }
 
-    @Override
-    public void onMessage(RailSimMessage<?> message) {
-        if (message.getMessageType() == MessageType.STATUS) {
-            onClockTick(((SystemStatus) message.getMessageBody()).simulatorTime());
-        }
+    private void handleStatus(Object msg) {
+        LocalTime simulatorTime = ((StatsMessage) msg).getMessageBody();
+        onClockTick(simulatorTime);
     }
+
 
     /*
      * Departures are driven by the StatsService clock tick rather than a separate schedule,
@@ -119,10 +149,7 @@ public class TimerService implements BroadcastListener {
         }
         ticksSinceScheduleSent = 0;
 
-        RailSimMessage<List<RunningService>> msg = new RailSimMessage<>();
-        msg.setMsgKey(UUID.randomUUID());
-        msg.setMessageType(MessageType.SCHEDULE);
-        msg.setMessageBody(upcomingServices);
+        UpcomingDeparturesMessage msg = new UpcomingDeparturesMessage(UUID.randomUUID(), upcomingServices);
         messageBroadcaster.broadcast(msg);
     }
 
