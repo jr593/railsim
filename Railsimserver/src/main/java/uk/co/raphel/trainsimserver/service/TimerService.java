@@ -54,7 +54,7 @@ public class TimerService  {
 
     private final BroadcastBus broadcastBus;
 
-    private List<Subscription> subscriptions = new ArrayList<>();
+    private final List<Subscription> subscriptions = new ArrayList<>();
 
 
     public TimerService(
@@ -98,7 +98,7 @@ public class TimerService  {
     }
 
     private void handleStatus(Object msg) {
-        LocalTime simulatorTime = ((StatsMessage) msg).getMessageBody();
+        simulatorTime = ((StatsMessage) msg).getMessageBody();
         onClockTick(simulatorTime);
     }
 

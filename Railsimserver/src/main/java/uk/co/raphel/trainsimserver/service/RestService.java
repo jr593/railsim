@@ -27,7 +27,6 @@ public class RestService {
     @GetMapping("/api/getTrain/{startTime}/{from}/")
     public TrainsResponse getTrains(@PathVariable("startTime") final String starTime,
                                     @PathVariable("from") final String origin) {
-        List<RunningService> ret = new ArrayList<>();
         TrainsResponse resp = new TrainsResponse() ;
         try {
             df.parse(starTime);

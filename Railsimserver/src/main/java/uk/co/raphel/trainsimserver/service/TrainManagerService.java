@@ -37,6 +37,7 @@ public class TrainManagerService {
     /**
      * Snapshot copies of services that have not yet completed.
      */
+    @Deprecated
     public List<RunningService> getRunningServices() {
         return services.values().stream()
                 .filter(s -> !s.isTerminated() && s.getLatestStatus() != ServiceEventType.TERMINATING)

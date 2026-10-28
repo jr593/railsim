@@ -6,7 +6,6 @@
 		<groupId>uk.co.raphel</groupId>
 		<artifactId>railwaysim</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<artifactId>RailsimWebApp</artifactId>
@@ -60,6 +59,7 @@
 			<artifactId>vaadin-dev</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>

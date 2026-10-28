@@ -1,6 +1,7 @@
 package uk.co.raphel.railsim.webapp.feed;
 
 import com.vaadin.flow.component.UI;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uk.co.raphel.railsim.common.dto.ServiceBoardEntry;
@@ -26,8 +27,16 @@ public class ServiceBoardStore {
     private final Map<Long, ServiceBoardEntry> services = new ConcurrentHashMap<>();
     private final List<ServiceBoardListener> listeners = new CopyOnWriteArrayList<>();
 
+    private final NatsService natsService;
+
+    @Getter
     private volatile LocalTime simulatorTime;
+    @Getter
     private volatile boolean connected;
+
+    public ServiceBoardStore(NatsService natsService) {
+        this.natsService = natsService;
+    }
 
     public void register(ServiceBoardListener listener) {
         if (!listeners.contains(listener)) {
@@ -44,14 +53,6 @@ public class ServiceBoardStore {
                 .sorted(Comparator.comparing(ServiceBoardEntry::departure,
                         Comparator.nullsLast(Comparator.naturalOrder())))
                 .toList();
-    }
-
-    public LocalTime getSimulatorTime() {
-        return simulatorTime;
-    }
-
-    public boolean isConnected() {
-        return connected;
     }
 
     void applyService(MessageType type, ServiceBoardEntry entry) {

@@ -7,6 +7,7 @@ import uk.co.raphel.railsim.common.enums.MessageType;
 import java.time.LocalTime;
 import java.util.Optional;
 
+@Deprecated
 public interface ServiceBoardListener {
 
     void onServiceUpdate(MessageType type, ServiceBoardEntry entry);
