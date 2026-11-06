@@ -34,20 +34,6 @@ public class ServiceEvent {
         this.departureTime = departure;
     }
 
-    /* public boolean isStopping() {
-        switch (serviceEventType) {
-            case ARRIVESTOP:
-                return true;
-            case PASSING:
-                return false;
-            case STOPPING:
-                return true;
-            case TERMINATING:
-                return false;
-            default:
-                return false;
-        }
-    }*/
 
     public int getScheduledExitTime() {
         return serviceEventType == ARRIVESTOP ? departureTime : getTimeOfDay();

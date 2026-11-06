@@ -1,6 +1,8 @@
 package uk.co.raphel.railsim.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 import uk.co.raphel.railsim.common.dto.*;
 import uk.co.raphel.railsim.common.enums.ServiceEventType;
 
@@ -11,6 +13,7 @@ import java.util.List;
  * * Created : 30/05/2015
  * * Author  : johnr
  **/
+@Deprecated
 public class TrainServiceDto {
 
     private Integer startTime;
@@ -20,13 +23,15 @@ public class TrainServiceDto {
     private String serviceClass;
     private String engine;
 
+    @Setter
+    @Getter
     private Integer id;
 
     private List<ServiceEvent> serviceEventList;
 
     private int currentServiceEvent;
 
-    private boolean started = false;
+    private final boolean started = false;
 
     public TrainServiceDto() { // for Json
     }
@@ -60,12 +65,12 @@ public class TrainServiceDto {
         serviceEventList = new ArrayList<>();
 
         for(int i = 5; i< csv.length; i++) {
-            if(csv[i].length() >0) {
+            if(!csv[i].isEmpty()) {
                 serviceEventList.add(generateServiceEvent(indexList.get(i - 5), csv[i]));
             }
         }
         // Make sure last event is a terminator
-        ServiceEvent lastEvent = serviceEventList.get(serviceEventList.size()-1);
+        ServiceEvent lastEvent = serviceEventList.getLast();
         if(!(lastEvent.getServiceEventType() == ServiceEventType.TERMINATING)) {
             lastEvent = new ServiceEvent(lastEvent.getServiceEventType(),
                                          lastEvent.getEventSection(), lastEvent.getTimeOfDay());
@@ -85,13 +90,6 @@ public class TrainServiceDto {
         }
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
     @JsonIgnore
     public ServiceEvent getNextEvent() {
            try {

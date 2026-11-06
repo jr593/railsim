@@ -40,7 +40,7 @@ public class TrackDiagramEntry implements Serializable {
             this.dist = Double.parseDouble(csv[2]);
             this.length = Double.parseDouble(csv[3]);
             this.allowMultipleOccupancy = csv[4].equals("Y");
-            this.trackDirection = csv[5]=="U" ? TrackDirection.UP : TrackDirection.DOWN;
+            this.trackDirection = csv[5].equalsIgnoreCase("U") ? TrackDirection.UP : TrackDirection.DOWN;
             linkedBerths = new HashSet<>();
             for(int i=5; i< csv.length; i++) {
                 try {

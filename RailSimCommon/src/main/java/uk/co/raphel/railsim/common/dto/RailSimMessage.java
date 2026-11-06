@@ -4,13 +4,9 @@ import tools.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import uk.co.raphel.railsim.common.TrainServiceDto;
 import uk.co.raphel.railsim.common.enums.MessageType;
-import uk.co.raphel.railsim.common.enums.SectionStatus;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -51,11 +47,11 @@ public class RailSimMessage<E>  implements Serializable {
         return "";
     }
 
-    public static RailSimMessage fromjson(String json) {
+    public static RailSimMessage<?> fromjson(String json) {
         try {
             return new ObjectMapper().readValue(json, RailSimMessage.class);
         } catch(Exception e) {
-            log.error("Could not convert message from json (" + json+") ", e);
+            log.error("Could not convert message from json ({}) ", json, e);
         }
         return null;
     }

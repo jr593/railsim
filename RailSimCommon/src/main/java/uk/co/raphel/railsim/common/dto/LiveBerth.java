@@ -1,14 +1,11 @@
 package uk.co.raphel.railsim.common.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uk.co.raphel.railsim.common.entity.Berth;
 import uk.co.raphel.railsim.common.enums.TrackDirection;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /*

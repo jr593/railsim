@@ -52,18 +52,16 @@ public class TrainService {
 
     public Map<Integer, String> getRoutePointsAsMap() {
         Map<Integer,String> ret = new HashMap<>();
-        routePoints.stream().forEach(routePoint -> {
-            ret.put(routePoint.getRouteStopNumber(), routePoint.getBerth().getBerthName());
-        });
+        routePoints.forEach(routePoint -> ret.put(routePoint.getRouteStopNumber(), routePoint.getBerth().getBerthName()));
         return ret;
     }
 
     public Berth getTerminalBerth() {
-        return routePoints.get(routePoints.size() - 1).getBerth();
+        return routePoints.getLast().getBerth();
     }
 
     public LocalTime getTerminalTime() {
-        // wikll report time of final arrival
-        return routePoints.get(routePoints.size()-1).getArrivalTime();
+        // will report time of final arrival
+        return routePoints.getLast().getArrivalTime();
     }
 }

@@ -2,7 +2,6 @@ package uk.co.raphel.railsim.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import uk.co.raphel.railsim.common.entity.Berth;
 import uk.co.raphel.railsim.common.entity.RouteStop;

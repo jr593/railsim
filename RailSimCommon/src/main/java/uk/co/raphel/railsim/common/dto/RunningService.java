@@ -10,7 +10,6 @@ import uk.co.raphel.railsim.common.enums.ServiceEventType;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /*
  Used to hold the details of aservice while it is running
