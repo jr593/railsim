@@ -19,7 +19,6 @@
 
     <modules>
         <module>RailSimCommon</module>
-        <module>RailsimConfigGUI</module>
         <module>Railsimserver</module>
         <module>RailsimWebApp</module>
     </modules>

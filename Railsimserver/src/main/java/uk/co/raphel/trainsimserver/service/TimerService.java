@@ -103,27 +103,26 @@ public class TimerService implements BroadcastListener {
 
     private void startService(TrainService trainService) {
         taskExecutor.execute(new RailsimRunnerTask(trainService, messageBroadcaster, trackManagerService, trainMonitor));
-        log.info(trainService.getStartTime() + " " + trainService.getOrigin() + " to " + trainService.getDestination() + " sets off");
+        log.info("{} {} to {} sets off", trainService.getStartTime(), trainService.getOrigin(), trainService.getDestination());
     }
 
     private void broadcastUpcomingServices() {
         boolean changed = upcomingServicesIdx != nextDepartureIdx;
         if (changed) {
             upcomingServicesIdx = nextDepartureIdx;
-            upcomingServices = getNextDepartures(NUMBER_UPCOMING_SERVICES).stream()
+            upcomingServices = getNextDepartures().stream()
                     .map(t -> RunningService.from(t, simulatorTime))
                     .toList();
         }
-        if (!changed && ++ticksSinceScheduleSent < SCHEDULE_REBROADCAST_TICKS) {
-            return;
-        }
-        ticksSinceScheduleSent = 0;
+        if (changed || ++ticksSinceScheduleSent >= SCHEDULE_REBROADCAST_TICKS) {
+            ticksSinceScheduleSent = 0;
 
-        RailSimMessage<List<RunningService>> msg = new RailSimMessage<>();
-        msg.setMsgKey(UUID.randomUUID());
-        msg.setMessageType(MessageType.SCHEDULE);
-        msg.setMessageBody(upcomingServices);
-        messageBroadcaster.broadcast(msg);
+            RailSimMessage<List<RunningService>> msg = new RailSimMessage<>();
+            msg.setMsgKey(UUID.randomUUID());
+            msg.setMessageType(MessageType.SCHEDULE);
+            msg.setMessageBody(upcomingServices);
+            messageBroadcaster.broadcast(msg);
+        }
     }
 
     public List<TrainService> loadTimeTable() {
@@ -144,17 +143,17 @@ public class TimerService implements BroadcastListener {
         return i;
     }
 
-    private List<TrainService> getNextDepartures(int numberOfServices) {
-        List<TrainService> ret = new ArrayList<>(numberOfServices);
+    private List<TrainService> getNextDepartures() {
+        List<TrainService> ret = new ArrayList<>(TimerService.NUMBER_UPCOMING_SERVICES);
         // Wraps past midnight so late-evening dashboards show the next morning's services.
-        for (int i = 0; i < timeTable.size() && ret.size() < numberOfServices; i++) {
+        for (int i = 0; i < timeTable.size() && ret.size() < TimerService.NUMBER_UPCOMING_SERVICES; i++) {
             ret.add(timeTable.get((nextDepartureIdx + i) % timeTable.size()));
         }
         return ret;
     }
 
     public List<RunningService> getTimeTableEntries(String startTime, String origin) {
-        // Get one service at present, but setup for future expansion
+        // Get one service at present, but set up for future expansion
         List<RunningService> ret = new ArrayList<>();
         int hour = Integer.parseInt(startTime.substring(0, 2));
         int minute = Integer.parseInt(startTime.substring(3, 5));
@@ -162,11 +161,11 @@ public class TimerService implements BroadcastListener {
             RunningService runner = RunningService.from(service);
             if (service.getOrigin().equalsIgnoreCase(origin) && service.getStartTime().getHour() == hour &&
                     service.getStartTime().getMinute() == minute) {
-                log.info("service " + runner.getForLog() + " matches.!!");
+                log.info("service {} matches.!!", runner.getForLog());
                 ret.add(runner);
 
             } else {
-                log.info("Service " + runner.getForLog() + " DOES NOT MATCH");
+                log.info("Service {} DOES NOT MATCH", runner.getForLog());
             }
         }
         return ret;

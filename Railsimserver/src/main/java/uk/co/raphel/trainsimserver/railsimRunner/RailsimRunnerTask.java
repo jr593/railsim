@@ -29,7 +29,7 @@ public class RailsimRunnerTask implements Runnable, BroadcastListener {
 
     private volatile boolean receivingMessages ;
 
-    private DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
+    private final DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
 
     public RailsimRunnerTask(TrainService trainService, MessageBroadcaster messageBroadcaster,
                              TrackManagerService trackManagerService, TrainManagerService trainMonitor) {
@@ -40,6 +40,15 @@ public class RailsimRunnerTask implements Runnable, BroadcastListener {
         receivingMessages = false;
     }
 
+    /**
+     * Process one Train Service.
+     * This method handles the lifecycle of a train service, from start to completion.
+     * It registers itself as a message listener, initializes the train service's start time and status,
+     * and then enters a loop to process service events such as departure, arrival at stops, blocking,
+     * and completion.
+     * The method also handles thread synchronization and ensures proper cleanup by unregistering itself
+     * as a message listener before exiting.
+     */
     // Process one Train Service
     public void run() {
         messageBroadcaster.register(this);
@@ -52,93 +61,85 @@ public class RailsimRunnerTask implements Runnable, BroadcastListener {
             runningService.setActualStartTime(simulatorTime);
             runningService.setLatestStatus(ServiceEventType.STARTING);
             trainMonitor.accept(runningService,ServiceEventType.STARTING);
-            //  runningService.setOrigin(runningService.getOrigin());
-            //  runningService.setRouteStops(runningService.getRoutePoints().stream()
-            //         .map(p ->  RunningRouteStop.from(p, runningService.getId())).toList().toArray(new RunningRouteStop[0]));
+
             runningService.setCurrentRouteStop(0);
             // we 'arrive' at the origin as we start.
             runningService.getRouteStops()[runningService.getCurrentRouteStop()].setActualArrivalTime(runningService.getActualStartTime());
             msg.setMessageBody(runningService.copy());
-            log.info("Created running service :" + runningService.getForLog());
+            log.info("Created running service :{}", runningService.getForLog());
             messageBroadcaster.broadcast(msg);
 
-            Boolean atDestination = false;
+            boolean atDestination = false;
         //    long iterationCount = 1;
             if (!receivingMessages) {
-                log.info(runningService.getTitle() + " Waiting for msgs to start");
+                log.info("{} Waiting for msgs to start", runningService.getTitle());
             }
             while (!receivingMessages && !Thread.currentThread().isInterrupted()) {
                 try {
                     Thread.sleep(250);
                 } catch (InterruptedException e) {
-                    log.error(runningService.getTitle() + "Got interrupted waiting for kick off");
+                    log.error("{}Got interrupted waiting for kick off", runningService.getTitle());
                     Thread.currentThread().interrupt();
                     return;
                 }
             }
-            log.info(runningService.getTitle() + "About to go not at destination = " + atDestination);
+            log.info("{}About to go not at destination = {}", runningService.getTitle(), atDestination);
             while (!atDestination && !Thread.currentThread().isInterrupted()) {
-                //  log.info(runningService.getTitle() + "Entered while loop");
-                //  log.info(runningService.getForLog() + " iteration " + iterationCount);
-                //  log.info(runningService.getTitle() + "Sim time now " + df.format(simulatorTime) + " next departure time = " +
-                //          df.format(runningService.getRouteStops()[runningService.getCurrentRouteStop()].getScheduledDepartureTime()));
-                if (simulatorTime.isAfter(runningService.getRouteStops()[runningService.getCurrentRouteStop()].getScheduledDepartureTime())) {
+                 if (simulatorTime.isAfter(runningService.getRouteStops()[runningService.getCurrentRouteStop()].getScheduledDepartureTime())) {
                     // TIME WE MOVED
-                    log.info(runningService.getTitle() + " Attempting to move");
+                    log.info("{} Attempting to move", runningService.getTitle());
                     if (!trackManagerService.isFree(runningService.getRouteStops()[runningService.getCurrentRouteStop() + 1])) {
-                        log.info(runningService.getTitle() + " blocked next section..");
+                        log.info("{} blocked next section..", runningService.getTitle());
                         // WE ARE BLOCKED
                         runningService.setLatestStatus(ServiceEventType.STOPPING);
                     //    trainMonitor.accept(runningService, ServiceEventType.STOPPING);
                         if (!runningService.isBlocked()) {
                             sendRunningServiceMessage(MessageType.BLOCKING, runningService);
-                            log.warn(runningService.getTitle() + " has gone BLOCKED");
+                            log.warn("{} has gone BLOCKED", runningService.getTitle());
                             runningService.setBlocked(true);
                         } else {
-                            log.warn(runningService.getTitle() + " already blocked");
+                            log.warn("{} already blocked", runningService.getTitle());
                         }
                     } else {
                         // Free to progress
                         //     log.info(runningService.getTitle() +  " free to move");
 
                         if (runningService.isBlocked()) {
-                            log.info(runningService.getTitle() + " UNBLOCKED");
+                            log.info("{} UNBLOCKED", runningService.getTitle());
                             runningService.setBlocked(false);
                         }
                         runningService.setLatestStatus(ServiceEventType.STARTING);
                      //   trainMonitor.accept(runningService, ServiceEventType.STARTING);
                         LocalTime timeToNext = calculatetimeRequiredToNextPassOrStop(runningService);
-                        log.info(runningService.getTitle() + " Time check simTime=" + df.format(simulatorTime)
-                                + " next= " + df.format(timeToNext));
+                        log.info("{} Time check simTime={} next= {}", runningService.getTitle(), df.format(simulatorTime), df.format(timeToNext));
                         if (timeToNext.isBefore(simulatorTime)) {
-                            log.info(runningService.getTitle() + " Time expired , move me");
+                            log.info("{} Time expired , move me", runningService.getTitle());
                             if (runningService.isTerminalBerth()) {
                                 atDestination = true;
                                 runningService.setLatestStatus(ServiceEventType.TERMINATING);
                               //  trainMonitor.accept(runningService, ServiceEventType.TERMINATING);
-                                log.info(runningService.getTitle() + " is FINISHED.");
+                                log.info("{} is FINISHED.", runningService.getTitle());
                                 sendRunningServiceMessage(MessageType.COMPLETION, runningService);
                             } else {
                                 runningService.moveToNextRouteStop(timeToNext, simulatorTime);
                                 runningService.setLatestStatus(ServiceEventType.ARRIVESTOP);
                            //     trainMonitor.accept(runningService, ServiceEventType.ARRIVESTOP);
-                                log.info(runningService.getTitle() + " moved to " + runningService.getLastBerth());
+                                log.info("{} moved to {}", runningService.getTitle(), runningService.getLastBerth());
                                 sendRunningServiceMessage(MessageType.MOVEMENT, runningService);
                             }
                         } else {
-                            log.info(runningService.getTitle() + "Waiting for schedule ");
+                            log.info("{}Waiting for schedule ", runningService.getTitle());
                         }
                     }
                 } else {
                     // Time TO WAIT FOR NEXT SCHEDULED MOVE
-                    log.info(runningService.getTitle() +
-                            " waiting to move at " + df.format(runningService.getRouteStops()[runningService.getCurrentRouteStop()].getScheduledDepartureTime()));
+                    log.info("{} waiting to move at {}", runningService.getTitle(), df.format(runningService.getRouteStops()[runningService.getCurrentRouteStop()].getScheduledDepartureTime()));
                 }
                 try {
                  //   iterationCount++;
                     Thread.sleep(Duration.ofSeconds(loopDelay));
                 } catch (InterruptedException e) {
-                    log.error("runningService " + runningService.getOrigin() + " (" + runningService.getStartTime() + ") thread interrupt", e);
+                    log.error("runningService {} ({}) thread interrupt", runningService.getOrigin(), runningService.getStartTime(), e);
                     Thread.currentThread().interrupt();
                     return;
                 }
@@ -165,8 +166,7 @@ public class RailsimRunnerTask implements Runnable, BroadcastListener {
         msg.setMessageType(type);
         // Send a snapshot: this task keeps mutating runningService while listeners render it.
         msg.setMessageBody(runningService.copy());
-        log.info("Runner broadcast Service = " + runningService.getStartTime() + " from " + runningService.getOrigin() +
-                " Msg type " + type + " Current berth " + runningService.getRouteStops()[runningService.getCurrentRouteStop()]);
+        log.info("Runner broadcast Service = {} from {} Msg type {} Current berth {}", runningService.getStartTime(), runningService.getOrigin(), type, runningService.getRouteStops()[runningService.getCurrentRouteStop()]);
         messageBroadcaster.broadcast(msg);
     }
 

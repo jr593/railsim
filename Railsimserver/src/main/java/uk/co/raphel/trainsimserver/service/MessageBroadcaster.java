@@ -38,11 +38,9 @@ public class MessageBroadcaster {
     public void broadcast(RailSimMessage<?> msg) {
 
         if (msg.getMessageBody() == null) {
-            log.warn("Message broadcast with no body: " + msg.getMessageType());
+            log.warn("Message broadcast with no body: {}", msg.getMessageType());
         }
-        for (BroadcastListener listener : listeners) {
-            listener.onMessage(msg);
-        }
+        listeners.forEach(listener -> listener.onMessage(msg));
     }
 
     public void unregister(BroadcastListener listener) {

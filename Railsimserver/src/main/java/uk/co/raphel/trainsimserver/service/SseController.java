@@ -16,9 +16,6 @@ import uk.co.raphel.railsim.common.enums.MessageType;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Stream;
-
-import static java.util.Arrays.stream;
 
 /*
   Streams train service updates to external clients (e.g. RailsimWebApp) as Server-Sent Events.
@@ -72,11 +69,20 @@ public class SseController {
                 case SERVICESTART, MOVEMENT, BLOCKING, COMPLETION, SCHEDULE -> {
                     if (message.getMessageBody() instanceof RunningService service) {
                         send(message.getMessageType(), ServiceBoardEntry.from(service));
-                    } else {
-                        Object body = message.getMessageBody();
-                        for(Object o : (List<Object>)body) {
-                            send(message.getMessageType(), ServiceBoardEntry.from((RunningService)o));
+                    } else if (message.getMessageBody() instanceof List<?> list) {
+                        for (Object element : list) {
+                            if (element instanceof RunningService service) {
+                                send(message.getMessageType(), ServiceBoardEntry.from(service));
+                            } else {
+                                log.warn("Skipping unexpected SCHEDULE element: {}",
+                                        element == null ? "null" : element.getClass().getSimpleName());
+                            }
                         }
+                    } else {
+                        log.warn("Ignoring {} with unexpected body: {}",
+                                message.getMessageType(),
+                                message.getMessageBody() == null ? "null"
+                                        : message.getMessageBody().getClass().getSimpleName());
                     }
                 }
                 case STATUS -> {

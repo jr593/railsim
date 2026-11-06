@@ -5,12 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uk.co.raphel.railsim.common.dto.LiveBerth;
 import uk.co.raphel.railsim.common.dto.RunningRouteStop;
-import uk.co.raphel.railsim.common.dto.RunningService;
 import uk.co.raphel.railsim.common.entity.Berth;
 import uk.co.raphel.trainsimserver.repository.BerthRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -60,8 +58,7 @@ public class TrackManagerService {
             LiveBerth lBerth = trackMap.get(routeStop.getBerth().getBerthId());
             return !lBerth.getMultiOccupancy() || lBerth.getOccupiers().isEmpty();
         } else {
-            log.error("Could not find Berth with ID : " + routeStop.getBerth().getBerthId() +
-                    "( " + routeStop.getBerth().getBerthName() + ")");
+            log.error("Could not find Berth with ID : {}( {})", routeStop.getBerth().getBerthId(), routeStop.getBerth().getBerthName());
             return false;
         }
     }
