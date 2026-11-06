@@ -2,30 +2,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>railwaysim</artifactId>
         <groupId>uk.co.raphel</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-
-    <properties>
-     <java.version>21</java.version>
-    </properties>
 
     <artifactId>railsimcommon</artifactId>
+    <name>RailSimCommon</name>
+    <description>Shared entities and DTOs for the RailwaySim modules</description>
+
+    <!-- This is a plain library: annotations and DTO (de)serialisation only.
+         Applications that persist entities declare
+         spring-boot-starter-data-jpa and the JDBC driver themselves,
+         so no JPA/Hibernate/Postgres (or web/kafka/actuator) stack
+         leaks into consumers such as RailsimWebApp. -->
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+        </dependency>
+        <!-- Jackson 3 (tools.jackson), matching Spring Boot 4 / Vaadin 25.
+             Note: Jackson 3 deliberately keeps its core annotations in the
+             Jackson 2 group id (com.fasterxml.jackson.annotation.*), so
+             @JsonIgnore etc. stay under com.fasterxml.jackson. -->
+        <dependency>
+            <groupId>tools.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
