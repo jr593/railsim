@@ -1,6 +1,7 @@
 package uk.co.raphel.railsim.webapp.feed;
 
 import com.vaadin.flow.component.UI;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uk.co.raphel.railsim.common.dto.ServiceBoardEntry;
@@ -16,7 +17,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
 /*
-  Current state of running services as received from Railsimserver, shared by all browser sessions.
+  The current state of running services as received from Railsimserver, shared by all browser sessions.
   Listeners are notified inside ui.access() so views can update components directly (pushed via @Push).
  */
 @Service
@@ -26,7 +27,9 @@ public class ServiceBoardStore {
     private final Map<Long, ServiceBoardEntry> services = new ConcurrentHashMap<>();
     private final List<ServiceBoardListener> listeners = new CopyOnWriteArrayList<>();
 
+    @Getter
     private volatile LocalTime simulatorTime;
+    @Getter
     private volatile boolean connected;
 
     public void register(ServiceBoardListener listener) {
@@ -44,14 +47,6 @@ public class ServiceBoardStore {
                 .sorted(Comparator.comparing(ServiceBoardEntry::departure,
                         Comparator.nullsLast(Comparator.naturalOrder())))
                 .toList();
-    }
-
-    public LocalTime getSimulatorTime() {
-        return simulatorTime;
-    }
-
-    public boolean isConnected() {
-        return connected;
     }
 
     void applyService(MessageType type, ServiceBoardEntry entry) {

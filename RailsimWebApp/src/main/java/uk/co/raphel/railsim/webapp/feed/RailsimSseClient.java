@@ -64,14 +64,14 @@ public class RailsimSseClient {
     private void readLoop() {
         while (running) {
             try {
-                log.info("Connecting to " + eventsUri);
+                log.info("Connecting to {}", eventsUri);
                 HttpRequest request = HttpRequest.newBuilder(eventsUri)
                         .header("Accept", "text/event-stream")
                         .GET()
                         .build();
                 HttpResponse<Stream<String>> response = httpClient.send(request, HttpResponse.BodyHandlers.ofLines());
                 if (response.statusCode() != 200) {
-                    log.warn("Railsimserver returned HTTP " + response.statusCode());
+                    log.warn("Railsimserver returned HTTP {}", response.statusCode());
                     response.body().close();
                 } else {
                     store.setConnected(true);
@@ -85,7 +85,7 @@ public class RailsimSseClient {
                 return;
             } catch (Exception e) {
                 if (running) {
-                    log.warn("Event stream failed: " + e);
+                    log.warn("Event stream failed: {}", String.valueOf(e));
                 }
             }
             if (store.isConnected()) {
@@ -138,7 +138,7 @@ public class RailsimSseClient {
                 store.applyService(type, jsonMapper.readValue(json, ServiceBoardEntry.class));
             }
         } catch (Exception e) {
-            log.error("Could not process " + eventName + " event (" + json + ")", e);
+            log.error("Could not process {} event ({})", eventName, json, e);
         }
     }
 }
